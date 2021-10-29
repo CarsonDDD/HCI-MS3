@@ -3,7 +3,7 @@
 ## Contributers:
  - Farhan Akib Rahman
  - Carson
- - Cao Minh Nguyen
+ - Cao Minh Nguyen Testing
 
 
 Description coming soon!
