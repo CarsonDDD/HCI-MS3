@@ -4,6 +4,7 @@
  - Farhan Akib Rahman
  - Carson
  - Cao Minh Nguyen
+ - Brady Svencicki
 
 
 Description coming soon!
