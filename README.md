@@ -1,8 +1,9 @@
 # HCI-MS3
-Contributers:  
-Farhan Akib Rahman
-Carson
-Cao Minh Nguyen
+
+## Contributers:
+ - Farhan Akib Rahman
+ - Carson
+ - Cao Minh Nguyen
 
 
 Description coming soon!
