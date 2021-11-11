@@ -52,3 +52,10 @@ You will use client-side web technologies (HTML, CSS, JavaScript, jQuery, etc.).
 - _Usability “sales pitch”._ Use maximum 2 pages, perhaps in list form, to explain what usability     guidelines you employed – pictures and references to the prototype can help with clarity.
 
 ---
+
+## Implementations  
+**Farhan:**  
+
+* Using React to make the webapp  
+* imported icons from material_io   
+* Implemented a sidebar with custom styling 
