@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Time</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!---------------SIDE BAR---------------->
+      <nav id="sidebar">
+        <ul>
+          <li id="home_li">
+            <img src="./images/home.png" alt="A home icon" id="home_btn" />
+            <p id="home_tooltip">Home</p>
+          </li>
+          <li id="calendar_li">
+            <img
+              src="./images/calendar.png"
+              alt="A calendar icon"
+              id="calendar_btn"
+            />
+            <p id="calendar_tooltip">Calendar</p>
+          </li>
+          <li id="statistics_li">
+            <img
+              src="./images/stats.png"
+              alt="A statistics icon"
+              id="statistics_btn"
+            />
+            <p id="statistics_tooltip">Statistics</p>
+          </li>
+        </ul>
+      </nav>
+      <!----------------------------------------------->
+
+      <!------------------HOME PAGE-------------------->
+      <div id="home_page">
+        <div id="home_main">
+          <div id="home_main_bubble"></div>
+          <div id="home_main_footer">
+            <div id="plus_button">
+              <img src="./images/plus.png" alt="A plus button" />
+            </div>
+          </div>
+        </div>
+        <div id="deadline_panel"></div>
+      </div>
+      <!------------------------------------------------->
+
+      <!------------------CALENDAR PAGE------------------>
+      <div id="calendar_page"></div>
+      <!------------------------------------------------->
+
+      <!----------------STATISTICS PAGE------------------>
+      <div id="statistics_page"></div>
+      <!------------------------------------------------->
+    </div>
+    <script src="pageTransitions.js" charset="utf-8"></script>
+  </body>
+</html>
