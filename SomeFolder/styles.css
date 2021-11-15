@@ -8,32 +8,46 @@
 
 /*--------Side bar and its elements---------------------*/
 
+#sidebar ul {
+  width: 100%;
+}
+
 #sidebar li {
+  width: 100%;
   list-style-type: none;
   position: relative;
 }
 
 #sidebar img {
   width: 100%;
-  padding: 1em;
+  padding: 10%;
   display: block;
+  user-select: none;
 }
 
 /*-----------Tool tips-------------------*/
 
-#sidebar p {
+#sidebar p,
+#plus_tooltip {
   opacity: 0;
   display: block;
-  height: 30%;
   background-color: white;
   position: absolute;
-  top: 80%;
-  left: 80%;
-  z-index: 1;
+
   padding: 0.1em 0.5em;
   user-select: none;
 
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, z-index 0.5s;
+}
+
+.bot_right {
+  top: 80%;
+  left: 80%;
+}
+
+.mid_right {
+  top: 20%;
+  left: 100%;
 }
 
 /*--------End of tool tips---------------*/
@@ -69,6 +83,8 @@
 #home_main_bubble {
   height: 85%;
   background-color: royalblue;
+  position: relative;
+  overflow: auto;
 }
 
 #home_main_footer {
@@ -80,19 +96,24 @@
 #plus_button {
   background-color: red;
   height: 75%;
-  width: fit-content;
+  width: calc(85vh * 0.15 * 0.75);
   border-radius: 50%;
   margin: auto;
-  cursor: pointer;
-}
-
-#plus_button:hover {
-  background-color: rgb(116, 5, 27);
+  position: relative;
 }
 
 #plus_button img {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#plus_button img:hover {
+  background-color: rgb(102, 7, 26);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 #deadline_panel {

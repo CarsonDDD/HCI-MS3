@@ -14,7 +14,7 @@
         <ul>
           <li id="home_li">
             <img src="./images/home.png" alt="A home icon" id="home_btn" />
-            <p id="home_tooltip">Home</p>
+            <p id="home_tooltip" class="bot_right">Home</p>
           </li>
           <li id="calendar_li">
             <img
@@ -22,7 +22,7 @@
               alt="A calendar icon"
               id="calendar_btn"
             />
-            <p id="calendar_tooltip">Calendar</p>
+            <p id="calendar_tooltip" class="bot_right">Calendar</p>
           </li>
           <li id="statistics_li">
             <img
@@ -30,7 +30,7 @@
               alt="A statistics icon"
               id="statistics_btn"
             />
-            <p id="statistics_tooltip">Statistics</p>
+            <p id="statistics_tooltip" class="bot_right">Statistics</p>
           </li>
         </ul>
       </nav>
@@ -42,7 +42,12 @@
           <div id="home_main_bubble"></div>
           <div id="home_main_footer">
             <div id="plus_button">
-              <img src="./images/plus.png" alt="A plus button" />
+              <img
+                src="./images/plus.png"
+                alt="A plus button"
+                id="plus_button_img"
+              />
+              <p id="plus_tooltip" class="mid_right">Add a Course</p>
             </div>
           </div>
         </div>
@@ -59,5 +64,6 @@
       <!------------------------------------------------->
     </div>
     <script src="pageTransitions.js" charset="utf-8"></script>
+    <script src="bubbles.js" charset="utf-8"></script>
   </body>
 </html>
