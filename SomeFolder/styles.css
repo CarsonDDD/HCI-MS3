@@ -10,33 +10,14 @@
 
 #sidebar li {
   list-style-type: none;
-  position: relative;
 }
 
 #sidebar img {
   width: 100%;
-  padding: 1em;
+  padding: 10%;
   display: block;
-}
-
-/*-----------Tool tips-------------------*/
-
-#sidebar p {
-  opacity: 0;
-  display: block;
-  height: 30%;
-  background-color: white;
-  position: absolute;
-  top: 80%;
-  left: 80%;
-  z-index: 1;
-  padding: 0.1em 0.5em;
   user-select: none;
-
-  transition: opacity 0.5s;
 }
-
-/*--------End of tool tips---------------*/
 
 /*------End of side bar and its elements---------------*/
 
@@ -45,12 +26,14 @@
 .container {
   width: 100vw;
   height: 100vh;
+  background-color: aqua;
   display: flex;
 }
 
 #sidebar {
   width: 5%;
   background-color: rgb(0, 85, 85);
+  height: 100vh;
 }
 
 /*----Home page and its elements--------*/
@@ -63,12 +46,37 @@
 
 #home_main {
   width: 75%;
-  background-color: powderblue;
+  background-color: red;
 }
 
 #home_main_bubble {
   height: 85%;
   background-color: white;
+  position: relative;
+  overflow: auto;
+}
+
+#home_main_bubble::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+#home_main_bubble::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 15px;
+}
+
+#home_main_bubble::-webkit-scrollbar-thumb {
+  background: green;
+  border-radius: 15px;
+}
+
+#home_main_bubble::-webkit-scrollbar-corner {
+  display: none;
+}
+
+#home_main_bubble::-webkit-scrollbar-thumb:hover {
+  background: rgb(7, 44, 7);
 }
 
 #home_main_footer {
@@ -80,7 +88,7 @@
 #plus_button {
   background-color: rgb(182, 241, 241);
   height: 75%;
-  width: fit-content;
+  width: calc(85vh * 0.15 * 0.75);
   border-radius: 50%;
   border: 1px solid black;
   margin: auto;
@@ -94,6 +102,15 @@
 .plus_button img {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#plus_button img:hover {
+  background-color: rgb(102, 7, 26);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 #deadline_panel {
