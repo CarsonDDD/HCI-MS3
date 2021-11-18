@@ -13,7 +13,9 @@ let statisticsToolTip = document.getElementById("statistics_tooltip"); //a point
 let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
                                             
 //color variables
-let hoverColor = "rgb(0, 200, 0)", selectedColor = "rgb(0, 128, 0)", defColor = "rgb(0, 255, 0)"; 
+let hoverColor = "rgb(0, 170, 170)", selectedColor = "rgb(0, 128, 128)", defColor = "rgb(0, 85, 85)"; 
+
+let createBub = document.getElementById("create_bubble");//pointer to create bubble form div
 
 //add click, mouseover, and mouseleave events to all the buttons
 
@@ -88,6 +90,25 @@ function getCorrespondingTooltip(btn)
     if (btn === homeBtn) return homeToolTip;
     else if (btn === calendarBtn) return calendarToolTip;
     else return statisticsToolTip;
+}
+
+function openForm()
+{
+    createBub.style.display = "block";
+}
+  
+function closeForm()
+{
+    createBub.style.display = "none";
+}
+
+function onlyOne(colour)//can have for loop or create a pointer to each colour and then a bunch of if and elses
+{
+    for(let i = 1; i <= 10; i++)//will need to alter depending on how many colours we have
+    {
+        document.getElementById("colour" + i).checked = false;
+    }
+    document.getElementById(colour).checked = true;
 }
 
 showPage();

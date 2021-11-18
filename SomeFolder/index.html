@@ -39,10 +39,91 @@
       <!------------------HOME PAGE-------------------->
       <div id="home_page">
         <div id="home_main">
-          <div id="home_main_bubble"></div>
+          <div id="home_main_bubble">
+
+          </div>
           <div id="home_main_footer">
-            <div id="plus_button">
-              <img src="./images/plus.png" alt="A plus button" />
+            <!--BUBBLE FORM START-->
+            <button class="plus_button" id="plus_button" onclick="openForm()"><img src="./images/plus.png"></button>
+            <div class="form-popup" id="create_bubble">
+              <form action="/action_page.php" class="form-container">
+                <h1>Create Bubble</h1>
+            
+                <label for="CourseName"><b>Course Name</b></label>
+                <input type="text" placeholder="Enter Course" name="CourseName" required>
+            
+                <label for="tar_gpa"><b>Target GPA</b></label>
+                <input type="text" placeholder="Enter Target GPA" name="tar_gpa" required>
+
+                <!--- SELECTION OPTION
+                <label for="bubbleColour">Bubble Colour</label>
+                <select id="bubbleColour" name="bubbleColour">
+                  <option color="baby blue">Baby Blue</option>
+                  <option value="baby pink">Baby Pink</option>
+                  <option value="light Green">Light Green</option>
+                </select><br><br>-->
+
+                <label class="colour1-label">
+                  <input type="checkbox" id= "colour1" onclick="onlyOne(this.id)">
+                  <span class="colour1"></span>
+                </label>
+                
+                <label class="colour2-label">
+                  <input type="checkbox" id= "colour2" onclick="onlyOne(this.id)">
+                  <span class="colour2"></span>
+                </label>
+
+                <label class="colour3-label">
+                  <input type="checkbox" id= "colour3" onclick="onlyOne(this.id)">
+                  <span class="colour3"></span>
+                </label>
+
+                <label class="colour4-label">
+                  <input type="checkbox" id= "colour4" onclick="onlyOne(this.id)">
+                  <span class="colour4"></span>
+                </label>
+
+                <label class="colour5-label">
+                  <input type="checkbox" id= "colour5" onclick="onlyOne(this.id)">
+                  <span class="colour5"></span>
+                </label><br><br><br>
+
+                <label class="colour6-label">
+                  <input type="checkbox" id= "colour6" onclick="onlyOne(this.id)">
+                  <span class="colour6"></span>
+                </label>
+
+                <label class="colour7-label">
+                  <input type="checkbox" id= "colour7" onclick="onlyOne(this.id)">
+                  <span class="colour7"></span>
+                </label>
+
+                <label class="colour8-label">
+                  <input type="checkbox" id= "colour8" onclick="onlyOne(this.id)">
+                  <span class="colour8"></span>
+                </label>
+
+                <label class="colour9-label">
+                  <input type="checkbox" id= "colour9" onclick="onlyOne(this.id)">
+                  <span class="colour9"></span>
+                </label>
+
+                <label class="colour10-label">
+                  <input type="checkbox" id= "colour10" onclick="onlyOne(this.id)">
+                  <span class="colour10"></span>
+                </label><br><br><br>
+
+                <!---CHECK MARKS
+                <input type="checkbox" class="colour1" id="colour1" name="colour1" value="Blue" onclick="onlyOne(this.id)">
+                <label for="colour1"> Blue</label>
+                <input type="checkbox" class="colour2" id="colour2" name="colour2" value="Pink" onclick="onlyOne(this.id)">
+                <label for="colour2"> Pink</label><br>
+                <input type="checkbox" class="colour3" id="colour3" name="colour3" value="Green" onclick="onlyOne(this.id)">
+                <label for="colour3"> Green</label><br><br>-->
+            
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+              </form>
             </div>
           </div>
         </div>
