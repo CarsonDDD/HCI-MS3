@@ -123,6 +123,7 @@ class Session
 
 }
 
+import {b} from "./bubbles.js"
 
 class Manager
 {
@@ -138,6 +139,8 @@ class Manager
         let c=new Course(name,totalHours,grade,color);
         this.numCourses++;
         this.courseList.push(c);
+		b.add(50, name, color);
+		b.generateBubbles();
     }
 
     createDeadline(courseName,date,time,type)
@@ -215,8 +218,10 @@ list.forEach(function (item) {
 }
 console.log(update(m.getDeadlineList()));*/
 
-window.addEventListener('load', () =>{
-	let m=new Manager();
+export let m = new Manager();
+
+function main()
+{
 	m.createCourse("Comp3020",0,100,"Blue");
 	m.createCourse("Comp3040",0,90,"Grey");
 	m.createCourse("Comp3050",0,80,"Red");
@@ -241,7 +246,6 @@ window.addEventListener('load', () =>{
 	btn.type="button";
 	btn.addEventListener('click', function() 
 	{
-		alert("Hello");
 		ul.removeChild(li);
 	});
 
@@ -249,5 +253,6 @@ window.addEventListener('load', () =>{
 	li.appendChild(btn);
     ul.appendChild(li);
 	});
+}
 
-});
+main();
