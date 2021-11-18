@@ -102,15 +102,6 @@
 .plus_button img {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#plus_button img:hover {
-  background-color: rgb(102, 7, 26);
-  border-radius: 50%;
-  cursor: pointer;
 }
 
 #deadline_panel {
