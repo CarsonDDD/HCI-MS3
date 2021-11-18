@@ -121,6 +121,30 @@
   background-color: rosybrown;
 }
 
+#deadline_tag{
+  padding-left: 30%;
+}
+
+#deadline_list
+{
+  padding-left: 10%;
+}
+
+#deadline_list ul
+{
+  border-style: outset;
+}
+#deadline_list li
+{
+  border-style: inset;
+}
+
+#deadline_list li button
+{
+  cursor: pointer;
+}
+
+
 /*--End of home page and its elements-----*/
 
 /*-------Calendar page and its elements----*/
