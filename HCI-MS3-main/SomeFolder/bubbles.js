@@ -283,8 +283,8 @@ function leaveBubble(e)
 }
 
 
-let b = new BubbleMenu();
-let n = Math.floor(Math.random() * 20 + 1);
+export let b = new BubbleMenu();
+let n = Math.floor(Math.random() * 2 + 1);
 let courses = new Array("COMP", "CHEMISTRY", "BIO", "PHYS", "PSYCH", "MATH", "ARTS", "PHIL", "GEO");
 
 for (let i = 0; i < n; i++)

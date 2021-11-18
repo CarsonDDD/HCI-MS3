@@ -44,21 +44,38 @@
       <!----------------HOME PAGE------------------>
       <div id="home_page">
         <div id="home_main">
-          <div id="home_main_bubble">
-
-          </div>
+          <div id="home_main_bubble"></div>
           <div id="home_main_footer">
             <!--BUBBLE FORM START-->
-            <button class="plus_button" id="plus_button" onclick="openForm()"><img src="./images/plus.png"></button>
+            <button class="plus_button" id="plus_button">
+              <img src="./images/plus.png" />
+            </button>
             <div class="form-popup" id="create_bubble">
-              <form action="/action_page.php" class="form-container">
+              <form
+                action="/action_page.php"
+                class="form-container"
+                target="home_main_bubble"
+                method="get"
+              >
                 <h1>Create Bubble</h1>
-            
+
                 <label for="CourseName"><b>Course Name</b></label>
-                <input type="text" placeholder="Enter Course" name="CourseName" required>
-            
+                <input
+                  type="text"
+                  placeholder="Enter Course"
+                  name="CourseName"
+                  id="courseName"
+                  required
+                />
+
                 <label for="tar_gpa"><b>Target GPA</b></label>
-                <input type="text" placeholder="Enter Target GPA" name="tar_gpa" required>
+                <input
+                  type="text"
+                  placeholder="Enter Target GPA"
+                  name="tar_gpa"
+                  id="tarGPA"
+                  required
+                />
 
                 <!--- SELECTION OPTION
                 <label for="bubbleColour">Bubble Colour</label>
@@ -69,54 +86,54 @@
                 </select><br><br>-->
 
                 <label class="colour1-label">
-                  <input type="checkbox" id= "colour1" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour1" />
                   <span class="colour1"></span>
                 </label>
-                
+
                 <label class="colour2-label">
-                  <input type="checkbox" id= "colour2" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour2" />
                   <span class="colour2"></span>
                 </label>
 
                 <label class="colour3-label">
-                  <input type="checkbox" id= "colour3" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour3" />
                   <span class="colour3"></span>
                 </label>
 
                 <label class="colour4-label">
-                  <input type="checkbox" id= "colour4" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour4" />
                   <span class="colour4"></span>
                 </label>
 
                 <label class="colour5-label">
-                  <input type="checkbox" id= "colour5" onclick="onlyOne(this.id)">
-                  <span class="colour5"></span>
-                </label><br><br><br>
+                  <input type="checkbox" id="colour5" />
+                  <span class="colour5"></span> </label
+                ><br /><br /><br />
 
                 <label class="colour6-label">
-                  <input type="checkbox" id= "colour6" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour6" />
                   <span class="colour6"></span>
                 </label>
 
                 <label class="colour7-label">
-                  <input type="checkbox" id= "colour7" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour7" />
                   <span class="colour7"></span>
                 </label>
 
                 <label class="colour8-label">
-                  <input type="checkbox" id= "colour8" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour8" />
                   <span class="colour8"></span>
                 </label>
 
                 <label class="colour9-label">
-                  <input type="checkbox" id= "colour9" onclick="onlyOne(this.id)">
+                  <input type="checkbox" id="colour9" />
                   <span class="colour9"></span>
                 </label>
 
                 <label class="colour10-label">
-                  <input type="checkbox" id= "colour10" onclick="onlyOne(this.id)">
-                  <span class="colour10"></span>
-                </label><br><br><br>
+                  <input type="checkbox" id="colour10" />
+                  <span class="colour10"></span> </label
+                ><br /><br /><br />
 
                 <!---CHECK MARKS
                 <input type="checkbox" class="colour1" id="colour1" name="colour1" value="Blue" onclick="onlyOne(this.id)">
@@ -125,9 +142,13 @@
                 <label for="colour2"> Pink</label><br>
                 <input type="checkbox" class="colour3" id="colour3" name="colour3" value="Green" onclick="onlyOne(this.id)">
                 <label for="colour3"> Green</label><br><br>-->
-            
-                <button type="submit" class="btn">Submit</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+
+                <button type="button" class="btn" id="submit_btn">
+                  Submit
+                </button>
+                <button type="button" class="btn cancel" id="cancel_btn">
+                  Close
+                </button>
               </form>
             </div>
           </div>
@@ -149,8 +170,8 @@
       <div id="statistics_page"></div>
       <!----------------------------------------------->
     </div>
-    <script src="pageTransitions.js" charset="utf-8"></script>
-    <script src="bubbles.js" charset="utf-8"></script>
-    <script src="Manager.js" charset="utf-8"></script>
+    <script type="module" src="pageTransitions.js" charset="utf-8"></script>
+    <script type="module" src="bubbles.js" charset="utf-8"></script>
+    <script type="module" src="Manager.js" charset="utf-8"></script>
   </body>
 </html>
