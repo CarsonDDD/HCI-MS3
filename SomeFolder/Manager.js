@@ -231,21 +231,23 @@ window.addEventListener('load', () =>{
 	m.createSession("Comp3050","21/11/2021",100,200);
 
 	const ul = document.createElement('ul');
-	const btn=document.createElement('button');
-	btn.innerHTML="Remove";
-	btn.type="button";
 
 	document.getElementById('deadline_list').appendChild(ul);
 
 	m.deadlineList.forEach(function (item) {
     const li = document.createElement('li');
-	li.appendChild(btn);
-    ul.appendChild(li);
-
-    li.innerHTML += item.toPrint();
-	});
-	btn.addEventListener('click', (e) => 
+	const btn=document.createElement('button');
+	btn.innerHTML="Remove";
+	btn.type="button";
+	btn.addEventListener('click', function() 
 	{
+		alert("Hello");
 		ul.removeChild(li);
 	});
+
+    li.innerHTML += item.toPrint();
+	li.appendChild(btn);
+    ul.appendChild(li);
+	});
+
 });
