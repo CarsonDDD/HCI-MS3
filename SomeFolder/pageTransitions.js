@@ -5,10 +5,7 @@ let statisticsPage = document.getElementById("statistics_page"); //a pointer to 
 let homeBtn = document.getElementById("home_btn"); //a pointer to the home img 
 let calendarBtn = document.getElementById("calendar_btn"); //a pointer to the calendar img
 let statisticsBtn = document.getElementById("statistics_btn"); //a pointer to the statistics img
-
-let homeToolTip = document.getElementById("home_tooltip"); //a pointer to the home tooltip
-let calendarToolTip = document.getElementById("calendar_tooltip"); //a pointer to the calendar tool tip
-let statisticsToolTip = document.getElementById("statistics_tooltip"); //a pointer to the statistics tool tip
+let plusBtn = document.getElementById("plus_button_img"); //a pointer to the plus button
 
 let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
                                             
@@ -36,9 +33,6 @@ function overBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = hoverColor; 
-
-        let tooltip = getCorrespondingTooltip(e.target);
-        tooltip.style.opacity = 1; //show the tooltip for the hovered button
     }
 }
 function leaveBtn(e) 
@@ -48,9 +42,6 @@ function leaveBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = defColor; 
-                                
-        let tooltip = getCorrespondingTooltip(e.target);
-        tooltip.style.opacity = 0; //get rid of the tooltip for the button
     }
 }
 
@@ -67,9 +58,6 @@ function highlightBtn()
 
     currBtn.style.backgroundColor = selectedColor; //change the color of crrBtn to indicate that it is selected
     currBtn.style.cursor = "default"; //make sure that the user does not get the idea that currBtn is still clickable
-
-    let tooltip = getCorrespondingTooltip(currBtn);
-    tooltip.style.opacity = 0; //get rid of tooltip for the clicked button
 }
 
 function showPage()
@@ -81,13 +69,6 @@ function showPage()
     statisticsPage.style.display = "none";
 
     currPage.style.display = "flex"; 
-}
-
-function getCorrespondingTooltip(btn)
-{
-    if (btn === homeBtn) return homeToolTip;
-    else if (btn === calendarBtn) return calendarToolTip;
-    else return statisticsToolTip;
 }
 
 showPage();
