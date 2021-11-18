@@ -7,11 +7,6 @@ let calendarBtn = document.getElementById("calendar_btn"); //a pointer to the ca
 let statisticsBtn = document.getElementById("statistics_btn"); //a pointer to the statistics img
 let plusBtn = document.getElementById("plus_button_img"); //a pointer to the plus button
 
-let homeToolTip = document.getElementById("home_tooltip"); //a pointer to the home tooltip
-let calendarToolTip = document.getElementById("calendar_tooltip"); //a pointer to the calendar tool tip
-let statisticsToolTip = document.getElementById("statistics_tooltip"); //a pointer to the statistics tool tip
-let plusToolTip = document.getElementById("plus_tooltip"); //a pointer to the plus tool tip
-
 let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
                                             
 //color variables
@@ -31,17 +26,6 @@ statisticsBtn.addEventListener("click", function(e) { currPage = statisticsPage;
 statisticsBtn.addEventListener("mouseover", overBtn);
 statisticsBtn.addEventListener("mouseleave", leaveBtn);
 
-plusBtn.addEventListener("mouseover", function()
-{
-    plusToolTip.style.zIndex = 1;
-    plusToolTip.style.opacity = 1;
-});
-plusBtn.addEventListener("mouseleave", function()
-{
-    plusToolTip.style.zIndex = 0;
-    plusToolTip.style.opacity = 0;
-});
-
 function overBtn(e) 
 { 
     if (e.target !== currBtn) //change the color of the image when mouse is over it
@@ -49,10 +33,6 @@ function overBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = hoverColor; 
-
-        let tooltip = getCorrespondingTooltip(e.target);
-        tooltip.style.zIndex = 1;
-        tooltip.style.opacity = 1; //show the tooltip for the hovered button
     }
 }
 function leaveBtn(e) 
@@ -62,10 +42,6 @@ function leaveBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = defColor; 
-                                
-        let tooltip = getCorrespondingTooltip(e.target);
-        tooltip.style.zIndex = 0;
-        tooltip.style.opacity = 0; //get rid of the tooltip for the button
     }
 }
 
@@ -82,10 +58,6 @@ function highlightBtn()
 
     currBtn.style.backgroundColor = selectedColor; //change the color of crrBtn to indicate that it is selected
     currBtn.style.cursor = "default"; //make sure that the user does not get the idea that currBtn is still clickable
-
-    let tooltip = getCorrespondingTooltip(currBtn);
-    tooltip.style.zIndex = 0;
-    tooltip.style.opacity = 0; //get rid of tooltip for the clicked button
 }
 
 function showPage()
@@ -97,13 +69,6 @@ function showPage()
     statisticsPage.style.display = "none";
 
     currPage.style.display = "flex"; 
-}
-
-function getCorrespondingTooltip(btn)
-{
-    if (btn === homeBtn) return homeToolTip;
-    else if (btn === calendarBtn) return calendarToolTip;
-    else return statisticsToolTip;
 }
 
 showPage();

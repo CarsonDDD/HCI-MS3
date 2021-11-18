@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Time</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      ::-webkit-scrollbar-track {
+        background: white;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: green;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -14,7 +22,6 @@
         <ul>
           <li id="home_li">
             <img src="./images/home.png" alt="A home icon" id="home_btn" />
-            <p id="home_tooltip" class="bot_right">Home</p>
           </li>
           <li id="calendar_li">
             <img
@@ -22,7 +29,6 @@
               alt="A calendar icon"
               id="calendar_btn"
             />
-            <p id="calendar_tooltip" class="bot_right">Calendar</p>
           </li>
           <li id="statistics_li">
             <img
@@ -30,13 +36,12 @@
               alt="A statistics icon"
               id="statistics_btn"
             />
-            <p id="statistics_tooltip" class="bot_right">Statistics</p>
           </li>
         </ul>
       </nav>
       <!----------------------------------------------->
 
-      <!------------------HOME PAGE-------------------->
+      <!----------------HOME PAGE------------------>
       <div id="home_page">
         <div id="home_main">
           <div id="home_main_bubble"></div>
@@ -47,13 +52,11 @@
                 alt="A plus button"
                 id="plus_button_img"
               />
-              <p id="plus_tooltip" class="mid_right">Add a Course</p>
             </div>
           </div>
         </div>
         <div id="deadline_panel"></div>
       </div>
-      <!------------------------------------------------->
 
       <!------------------CALENDAR PAGE------------------>
       <div id="calendar_page"></div>
@@ -61,7 +64,7 @@
 
       <!----------------STATISTICS PAGE------------------>
       <div id="statistics_page"></div>
-      <!------------------------------------------------->
+      <!----------------------------------------------->
     </div>
     <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="bubbles.js" charset="utf-8"></script>

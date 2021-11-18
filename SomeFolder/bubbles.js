@@ -30,34 +30,12 @@ class Bubble
     */
     setDimensions(cx, cy, rad)
     {
-        let r = this.calculateRadius(rad);
-
-        this.div.style.left = this.calculateCenterX(cx) - r + "px";
-        this.div.style.top = this.calculateCenterY(cy) - r + "px";
-        this.div.style.width = r * 2 + "px";
-        this.div.style.height = r * 2 + "px";
-        this.div.style.borderRadius = r + "px";
-        this.div.style.fontSize = r / 3 + "px"; 
-    }
-
-    //The following three functions will convert cx, cy, and rad to pixels (from %)
-
-    calculateRadius(rad)
-    { 
-        let rect = document.getElementById("home_main_bubble").getBoundingClientRect();
-        return (rect.width < rect.height) ? rad * rect.width : rad * rect.height;
-    }
-
-    calculateCenterX(cx)
-    {
-        let rect = document.getElementById("home_main_bubble").getBoundingClientRect();
-        return cx * rect.width;
-    }
-
-    calculateCenterY(cy)
-    {
-        let rect = document.getElementById("home_main_bubble").getBoundingClientRect();
-        return cy * rect.height;
+        this.div.style.left = cx - rad + "px";
+        this.div.style.top = cy - rad + "px";
+        this.div.style.width = rad * 2 + "px";
+        this.div.style.height = rad * 2 + "px";
+        this.div.style.borderRadius = rad + "px";
+        this.div.style.fontSize = rad / 3 + "px"; 
     }
 
     intersects(x, y, rad)
@@ -66,11 +44,8 @@ class Bubble
         //be able to scale the bubble if the window changes size
         //Hence, we need to convert all of them to pixels so that we can use
         //them for intersection calculation.
-        let cx = this.calculateCenterX(this.cx);
-        let cy = this.calculateCenterY(this.cy);
-        let r = this.calculateRadius(this.rad);
 
-        return Math.sqrt(Math.pow(cx - x, 2) + Math.pow(cy - y, 2)) + 0.1 < r + rad;
+        return Math.sqrt(Math.pow(this.cx - x, 2) + Math.pow(this.cy - y, 2)) + 0.1 < this.rad + rad;
     }
 }
 
@@ -127,8 +102,8 @@ class BubbleMenu
         {
           //place the first bubble in the middle of the parent
           let curr = this.bubbles[0];
-          curr.cx = 0.5;
-          curr.cy = 0.5;
+          curr.cx = rect.width / 2;
+          curr.cy = rect.height / 2;
           curr.setDimensions(curr.cx, curr.cy, curr.rad);
     
           if (this.bubbles.length > 1)
@@ -141,7 +116,7 @@ class BubbleMenu
     
             //place the second bubble to the left of the first bubble
             curr = this.bubbles[1];
-            curr.cx = ((src.cx * rect.width) - (src.calculateRadius(src.rad) + curr.calculateRadius(curr.rad))) / rect.width;
+            curr.cx = (src.cx - (src.rad + curr.rad));
             curr.cy = src.cy;
             curr.setDimensions(curr.cx, curr.cy, curr.rad);
             prev = curr;
@@ -153,28 +128,21 @@ class BubbleMenu
               curr = this.bubbles[idx];
 
               //get the instance variables of the bubbles in pixels
-              let srcCX_Px = src.calculateCenterX(src.cx);
-              let srcCY_Px = src.calculateCenterY(src.cy);
-              let prevCX_Px = prev.calculateCenterX(prev.cx)
-              let prevCY_Px = prev.calculateCenterY(prev.cy)
-              let prevRad_Px = prev.calculateRadius(prev.rad);
-              let currRad_Px = curr.calculateRadius(curr.rad);
-              let srcRad_Px = src.calculateRadius(src.rad);
 
-              angle = Math.atan2(srcCY_Px - prevCY_Px, prevCX_Px - srcCX_Px);
-              let c = prevRad_Px + currRad_Px;
-              let a = srcRad_Px + currRad_Px;
-              let b = srcRad_Px + prevRad_Px;
+              angle = Math.atan2(src.cy - prev.cy, prev.cx - src.cx);
+              let c = prev.rad + curr.rad;
+              let a = src.rad + curr.rad;
+              let b = src.rad + prev.rad;
               let theta = Math.acos((a * a + b * b - c * c) / (2 * a * b));
               angle -= theta;
     
-              let cx = srcCX_Px + Math.cos(angle) * a;
-              let cy = srcCY_Px - Math.sin(angle) * a;
+              let cx = src.cx + Math.cos(angle) * a;
+              let cy = src.cy - Math.sin(angle) * a;
     
-              if (this.validBubble(cx, cy, currRad_Px, idx))
+              if (this.validBubble(cx, cy, curr.rad, idx))
               {
-                curr.cx = cx / rect.width;
-                curr.cy = cy / rect.height;
+                curr.cx = cx;
+                curr.cy = cy;
                 curr.setDimensions(curr.cx, curr.cy, curr.rad);
                 sources.push(curr);
     
@@ -196,38 +164,30 @@ class BubbleMenu
                 prev = sources[i + 1];
                 curr = this.bubbles[idx];
 
-                let srcCX_Px = src.calculateCenterX(src.cx);
-                let srcCY_Px = src.calculateCenterY(src.cy);
-                let prevCX_Px = prev.calculateCenterX(prev.cx);
-                let prevCY_Px = prev.calculateCenterY(prev.cy);
-                let prevRad_Px = prev.calculateRadius(prev.rad);
-                let currRad_Px = curr.calculateRadius(curr.rad);
-                let srcRad_Px = src.calculateRadius(src.rad);
-
-                angle = Math.atan2(srcCY_Px - prevCY_Px, prevCX_Px - srcCX_Px);
-                let c = prevRad_Px + currRad_Px;
-                let a = srcRad_Px + currRad_Px;
-                let b = srcRad_Px + prevRad_Px;
+                angle = Math.atan2(src.cy - prev.cy, prev.cx - src.cx);
+                let c = prev.rad + curr.rad;
+                let a = src.rad + curr.rad;
+                let b = src.rad + prev.rad;
                 let theta = Math.acos((a * a + b * b - c * c) / (2 * a * b));
                 angle += theta;
     
-                let cx = srcCX_Px + Math.cos(angle) * a;
-                let cy = srcCY_Px - Math.sin(angle) * a;
+                let cx = src.cx + Math.cos(angle) * a;
+                let cy = src.cy - Math.sin(angle) * a;
     
-                if (this.validBubble(cx, cy, currRad_Px, idx))
+                if (this.validBubble(cx, cy, curr.rad, idx))
                 {
-                  curr.cx = cx / rect.width;
-                  curr.cy = cy / rect.height;
-                  curr.setDimensions(curr.cx, curr.cy, curr.rad);
+                    curr.cx = cx;
+                    curr.cy = cy;
+                    curr.setDimensions(curr.cx, curr.cy, curr.rad);
 
-                  //insert curr to sources as its (i + 1)th element
-                  sources.push(0);
-                  for (let j = sources.length - 1; j >= i + 2; j--) 
-                    sources[j] = sources[j - 1];
+                    //insert curr to sources as its (i + 1)th element
+                    sources.push(0);
+                    for (let j = sources.length - 1; j >= i + 2; j--) 
+                        sources[j] = sources[j - 1];
                   
-                  sources[i + 1] = curr;
-                  i += 2;
-                  idx++;
+                    sources[i + 1] = curr;
+                    i += 2;
+                    idx++;
                 } else
                 {
                   i++;
@@ -246,18 +206,15 @@ class BubbleMenu
         for (let i = 0; i < this.bubbles.length; i++)
         {
             let bubble = this.bubbles[i];
-            let cx = bubble.calculateCenterX(bubble.cx);
-            let cy = bubble.calculateCenterY(bubble.cy);
-            let rad = bubble.calculateRadius(bubble.rad);
+            let cx = bubble.cx;
+            let cy = bubble.cy;
+            let rad = bubble.rad;
 
             if (cx - rad < minLeft)
                 minLeft = cx - rad;
             if (cy - rad < minTop)
                 minTop = cy - rad;
         }
-
-        minLeft /= rect.width;
-        minTop /= rect.height;
 
         //adjust all the bubbles
         for (let i = 0; i < this.bubbles.length; i++)
@@ -290,6 +247,7 @@ window.addEventListener("resize", function()
         element.setDimensions(element.cx, element.cy, element.rad);
     });
     b.generateBubbles();
+    console.log(window.innerWidth);
 });
 
 function overBubble(e)
@@ -301,7 +259,7 @@ function overBubble(e)
         let bubble = b.bubbles[i];
         if (e.target === bubble.div)
         {
-            bubble.setDimensions(bubble.cx, bubble.cy, bubble.rad * 1.3);
+            bubble.setDimensions(bubble.cx, bubble.cy, bubble.rad * 1.2);
             bubble.div.style.zIndex = 1;
             done = true;
         }
@@ -331,7 +289,7 @@ let courses = new Array("COMP", "CHEMISTRY", "BIO", "PHYS", "PSYCH", "MATH", "AR
 
 for (let i = 0; i < n; i++)
 {
-  b.add(Math.random() * 0.1 + 0.05, 
+  b.add(Math.random() * 90 + 30, 
   courses[Math.floor(Math.random() * courses.length)] + " " + Math.floor(Math.random() * 9000 + 1000),
   "rgb(" + Math.floor(Math.random() * 128 + 128) + 
   ", " + Math.floor(Math.random() * 128 + 128) + 

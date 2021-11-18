@@ -8,14 +8,8 @@
 
 /*--------Side bar and its elements---------------------*/
 
-#sidebar ul {
-  width: 100%;
-}
-
 #sidebar li {
-  width: 100%;
   list-style-type: none;
-  position: relative;
 }
 
 #sidebar img {
@@ -25,33 +19,6 @@
   user-select: none;
 }
 
-/*-----------Tool tips-------------------*/
-
-#sidebar p,
-#plus_tooltip {
-  opacity: 0;
-  display: block;
-  background-color: white;
-  position: absolute;
-
-  padding: 0.1em 0.5em;
-  user-select: none;
-
-  transition: opacity 0.5s, z-index 0.5s;
-}
-
-.bot_right {
-  top: 80%;
-  left: 80%;
-}
-
-.mid_right {
-  top: 20%;
-  left: 100%;
-}
-
-/*--------End of tool tips---------------*/
-
 /*------End of side bar and its elements---------------*/
 
 /*------Main layout elements---------------------------*/
@@ -59,11 +26,13 @@
 .container {
   width: 100vw;
   height: 100vh;
+  background-color: aqua;
   display: flex;
 }
 
 #sidebar {
   width: 5%;
+  height: 100vh;
   background-color: rgb(0, 255, 0);
 }
 
@@ -77,7 +46,7 @@
 
 #home_main {
   width: 75%;
-  background-color: powderblue;
+  background-color: red;
 }
 
 #home_main_bubble {
@@ -85,6 +54,29 @@
   background-color: royalblue;
   position: relative;
   overflow: auto;
+}
+
+#home_main_bubble::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+#home_main_bubble::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 15px;
+}
+
+#home_main_bubble::-webkit-scrollbar-thumb {
+  background: green;
+  border-radius: 15px;
+}
+
+#home_main_bubble::-webkit-scrollbar-corner {
+  display: none;
+}
+
+#home_main_bubble::-webkit-scrollbar-thumb:hover {
+  background: rgb(7, 44, 7);
 }
 
 #home_main_footer {
@@ -98,8 +90,8 @@
   height: 75%;
   width: calc(85vh * 0.15 * 0.75);
   border-radius: 50%;
-  margin: auto;
   position: relative;
+  margin: auto;
 }
 
 #plus_button img {
