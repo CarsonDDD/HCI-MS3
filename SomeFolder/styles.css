@@ -108,6 +108,15 @@
   width: 95%;
   background-color: darkgoldenrod;
   display: none;
+  /*position: fixed;*/
+}
+
+#calendar_element{
+  margin: 0 auto;
+  box-sizing: content-box;
+  display: flexbox;
+  width: 75%;
+  height: 100px
 }
 
 /* End of calendar page and its elements---*/
