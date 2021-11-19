@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
       selectable: true,
       selectMirror: true,
       select: function(arg) {
+        // THIS IS WHERE WE WANT THE DIALOG BOX
         var title = prompt('Add Class:');
         if (title) {
           calendar.addEvent({
