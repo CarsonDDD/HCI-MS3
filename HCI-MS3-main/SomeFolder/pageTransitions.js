@@ -17,6 +17,17 @@ let submitBtn = document.getElementById("submit_btn");
 let cancelBtn = document.getElementById("cancel_btn");
 let plusBtn = document.getElementById("plus_button");
 
+let colourOne = document.getElementById("colour1");
+let colourTwo = document.getElementById("colour2");
+let colourThree = document.getElementById("colour3");
+let colourFour = document.getElementById("colour4");
+let colourFive = document.getElementById("colour5");
+let colourSix = document.getElementById("colour6");
+let colourSeven = document.getElementById("colour7");
+let colourEight = document.getElementById("colour8");
+let colourNine = document.getElementById("colour9");
+let colourTen = document.getElementById("colour10");
+
 //add click, mouseover, and mouseleave events to all the buttons
 
 homeBtn.addEventListener("click", function(e) { currPage = homePage; showPage(); currBtn = homeBtn; highlightBtn(e); });
@@ -34,6 +45,17 @@ statisticsBtn.addEventListener("mouseleave", leaveBtn);
 submitBtn.addEventListener("click", addCourse);
 cancelBtn.addEventListener("click", closeForm);
 plusBtn.addEventListener("click", openForm);
+
+colourOne.addEventListener("click", onlyOne);
+colourTwo.addEventListener("click", onlyOne);
+colourThree.addEventListener("click", onlyOne);
+colourFour.addEventListener("click", onlyOne);
+colourFive.addEventListener("click", onlyOne);
+colourSix.addEventListener("click", onlyOne);
+colourSeven.addEventListener("click", onlyOne);
+colourEight.addEventListener("click", onlyOne);
+colourNine.addEventListener("click", onlyOne);
+colourTen.addEventListener("click", onlyOne);
 
 function overBtn(e) 
 { 
@@ -88,6 +110,7 @@ function openForm()
 function closeForm()
 {
     createBub.style.display = "none";
+    clear();//reset the entries and colours
 }
 
 import {m} from "./Manager.js";
@@ -116,21 +139,33 @@ function addCourse()
         for(let i = 1; i <= 10; i++) //will need to alter depending on how many colours we have
         {
             if(document.getElementById("colour" + i).checked)
-              chosenColour = i - 1;
+            {
+                chosenColour = i - 1;
+            }
         }
-
         m.createCourse(courseName.value, 0, tarGPA.value, colours[chosenColour]);
         closeForm();
+        clear();//reset the entries and colours
     }
 }
 
-function onlyOne(colour)//can have for loop or create a pointer to each colour and then a bunch of if and elses
+function onlyOne()
 {
     for(let i = 1; i <= 10; i++)//will need to alter depending on how many colours we have
     {
         document.getElementById("colour" + i).checked = false;
     }
-    document.getElementById(colour).checked = true;
+    this.checked = true;
+}
+
+function clear()//ensures each time form is open then input options are clear, called after submit and close
+{
+    let formPop = document.getElementById("bubble_form");
+    formPop.reset();
+    for(let i = 1; i <= 10; i++)//will need to alter depending on how many colours we have
+    {
+        document.getElementById("colour" + i).checked = false;
+    }
 }
 
 showPage();
