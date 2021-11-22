@@ -1,0 +1,387 @@
+/*----------------------------------------Create Bubble Form--------------------------------------------*/
+/* Form background */
+.form-container {
+  border-radius: 15px;
+  border: 3px solid #c9c3c3;
+  padding: 25px;
+  background-color: white;
+  height: max-content;
+  width: max-content;
+  max-height: 70vh;
+  max-width: 50vw;
+
+  opacity: 0;
+  position: absolute;
+  left: -1000px;
+  bottom: 15%;
+
+  overflow: auto;
+  cursor: grab;
+  user-select: none;
+  z-index: 2;
+  transition: opacity 0.5s;
+}
+
+/* Width input fields */
+.form-container input[type="text"],
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* For focused */
+.form-container input[type="text"]:focus,
+.form-container input[type="text"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/*Green Submit button */
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/*Red cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/*Hover effects to buttons */
+.form-container .btn:hover {
+  opacity: 1;
+}
+
+/*Hiding the checkbox*/
+.colour1-label input {
+  position: absolute; /*doing abosute to keep it on one line*/
+  opacity: 0;
+  cursor: pointer;
+}
+.colour2-label input {
+  position: relative; /*doing relative with right 50px moves it over*/
+  /*inline-block did nothing, position: relative with right: 50px; did nothing*/
+  opacity: 0;
+  cursor: pointer;
+}
+.colour3-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour4-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour5-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour6-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour7-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour8-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour9-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour10-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/*-------------BUBBLE COLOURS--------------------------*/
+/*Customizing a spanning element behind the checkbox*/
+.colour1-label .colour1 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #f7f3cd;
+  border: 2px solid black;
+}
+.colour1-label .colour1::after {
+  height: 0px;
+  width: 0px;
+  background-color: #f7f3cd;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour1-label input:checked ~ .colour1 {
+  background-color: #f7f3cd;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour1-label input:checked ~ .colour1::after {
+  opacity: 1;
+  background-color: #f7f3cd;
+  border: 2px solid black;
+}
+
+.colour2-label .colour2 {
+  position: absolute;
+  left: 70px;
+  width: 40px;
+  height: 40px;
+  background-color: #b4f1b3; /*#CFE3E2;*/
+  border: 2px solid black;
+}
+.colour2-label .colour2::after {
+  height: 0px;
+  width: 0px;
+  background-color: #b4f1b3;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour2-label input:checked ~ .colour2 {
+  background-color: #b4f1b3;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour2-label input:checked ~ .colour2::after {
+  opacity: 1;
+  background-color: #b4f1b3;
+  border: 2px solid black;
+}
+
+.colour3-label .colour3 {
+  position: absolute;
+  left: 120px;
+  width: 40px;
+  height: 40px;
+  background-color: #a6d5fd;
+  border: 2px solid black;
+}
+.colour3-label .colour3::after {
+  height: 0px;
+  width: 0px;
+  background-color: #a6d5fd;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour3-label input:checked ~ .colour3 {
+  background-color: #a6d5fd;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour3-label input:checked ~ .colour3::after {
+  opacity: 1;
+  background-color: #a6d5fd;
+  border: 2px solid black;
+}
+
+.colour4-label .colour4 {
+  position: absolute;
+  left: 170px;
+  width: 40px;
+  height: 40px;
+  background-color: #b9cbd9;
+  border: 2px solid black;
+}
+.colour4-label .colour4::after {
+  height: 0px;
+  width: 0px;
+  background-color: #b9cbd9;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour4-label input:checked ~ .colour4 {
+  background-color: #b9cbd9;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour4-label input:checked ~ .colour4::after {
+  opacity: 1;
+  background-color: #b9cbd9;
+  border: 2px solid black;
+}
+
+.colour5-label .colour5 {
+  position: absolute;
+  left: 220px;
+  width: 40px;
+  height: 40px;
+  background-color: #cfe3e2;
+  border: 2px solid black;
+}
+.colour5-label .colour5::after {
+  height: 0px;
+  width: 0px;
+  background-color: #cfe3e2;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour5-label input:checked ~ .colour5 {
+  background-color: #cfe3e2;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour5-label input:checked ~ .colour5::after {
+  opacity: 1;
+  background-color: #cfe3e2;
+  border: 2px solid black;
+}
+
+.colour6-label .colour6 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #bcb0ee;
+  border: 2px solid black;
+}
+.colour6-label .colour6::after {
+  height: 0px;
+  width: 0px;
+  background-color: #bcb0ee;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour6-label input:checked ~ .colour6 {
+  background-color: #bcb0ee;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour6-label input:checked ~ .colour6::after {
+  opacity: 1;
+  background-color: #bcb0ee;
+  border: 2px solid black;
+}
+
+.colour7-label .colour7 {
+  position: absolute;
+  left: 70px;
+  width: 40px;
+  height: 40px;
+  background-color: #fccff4;
+  border: 2px solid black;
+}
+.colour7-label .colour7::after {
+  height: 0px;
+  width: 0px;
+  background-color: #fccff4;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour7-label input:checked ~ .colour7 {
+  background-color: #fccff4;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour7-label input:checked ~ .colour7::after {
+  opacity: 1;
+  background-color: #fccff4;
+  border: 2px solid black;
+}
+
+.colour8-label .colour8 {
+  position: absolute;
+  left: 120px;
+  width: 40px;
+  height: 40px;
+  background-color: #fcc9c5;
+  border: 2px solid black;
+}
+.colour8-label .colour8::after {
+  height: 0px;
+  width: 0px;
+  background-color: #fcc9c5;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour8-label input:checked ~ .colour8 {
+  background-color: #fcc9c5;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour8-label input:checked ~ .colour8::after {
+  opacity: 1;
+  background-color: #fcc9c5;
+  border: 2px solid black;
+}
+
+.colour9-label .colour9 {
+  position: absolute;
+  left: 170px;
+  width: 40px;
+  height: 40px;
+  background-color: #feddd8;
+  border: 2px solid black;
+}
+.colour9-label .colour9::after {
+  height: 0px;
+  width: 0px;
+  background-color: #feddd8;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour9-label input:checked ~ .colour9 {
+  background-color: #feddd8;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour9-label input:checked ~ .colour9::after {
+  opacity: 1;
+  background-color: #feddd8;
+  border: 2px solid black;
+}
+
+.colour10-label .colour10 {
+  position: absolute;
+  left: 220px;
+  width: 40px;
+  height: 40px;
+  background-color: #eae7e2;
+  border: 2px solid black;
+}
+.colour10-label .colour10::after {
+  height: 0px;
+  width: 0px;
+  background-color: #eae7e2;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour10-label input:checked ~ .colour10 {
+  background-color: #eae7e2;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour10-label input:checked ~ .colour10::after {
+  opacity: 1;
+  background-color: #eae7e2;
+  border: 2px solid black;
+}
+
+/*--------------------------------------------------End of bubble form----------------------------------------*/

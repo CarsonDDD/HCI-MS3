@@ -1,3 +1,5 @@
+import {clickBubble} from "./InfoForm.js";
+
 class Bubble
 {
     constructor(cx, cy, rad, label, colour)
@@ -22,6 +24,7 @@ class Bubble
         this.div.style.userSelect = "none";
         this.div.addEventListener("mouseover", overBubble);
         this.div.addEventListener("mouseleave", leaveBubble);
+        this.div.addEventListener("click", clickBubble);
         document.getElementById("home_main_bubble").appendChild(this.div);
     }
 
@@ -61,18 +64,9 @@ class BubbleMenu
         this.bubbles.push(new Bubble(0, 0, rad, label, colour));
     }
 
-    remove(label)
+    remove(idx)
     {
-        let idx = -1;
-
-        //look for the bubble with the said label
-        for (let i = 0; i < this.bubbles.length && idx == -1; i++)
-        {
-            if (this.bubbles[i].label === label)
-                idx = i;
-        }
-
-        if (idx != -1)
+        if (idx >= 0 && idx < this.bubbles.length)
         {
             document.getElementById("home_main_bubble").removeChild(this.bubbles[idx].div); //remove the bubble from the page
 
@@ -84,13 +78,10 @@ class BubbleMenu
         }
     }
 
-    setRadius(label, rad)
+    setRadius(idx, rad)
     {
-        for (let i = 0; i < this.bubbles.length; i++)
-        {
-            if (this.bubbles[i].label === label)
-                this.bubbles[i].rad = rad;
-        }
+        if (idx >= 0 && idx < this.bubbles.length)
+            this.bubbles[idx].rad = rad;
     }
 
     generateBubbles()
@@ -243,20 +234,21 @@ class BubbleMenu
 //change the dimensions of the bubbles if window changes size
 window.addEventListener("resize", function()
 {
-    b.bubbles.forEach(element => {
+    menu.bubbles.forEach(element => {
         element.setDimensions(element.cx, element.cy, element.rad);
     });
-    b.generateBubbles();
-    console.log(window.innerWidth);
+    menu.generateBubbles();
 });
+
+export let menu = new BubbleMenu();
 
 function overBubble(e)
 {
     let done = false;
 
-    for(let i = 0; i < b.bubbles.length && !done; i++)
+    for(let i = 0; i < menu.bubbles.length && !done; i++)
     {
-        let bubble = b.bubbles[i];
+        let bubble = menu.bubbles[i];
         if (e.target === bubble.div)
         {
             bubble.setDimensions(bubble.cx, bubble.cy, bubble.rad * 1.2);
@@ -270,9 +262,9 @@ function leaveBubble(e)
 {
     let done = false;
 
-    for(let i = 0; i < b.bubbles.length && !done; i++)
+    for(let i = 0; i < menu.bubbles.length && !done; i++)
     {
-        let bubble = b.bubbles[i];
+        let bubble = menu.bubbles[i];
         if (e.target === bubble.div)
         {
             bubble.setDimensions(bubble.cx, bubble.cy, bubble.rad);
@@ -281,19 +273,3 @@ function leaveBubble(e)
         }
     }
 }
-
-
-export let b = new BubbleMenu();
-let n = Math.floor(Math.random() * 2 + 1);
-let courses = new Array("COMP", "CHEMISTRY", "BIO", "PHYS", "PSYCH", "MATH", "ARTS", "PHIL", "GEO");
-
-for (let i = 0; i < n; i++)
-{
-  b.add(Math.random() * 90 + 30, 
-  courses[Math.floor(Math.random() * courses.length)] + " " + Math.floor(Math.random() * 9000 + 1000),
-  "rgb(" + Math.floor(Math.random() * 128 + 128) + 
-  ", " + Math.floor(Math.random() * 128 + 128) + 
-   ", " + Math.floor(Math.random() * 128 + 128) + ")");
-}
-
-b.generateBubbles();
