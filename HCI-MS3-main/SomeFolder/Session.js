@@ -1,12 +1,13 @@
-class Session
+export class Session
 {
 
-	constructor(course,date,start,end)
+	constructor(course,date,start,end,type)
 	{
 		this.course=course;
 		this.date=date;
 		this.start=start;
 		this.end=end;
+		this.type=type;
 	}
 
 	course()
@@ -26,5 +27,8 @@ class Session
 	{
 		return this.end;
 	}
-
+	type()
+	{
+		return this.type;
+	}
 }

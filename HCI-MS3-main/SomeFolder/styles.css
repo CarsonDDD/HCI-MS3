@@ -26,27 +26,25 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: aqua;
   display: flex;
 }
 
 #sidebar {
-  width: 5%;
+  width: 60px;
   background-color: rgb(0, 85, 85);
   height: 100vh;
+  overflow: auto;
 }
 
 /*----Home page and its elements--------*/
 
 #home_page {
-  width: 95%;
-  background-color: pink;
+  width: calc(100vw - 60px);
   display: flex;
 }
 
 #home_main {
-  width: 75%;
-  background-color: red;
+  width: calc(100% - 20em);
 }
 
 #home_main_bubble {
@@ -54,29 +52,7 @@
   background-color: white;
   position: relative;
   overflow: auto;
-}
-
-#home_main_bubble::-webkit-scrollbar {
-  width: 15px;
-  height: 15px;
-}
-
-#home_main_bubble::-webkit-scrollbar-track {
-  background: white;
-  border-radius: 15px;
-}
-
-#home_main_bubble::-webkit-scrollbar-thumb {
-  background: green;
-  border-radius: 15px;
-}
-
-#home_main_bubble::-webkit-scrollbar-corner {
-  display: none;
-}
-
-#home_main_bubble::-webkit-scrollbar-thumb:hover {
-  background: rgb(7, 44, 7);
+  border: 2px black solid;
 }
 
 #home_main_footer {
@@ -90,448 +66,42 @@
   height: 75%;
   width: calc(85vh * 0.15 * 0.75);
   border-radius: 50%;
-  border: 1px solid black;
+  border: none;
   margin: auto;
   cursor: pointer;
+  background-image: url("./images/plus.png");
+  background-size: contain;
+  background-position: center center;
 }
 
 #plus_button:hover {
   background-color: rgb(130, 190, 190);
 }
 
-.plus_button img {
-  width: 100%;
-  height: 100%;
-}
-
 #deadline_panel {
-  width: 25%;
+  width: 20em;
+  height: 100vh;
+  padding: 2em 2em;
+  overflow: auto;
   background-color: rosybrown;
 }
 
-#deadline_tag{
-  padding-left: 30%;
+#deadline_panel h2 {
+  text-align: center;
 }
 
-#deadline_list
-{
-  padding-left: 10%;
-}
-
-#deadline_list ul
-{
-  border-style: outset;
-}
-#deadline_list li
-{
-  border-style: inset;
-}
-
-#deadline_list li button
-{
+#deadline_list li button {
   cursor: pointer;
 }
-
 
 /*--End of home page and its elements-----*/
-
-/*----------------------------------------Create Bubble Form--------------------------------------------*/
-
-/* Popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;/*Moves the form to the right hand side*/
-  border: 3px solid #c9c3c3;
-  z-index: 9;
-}
-
-/* Form background */
-.form-container {
-  max-width: 300px;
-  padding: 20px;
-  background-color: white;
-}
-
-/* Width input fields */
-.form-container input[type=text], .form-container input[type=text] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* For focused */
-.form-container input[type=text]:focus, .form-container input[type=text]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/*Green Submit button */
-.form-container .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/*Red cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/*Hover effects to buttons */
-.form-container .btn:hover {
-  opacity: 1;
-}
-
-/*Hiding the checkbox*/
-.colour1-label input{
-  position: absolute;/*doing abosute to keep it on one line*/
-  opacity: 0;
-  cursor: pointer;
-}
-.colour2-label input{
-  position: relative;/*doing relative with right 50px moves it over*/
-  /*inline-block did nothing, position: relative with right: 50px; did nothing*/
-  opacity: 0;
-  cursor: pointer;
-}
-.colour3-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour4-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour5-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour6-label input{
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour7-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour8-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour9-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-.colour10-label input{
-  position: relative;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/*-------------BUBBLE COLOURS--------------------------*/
-/*Customizing a spanning element behind the checkbox*/
-.colour1-label .colour1{
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background-color: #F7F3CD;
-  border: 2px solid black;
-}
-.colour1-label .colour1::after{
-  height: 0px;
-  width: 0px;
-  background-color: #F7F3CD;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour1-label input:checked ~ .colour1{
-  background-color: #F7F3CD;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour1-label input:checked ~ .colour1::after{
-  opacity: 1;
-  background-color: #F7F3CD;
-  border: 2px solid black;
-}
-
-.colour2-label .colour2{
-  position: absolute;
-  left: 70px;
-  width: 40px;
-  height: 40px;
-  background-color: #B4F1B3;/*#CFE3E2;*/
-  border: 2px solid black;
-}
-.colour2-label .colour2::after{
-  height: 0px;
-  width: 0px;
-  background-color: #B4F1B3;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour2-label input:checked ~ .colour2{
-  background-color: #B4F1B3;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour2-label input:checked ~ .colour2::after{
-  opacity: 1;
-  background-color: #B4F1B3;
-  border: 2px solid black;
-}
-
-.colour3-label .colour3{
-  position: absolute;
-  left: 120px;
-  width: 40px;
-  height: 40px;
-  background-color: #A6D5FD;
-  border: 2px solid black;
-}
-.colour3-label .colour3::after{
-  height: 0px;
-  width: 0px;
-  background-color: #A6D5FD;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour3-label input:checked ~ .colour3{
-  background-color: #A6D5FD;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour3-label input:checked ~ .colour3::after{
-  opacity: 1;
-  background-color: #A6D5FD;
-  border: 2px solid black;
-}
-
-.colour4-label .colour4{
-  position: absolute;
-  left: 170px;
-  width: 40px;
-  height: 40px;
-  background-color: #B9CBD9;
-  border: 2px solid black;
-}
-.colour4-label .colour4::after{
-  height: 0px;
-  width: 0px;
-  background-color: #B9CBD9;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour4-label input:checked ~ .colour4{
-  background-color: #B9CBD9;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour4-label input:checked ~ .colour4::after{
-  opacity: 1;
-  background-color: #B9CBD9;
-  border: 2px solid black;
-}
-
-.colour5-label .colour5{
-  position: absolute;
-  left: 220px;
-  width: 40px;
-  height: 40px;
-  background-color: #CFE3E2;
-  border: 2px solid black;
-}
-.colour5-label .colour5::after{
-  height: 0px;
-  width: 0px;
-  background-color: #CFE3E2;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour5-label input:checked ~ .colour5{
-  background-color: #CFE3E2;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour5-label input:checked ~ .colour5::after{
-  opacity: 1;
-  background-color: #CFE3E2;
-  border: 2px solid black;
-}
-
-.colour6-label .colour6{
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background-color: #BCB0EE;
-  border: 2px solid black;
-}
-.colour6-label .colour6::after{
-  height: 0px;
-  width: 0px;
-  background-color: #BCB0EE;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour6-label input:checked ~ .colour6{
-  background-color: #BCB0EE;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour6-label input:checked ~ .colour6::after{
-  opacity: 1;
-  background-color: #BCB0EE;
-  border: 2px solid black;
-}
-
-.colour7-label .colour7{
-  position: absolute;
-  left: 70px;
-  width: 40px;
-  height: 40px;
-  background-color: #FCCFF4;
-  border: 2px solid black;
-}
-.colour7-label .colour7::after{
-  height: 0px;
-  width: 0px;
-  background-color: #FCCFF4;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour7-label input:checked ~ .colour7{
-  background-color: #FCCFF4;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour7-label input:checked ~ .colour7::after{
-  opacity: 1;
-  background-color: #FCCFF4;
-  border: 2px solid black;
-}
-
-.colour8-label .colour8{
-  position: absolute;
-  left: 120px;
-  width: 40px;
-  height: 40px;
-  background-color: #FCC9C5;
-  border: 2px solid black;
-}
-.colour8-label .colour8::after{
-  height: 0px;
-  width: 0px;
-  background-color: #FCC9C5;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour8-label input:checked ~ .colour8{
-  background-color: #FCC9C5;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour8-label input:checked ~ .colour8::after{
-  opacity: 1;
-  background-color: #FCC9C5;
-  border: 2px solid black;
-}
-
-.colour9-label .colour9{
-  position: absolute;
-  left: 170px;
-  width: 40px;
-  height: 40px;
-  background-color: #FEDDD8;
-  border: 2px solid black;
-}
-.colour9-label .colour9::after{
-  height: 0px;
-  width: 0px;
-  background-color: #FEDDD8;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour9-label input:checked ~ .colour9{
-  background-color: #FEDDD8;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour9-label input:checked ~ .colour9::after{
-  opacity: 1;
-  background-color: #FEDDD8;
-  border: 2px solid black;
-}
-
-.colour10-label .colour10{
-  position: absolute;
-  left: 220px;
-  width: 40px;
-  height: 40px;
-  background-color: #EAE7E2;
-  border: 2px solid black;
-}
-.colour10-label .colour10::after{
-  height: 0px;
-  width: 0px;
-  background-color: #EAE7E2;
-  border: 5px solid black;
-  opacity: 1;
-}
-/*Check our hiding checkmark*/
-.colour10-label input:checked ~ .colour10{
-  background-color: #EAE7E2;
-  border: 5px solid black;
-  opacity: 1;
-}
-.colour10-label input:checked ~ .colour10::after{
-  opacity: 1;
-  background-color: #EAE7E2;
-  border: 2px solid black;
-}
-
-/*--------------------------------------------------End of bubble form----------------------------------------*/
-
 
 /*-------Calendar page and its elements----*/
 
 #calendar_page {
-  width: 95%;
+  width: calc(100vw - 60px);
   background-color: darkgoldenrod;
   display: none;
-  /*position: fixed;*/
-}
-
-#calendar_element{
-  margin: 0 auto;
-  box-sizing: content-box;
-  display: flexbox;
-  width: 75%;
-  height: 100px
 }
 
 /* End of calendar page and its elements---*/
@@ -539,7 +109,7 @@
 /*------Statistics page and its elements---*/
 
 #statistics_page {
-  width: 95%;
+  width: calc(100vw - 60px);
   background-color: deeppink;
   display: none;
 }
@@ -549,3 +119,39 @@
 /*-------End of main layout elements--------------------*/
 
 /*--------------------End of Layout------------------------------------------------------------*/
+
+/*---------------------Media Queries-----------------------------------------------------------*/
+
+@media (max-width: 600px) {
+  #home_page {
+    flex-direction: column;
+    width: 85%;
+    height: 200vh;
+    overflow: auto;
+  }
+
+  #sidebar {
+    width: 15%;
+    height: 200vh;
+  }
+
+  #home_main {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #home_main_bubble {
+    height: 85vh;
+  }
+
+  #home_main_footer {
+    height: 15vh;
+  }
+
+  #deadline_panel {
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+/*------------------End of Media Queries-------------------------------------------------------*/
