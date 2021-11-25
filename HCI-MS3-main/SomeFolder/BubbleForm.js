@@ -1,23 +1,39 @@
+//pointers to html elements
+
 let submitBtn = document.getElementById("submit_btn");
 let cancelBtn = document.getElementById("cancel_btn");
 let plusBtn = document.getElementById("plus_button");
-let createBub = document.getElementById("create_bubble");//pointer to create bubble form div
+let createBub = document.getElementById("create_bubble");
 let parent = document.querySelector("body");
 
-import {manager} from "./Manager.js";
+//variables for dragging 
 
-let prevX = 0, prevY = 0;
-let left = -1, top = -1;
+let prevXBub = 0, prevYBub = 0;
+let leftBub = -1, topBub = -1;
+
+/************************Event Listeners***************************************/
 
 submitBtn.addEventListener("click", addCourse);
-cancelBtn.addEventListener("click", closeForm);
-plusBtn.addEventListener("click", openForm);
+cancelBtn.addEventListener("click", closeBub);
+plusBtn.addEventListener("click", function()
+{
+    resetTooltip();
+    openBub();
+});
+plusBtn.addEventListener("mouseover", function()
+{
+    createTooltip("Add a course", plusBtn);
+});
+plusBtn.addEventListener("mouseleave", function()
+{
+    resetTooltip();
+});
 createBub.addEventListener("mousedown", function(e)
 {
     let inside = false;
     let children = createBub.children;
 
-    for (let i = 0; i < children.length; i++)
+    for (let i = 0; i < children.length; i++) //we don't drag is mouse is over a textbox
     {
         let c = children[i];
         if (c.getAttribute("type") === "text")
@@ -25,81 +41,84 @@ createBub.addEventListener("mousedown", function(e)
             let rect = c.getBoundingClientRect();
             let x = e.pageX;
             let y = e.pageY;
+
             if (x >= rect.left && x < rect.right &&
-                y >= rect.top && y < rect.bottom)
+                y >= rect.top + window.scrollY && y < rect.bottom + window.scrollY)
                 inside = true;
         }
     }
 
     if (!inside)
     {
-        prevX = e.pageX;
-        prevY = e.pageY;
-        left = (createBub.getBoundingClientRect().left - parent.getBoundingClientRect().left);
-        top = (createBub.getBoundingClientRect().top - parent.getBoundingClientRect().top);
+        prevXBub = e.pageX;
+        prevYBub = e.pageY;
+        leftBub = (createBub.getBoundingClientRect().left - parent.getBoundingClientRect().left);
+        topBub = (createBub.getBoundingClientRect().top - parent.getBoundingClientRect().top);
         createBub.style.cursor = "grabbing";
-        parent.addEventListener("mousemove", move);
+        parent.addEventListener("mousemove", moveBub);
         parent.addEventListener("mouseleave", function()
         {
             createBub.style.cursor = "grab";
-            parent.removeEventListener("mousemove", move);
+            parent.removeEventListener("mousemove", moveBub);
         })
     }
 })
 window.addEventListener("mouseup", function()
 {
     createBub.style.cursor = "grab";
-    parent.removeEventListener("mousemove", move);
+    parent.removeEventListener("mousemove", moveBub);
 })
 window.addEventListener("resize", function()
 {
-    left = -1;
-    top = -1;
+    leftBub = -1;
+    topBub = -1;
 
     if (createBub.style.opacity == 1)
     {
-        closeForm();
-        openForm();
+        closeBub();
+        openBub();
     }
 })
 
-function move(e)
+/*********************************************************************************** */
+
+function moveBub(e)
 {
-    left += e.pageX - prevX;
-    top += e.pageY - prevY;    
+    leftBub += e.pageX - prevXBub;
+    topBub += e.pageY - prevYBub;    
 
-    fit();
+    fitBub();
 
-    prevX = e.pageX;
-    prevY = e.pageY;
-    createBub.style.left = left + "px";
-    createBub.style.top = top + "px";
+    prevXBub = e.pageX;
+    prevYBub = e.pageY;
+    createBub.style.left = leftBub + "px";
+    createBub.style.top = topBub + "px";
 }
 
-function fit()
+function fitBub()
 {
     let rect = createBub.getBoundingClientRect();
 
-    if (left < 0)
-        left = 0;
-    if (top < 0)
-        top = 0;
-    if (left + rect.width > window.innerWidth)
-        left = window.innerWidth - rect.width;
+    if (leftBub < 0)
+        leftBub = 0;
+    if (topBub < 0)
+        topBub = 0;
+    if (leftBub + rect.width > window.innerWidth)
+        leftBub = window.innerWidth - rect.width;
 
     let high = window.innerHeight;
     if (window.innerWidth <= 600)
         high *= 2;
 
-    if (top + rect.height > high)
-        top = high - rect.height;
+    if (topBub + rect.height > high)
+        topBub = high - rect.height;
 }
 
-function openForm()
+function openBub()
 {
     if (createBub.style.opacity == 0) //not shown yet
     {
-        if (left == -1) //not yet moved
+        if (leftBub == -1) //not yet moved
         {
             let rect = document.getElementById("home_main").getBoundingClientRect();
             let middle = (rect.left + rect.width / 2) / window.innerWidth;
@@ -108,19 +127,19 @@ function openForm()
         }
         else
         {   
-            createBub.style.left = left + "px";
-            createBub.style.top = top + "px";
+            createBub.style.left = leftBub + "px";
+            createBub.style.top = topBub + "px";
         }
 
         createBub.style.opacity = 1;
     }
     else
     {
-        closeForm();
+        closeBub();
     }
 }
   
-function closeForm()
+function closeBub()
 {
     createBub.style.opacity = 0;
     createBub.style.left = "-1000px";
@@ -145,22 +164,28 @@ function addCourse()
 {
     let courseName = document.getElementById("courseName").value;
     let tarGPA = Number(document.getElementById("tarGPA").value);
-    let chosenColour = 0;
+    let chosenColour = -1;
+    let message = null;
 
-    if (courseName !== "" && 
-        typeof tarGPA == "number" && tarGPA >= 0) //gpa has to be a positive number
+    for(let i = 1; i <= 10; i++) //will need to alter depending on how many colours we have
     {
-        for(let i = 1; i <= 10; i++) //will need to alter depending on how many colours we have
-        {
-            if(document.getElementById("colour" + i).checked)
-              chosenColour = i - 1;
-        }
-
-        if(manager.createCourse(courseName, 0, tarGPA, colours[chosenColour]))
-        {
-            closeForm();
-        }
+        if(document.getElementById("colour" + i).checked)
+          chosenColour = i - 1;
     }
+
+    if (courseName === "") message = "Invalid course: Can't be blank.";
+    else if (isNaN(tarGPA) || document.getElementById("tarGPA").value.length === 0) message = "Invalid grade: Has to be a number.";
+    else if (tarGPA < 0) message = "Invalid grade: Has to be non-negative.";
+    else if (chosenColour === -1) message = "Invalid color: Please select a color."
+    else
+    {
+        if(manager.createCourse(courseName, 0, tarGPA, colours[chosenColour]))
+            closeBub();
+        else    
+            message = "Invalid course: " + courseName + " already exists.";
+    }
+
+    if (message != null) alert(message);
 }
 
 function onlyOne(colour)//can have for loop or create a pointer to each colour and then a bunch of if and elses

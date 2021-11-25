@@ -1,4 +1,4 @@
-export class Course
+class Course
 {
 
 	constructor(name,totalHours,grade,color)

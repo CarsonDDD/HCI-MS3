@@ -1,4 +1,4 @@
-export class Session
+class Session
 {
 
 	constructor(course,date,start,end,type)

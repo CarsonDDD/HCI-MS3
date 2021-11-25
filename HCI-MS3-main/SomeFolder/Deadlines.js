@@ -1,4 +1,4 @@
-export class Deadlines
+class Deadlines
 {
 
 	constructor(course,date,time,type)
@@ -28,5 +28,4 @@ export class Deadlines
     {
         return this.course+" "+this.date+" :"+this.time + this.type;
     }
-
 }

@@ -13,15 +13,32 @@ let hoverColor = "rgb(0, 170, 170)", selectedColor = "rgb(0, 128, 128)", defColo
 
 //add click, mouseover, and mouseleave events to all the buttons
 
-homeBtn.addEventListener("click", function(e) { currPage = homePage; showPage(); currBtn = homeBtn; highlightBtn(e); });
+homeBtn.addEventListener("click", function(e) 
+{ 
+    currPage = homePage; 
+    showPage(); currBtn = homeBtn; 
+    highlightBtn(e); resetTooltip()}
+);
 homeBtn.addEventListener("mouseover", overBtn);
 homeBtn.addEventListener("mouseleave", leaveBtn);
 
-calendarBtn.addEventListener("click", function(e) { currPage = calendarPage; showPage(); currBtn = calendarBtn; highlightBtn(e);});
+calendarBtn.addEventListener("click", function(e) 
+{ 
+    currPage = calendarPage; 
+    showPage(); currBtn = calendarBtn; 
+    highlightBtn(e); 
+    resetTooltip()}
+);
 calendarBtn.addEventListener("mouseover", overBtn);
 calendarBtn.addEventListener("mouseleave", leaveBtn);
 
-statisticsBtn.addEventListener("click", function(e) { currPage = statisticsPage; showPage(); currBtn = statisticsBtn; highlightBtn(e);});
+statisticsBtn.addEventListener("click", function(e) 
+{ 
+    currPage = statisticsPage; 
+    showPage(); currBtn = statisticsBtn; 
+    highlightBtn(e); 
+    resetTooltip()}
+);
 statisticsBtn.addEventListener("mouseover", overBtn);
 statisticsBtn.addEventListener("mouseleave", leaveBtn);
 
@@ -32,6 +49,8 @@ function overBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = hoverColor; 
+        
+        createTooltip((e.target === homeBtn) ? "Home" : (e.target === calendarBtn) ? "Calendar" : "Statistics", e.target);
     }
 }
 function leaveBtn(e) 
@@ -41,6 +60,8 @@ function leaveBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = defColor; 
+
+        resetTooltip();
     }
 }
 
@@ -68,6 +89,14 @@ function showPage()
     statisticsPage.style.display = "none";
 
     currPage.style.display = "flex"; 
+
+    if (currPage === homePage)
+    {
+        menu.bubbles.forEach(element => {
+            element.setDimensions(element.cx, element.cy, element.rad);
+        });
+        menu.generateBubbles();
+    }
 }
 
 showPage();

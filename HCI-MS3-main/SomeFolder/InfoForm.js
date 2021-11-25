@@ -1,10 +1,7 @@
-import {menu} from "./Bubbles.js";
-import {manager} from "./Manager.js";
-import {main} from "./Manager.js";
+//pointers to html elements
 
 let closeBtn = document.getElementById("close_btn");
-let infoDiv = document.getElementById("info_div");//pointer to info div
-let parent = document.querySelector("body");
+let infoDiv = document.getElementById("info_div");
 let deadline_btn = document.getElementById("deadlines");
 let session_btn = document.getElementById("sessions");
 let deadline = document.getElementById("form_deadline_panel");
@@ -17,78 +14,85 @@ let changeColor = document.getElementById("change_color");
 let nameText = document.getElementById("course_name_text");
 let gradeText = document.getElementById("target_grade_text");
 
-let name = document.getElementById("course_name");
+let courseName = document.getElementById("course_name");
 let grade = document.getElementById("target_grade");
 
 let colorAux = document.getElementById("color_div_aux");
 let pickers = document.querySelectorAll(".picker");
 let color = document.getElementById("color");
 
-let prevX = 0, prevY = 0;
-let left = -1, top = -1;
+//variables for dragging
 
-let selectedColor = "rosybrown";
-let defaultColor = "rgb(255, 191, 191)";
-let hoverColor = "rgb(158, 118, 118)";
+let prevXInfo = 0, prevYInfo = 0;
+let leftInfo = -1, topInfo = -1;
+
+//variables for selection
+
+let selectedColorInfo = "rosybrown";
+let defaultColorInfo = "rgb(255, 191, 191)";
+let hoverColorInfo = "rgb(158, 118, 118)";
 let selected = deadline_btn;
 
 let selectedPicker = null;
+let currBubbleDiv = null;
+
+/***************************Event Listeners*************************************** */
 
 infoDiv.addEventListener("mousedown", function(e)
 {
     let inside = false;
     let texts = new Array(nameText, gradeText);
 
+    //check to see if mouse is over a textbox; we don't want to drag the form if so
     for (let i = 0; i < texts.length; i++)
     {
         let rect = texts[i].getBoundingClientRect();
         let x = e.pageX;
         let y = e.pageY;
         if (x >= rect.left && x < rect.right &&
-            y >= rect.top && y < rect.bottom)
-            inside = true;
-        
+            y >= rect.top + window.scrollY && y < rect.bottom + window.scrollY)
+            inside = true;      
     }
 
     if (!inside)
     {
-        prevX = e.pageX;
-        prevY = e.pageY;
-        left = (infoDiv.getBoundingClientRect().left - parent.getBoundingClientRect().left);
-        top = (infoDiv.getBoundingClientRect().top - parent.getBoundingClientRect().top);
+        prevXInfo = e.pageX;
+        prevYInfo = e.pageY;
+        leftInfo = (infoDiv.getBoundingClientRect().left - parent.getBoundingClientRect().left);
+        topInfo = (infoDiv.getBoundingClientRect().top - parent.getBoundingClientRect().top);
         infoDiv.style.cursor = "grabbing";
-        parent.addEventListener("mousemove", move);
+        parent.addEventListener("mousemove", moveInfo);
         parent.addEventListener("mouseleave", function()
         {
             infoDiv.style.cursor = "grab";
-            parent.removeEventListener("mousemove", move);
+            parent.removeEventListener("mousemove", moveInfo);
         })
     }
 })
 window.addEventListener("mouseup", function()
 {
     infoDiv.style.cursor = "grab";
-    parent.removeEventListener("mousemove", move);
+    parent.removeEventListener("mousemove", moveInfo);
 })
 infoDiv.addEventListener("mouseleave", function()
 {
     infoDiv.style.cursor = "grab";
-    parent.removeEventListener("mousemove", move);
+    parent.removeEventListener("mousemove", moveInfo);
 })
 window.addEventListener("resize", function()
 {
-    left = -1;
-    top = -1;
+    leftInfo = -1;
+    topInfo = -1;
 
     if (infoDiv.style.opacity == 1)
     {
-        closeForm();
-        openForm();
+        closeInfo();
+        openInfo();
     }
 })
 closeBtn.addEventListener("click", function()
 {
-    closeForm();
+    closeInfo();
 })
 deadline_btn.addEventListener("mouseover", overButton);
 deadline_btn.addEventListener("mouseleave", leaveButton);
@@ -96,42 +100,102 @@ deadline_btn.addEventListener("click", clickButton);
 session_btn.addEventListener("mouseover", overButton);
 session_btn.addEventListener("mouseleave", leaveButton);
 session_btn.addEventListener("click", clickButton);
+
+/***********************************For tooltips********************************************/
+
+changeName.addEventListener("mouseover", function()
+{
+    if (changeName.style.backgroundColor === "rgb(175, 175, 175)") 
+        createTooltip("Edit course name", changeName);
+    else
+        createTooltip("Apply change", changeName);
+});
+changeName.addEventListener("mouseleave", function()
+{
+    resetTooltip();
+});
+
+changeGrade.addEventListener("mouseover", function()
+{
+    if (changeGrade.style.backgroundColor === "rgb(175, 175, 175)") 
+        createTooltip("Edit target grade", changeGrade);
+    else    
+        createTooltip("Apply change", changeGrade);
+});
+changeGrade.addEventListener("mouseleave", function()
+{
+    resetTooltip();
+});
+
+changeColor.addEventListener("mouseover", function()
+{
+    if (changeColor.style.backgroundColor === "rgb(175, 175, 175)") 
+        createTooltip("Edit bubble color", changeColor);
+    else
+        createTooltip("Apply change", changeColor);
+});
+changeColor.addEventListener("mouseleave", function()
+{
+    resetTooltip();
+});
+
+/***********************************************************************/
+
 changeName.addEventListener("click", function(e)
 {
     if (changeName.style.backgroundColor === "rgb(175, 175, 175)") //convert to confirm button
     {
         changeName.style.backgroundColor = "#04aa6d";
         changeName.style.backgroundImage = "url('./images/check.png')";
-        name.style.display = "none";
+        courseName.style.display = "none";
         nameText.style.display = "block";
         nameText.value = "";
-        nameText.placeholder = name.innerHTML;
+        nameText.placeholder = "Enter new course name";
+
+        createTooltip("Apply change", changeName);
     }
-    else
+    else //convert to edit button
     {
         changeName.style.backgroundColor = "rgb(175, 175, 175)";
         changeName.style.backgroundImage = "url('./images/edit.png')";
-        name.style.display = "block";
+        courseName.style.display = "block";
         nameText.style.display = "none";
 
         let newName = nameText.value;
+        let message = null;
 
-        if (newName.length > 0 && !manager.exists(newName))
+        if (newName !== courseName.innerHTML && manager.exists(newName)) message = "Invalid course: " + newName + " already exists.";
+        else if (newName.length > 0) //name can't be the empty string or can't be a repeat
         {
             let course = -1, bubble = -1;
             for (let i = 0; i < manager.courseList.length && (course == -1 || bubble == -1); i++)
             {
-                if (manager.courseList[i].name === name.innerHTML)
+                if (manager.courseList[i].name === courseName.innerHTML)
                     course = manager.courseList[i];
-                if (menu.bubbles[i].label === name.innerHTML)
+                if (menu.bubbles[i].label === courseName.innerHTML)
                     bubble = menu.bubbles[i];
             }
 
-            course.name = newName;
-            name.innerHTML = newName;
+            //update the name variable of the deadlines
+            for (let i = 0; i < course.deadlineArray.length; i++)
+            {
+                course.deadlineArray[i].course = newName; 
+            }
+            //update the name variable of the sessions
+            for (let i = 0; i < course.sessionArray.length; i++)
+            {
+                course.sessionArray[i].course = newName;
+            }
+            course.name = newName; 
+            courseName.innerHTML = newName; 
             bubble.label = newName;
             bubble.div.innerHTML = newName;
+            main(); //update the deadline panel since name has been changed
         }
+
+        if (message !== null) alert(message);
+
+        createTooltip("Edit course name", changeName);
     }
 });
 changeGrade.addEventListener("click", function(e)
@@ -143,9 +207,11 @@ changeGrade.addEventListener("click", function(e)
         grade.style.display = "none";
         gradeText.style.display = "block";
         gradeText.value = "";
-        gradeText.placeholder = grade.innerHTML;
+        gradeText.placeholder = "Enter new target grade";
+
+        createTooltip("Apply change", changeGrade);
     }
-    else
+    else //convert to edit button
     {
         changeGrade.style.backgroundColor = "rgb(175, 175, 175)";
         changeGrade.style.backgroundImage = "url('./images/edit.png')";
@@ -153,34 +219,28 @@ changeGrade.addEventListener("click", function(e)
         gradeText.style.display = "none";
 
         let newGrade = Number(gradeText.value);
+        let message = null;
 
-        if (gradeText.value.length > 0 && typeof newGrade == "number" && newGrade >= 0)
+        if (isNaN(newGrade)) message = "Invalid grade: Has to be a number";
+        else if (gradeText.value.length > 0 && newGrade < 0) message = "Invalid grade: Has to be non-negative";
+        else if (gradeText.value.length > 0)
         {
             let course = -1;
             for (let i = 0; i < manager.courseList.length && course == -1; i++)
             {
-                if (manager.courseList[i].name === name.innerHTML)
+                if (manager.courseList[i].name === courseName.innerHTML)
                     course = manager.courseList[i];
             }
 
             course.grade = newGrade;
             grade.innerHTML = newGrade;
         }
+
+        if (message !== null) alert(message);
+
+        createTooltip("Edit target grade", changeGrade);
     }
 });
-
-let colours = new Array(
-    "#F7F3CD",
-    "#B4F1B3",
-    "#A6D5FD",
-    "#B9CBD9",
-    "#CFE3E2",
-    "#BCB0EE",
-    "#FCCFF4",
-    "#FCC9C5",
-    "#FEDDD8",
-    "#EAE7E2"
-);
 
 changeColor.addEventListener("click", function(e)
 {
@@ -196,8 +256,10 @@ changeColor.addEventListener("click", function(e)
             pickers[i].addEventListener("click", pickPicker);
         }
         colorAux.style.display = "flex";
+
+        createTooltip("Apply change", changeColor);
     }
-    else
+    else //convert to edit button
     {
         changeColor.style.backgroundColor = "rgb(175, 175, 175)";
         changeColor.style.backgroundImage = "url('./images/edit.png')";
@@ -213,9 +275,9 @@ changeColor.addEventListener("click", function(e)
             let course = -1, bubble = -1;
             for (let i = 0; i < manager.courseList.length && (course == -1 || bubble == -1); i++)
             {
-                if (manager.courseList[i].name === name.innerHTML)
+                if (manager.courseList[i].name === courseName.innerHTML)
                     course = manager.courseList[i];
-                if (menu.bubbles[i].label === name.innerHTML)
+                if (menu.bubbles[i].label === courseName.innerHTML)
                     bubble = menu.bubbles[i];
             }
 
@@ -228,8 +290,11 @@ changeColor.addEventListener("click", function(e)
         }
 
         resetPickers();
+        createTooltip("Edit bubble color", changeColor);
     }
 });
+
+/**************************************************************************************** */
 
 function pickPicker(e)
 {
@@ -250,7 +315,7 @@ function resetPickers()
     });
 }
 
-function resetEdits()
+function resetEdits() 
 {
     changeName.style.backgroundImage = "url('./images/edit.png')";
     changeGrade.style.backgroundImage = "url('./images/edit.png')";
@@ -258,7 +323,7 @@ function resetEdits()
     changeName.style.backgroundColor = "rgb(175, 175, 175)";
     changeGrade.style.backgroundColor = "rgb(175, 175, 175)";
     changeColor.style.backgroundColor = "rgb(175, 175, 175)";
-    name.style.display = "block";
+    courseName.style.display = "block";
     nameText.style.display = "none";
     grade.style.display = "block";
     gradeText.style.display = "none";
@@ -281,14 +346,14 @@ function clickButton(e)
 
 function resetButtons()
 {
-    deadline_btn.style.backgroundColor = defaultColor;
-    session_btn.style.backgroundColor = defaultColor;
+    deadline_btn.style.backgroundColor = defaultColorInfo;
+    session_btn.style.backgroundColor = defaultColorInfo;
     deadline_btn.style.cursor = "pointer";
     session_btn.style.cursor = "pointer";
     deadline.style.display = "none";
     session.style.display = "none";
 
-    selected.style.backgroundColor = selectedColor;
+    selected.style.backgroundColor = selectedColorInfo;
     selected.style.cursor = "default";
     if (selected === deadline_btn)
         deadline.style.display = "block";
@@ -300,7 +365,7 @@ function overButton(e)
 {
     if (e.target !== selected)
     {
-        e.target.style.backgroundColor = hoverColor;
+        e.target.style.backgroundColor = hoverColorInfo;
     }
 }
 
@@ -308,43 +373,43 @@ function leaveButton(e)
 {
     if (e.target !== selected)
     {
-        e.target.style.backgroundColor = defaultColor;
+        e.target.style.backgroundColor = defaultColorInfo;
     }
 }
 
-function move(e)
+function moveInfo(e)
 {
-    left += e.pageX - prevX;
-    top += e.pageY - prevY;    
+    leftInfo += e.pageX - prevXInfo;
+    topInfo += e.pageY - prevYInfo;    
 
-    fit();
+    fitInfo();
 
-    prevX = e.pageX;
-    prevY = e.pageY;
-    infoDiv.style.left = left + "px";
-    infoDiv.style.top = top + "px";
+    prevXInfo = e.pageX;
+    prevYInfo = e.pageY;
+    infoDiv.style.left = leftInfo + "px";
+    infoDiv.style.top = topInfo + "px";
 }
 
-function fit()
+function fitInfo()
 {
     let rect = infoDiv.getBoundingClientRect();
 
-    if (left < 0)
-        left = 0;
-    if (top < 0)
-        top = 0;
-    if (left + rect.width > window.innerWidth)
-        left = window.innerWidth - rect.width;
+    if (leftInfo < 0)
+        leftInfo = 0;
+    if (topInfo < 0)
+        topInfo = 0;
+    if (leftInfo + rect.width > window.innerWidth)
+        leftInfo = window.innerWidth - rect.width;
 
     let high = window.innerHeight;
     if (window.innerWidth <= 600)
         high *= 2;
 
-    if (top + rect.height > high)
-        top = high - rect.height;
+    if (topInfo + rect.height > high)
+        topInfo = high - rect.height;
 }
 
-export function openForm()
+function openInfo()
 {
     selected = deadline_btn;
     resetButtons();
@@ -353,7 +418,7 @@ export function openForm()
     
     if (infoDiv.style.opacity == 0) //not shown yet
     {
-        if (left == -1) //not yet moved
+        if (leftInfo == -1) //not yet moved
         {
             let rect = document.getElementById("home_main").getBoundingClientRect();
             let middle = (rect.left + rect.width / 2) / window.innerWidth;
@@ -362,15 +427,15 @@ export function openForm()
         }
         else
         {   
-            infoDiv.style.left = left + "px";
-            infoDiv.style.top = top + "px";
+            infoDiv.style.left = leftInfo + "px";
+            infoDiv.style.top = topInfo + "px";
         }
 
         infoDiv.style.opacity = 1;
     }
 }
   
-function closeForm()
+function closeInfo()
 {
     infoDiv.style.opacity = 0;
     infoDiv.style.left = "-1000px";
@@ -380,11 +445,11 @@ function closeForm()
     currBubbleDiv = null;
 }
 
-let currBubbleDiv = null;
-
-export function clickBubble(e)
+function clickBubble(e)
 {
-    if (currBubbleDiv === null || e.target !== currBubbleDiv) //no bubble has been clicked
+    resetTooltip();
+
+    if (currBubbleDiv === null || e.target !== currBubbleDiv) 
     {   
         let idx = -1;
         currBubbleDiv = e.target;
@@ -405,15 +470,15 @@ export function clickBubble(e)
         generatePanel(course, deadline, true);
         generatePanel(course, session, false);      
 
-        openForm();
+        openInfo();
     }
     else if (e.target === currBubbleDiv)
     {
-        closeForm();
+        closeInfo();
     }
 }
 
-export function generatePanel(course, panel, forDeadlines)
+function generatePanel(course, panel, forDeadlines) //this function generates both the deadline and session panel on the form
 {
     const ul = document.createElement('ul');
 
@@ -424,6 +489,7 @@ export function generatePanel(course, panel, forDeadlines)
     panel.appendChild(ul);
 
     let array = (forDeadlines) ? course.deadlineArray : course.sessionArray;
+    array.sort(sort);
 
     array.forEach(function (item) {
         const li = document.createElement('li');
@@ -438,33 +504,41 @@ export function generatePanel(course, panel, forDeadlines)
 
         complete_btn.style.backgroundImage = "url('./images/check.png')";
         complete_btn.style.backgroundColor = "rgb(0, 255, 0)";
-        complete_btn.style.right = "3em";
+        complete_btn.style.right = "6em";
         styleButton(complete_btn);
 
         btn.addEventListener('click', 
         (forDeadlines) ? 
-        function() { removeDeadline(ul, li, course, item); } :
-        function() { removeSession(ul, li, course, item); });
+        function() { removeDeadline(ul, li, course, item); resetTooltip(); } :
+        function() { removeSession(ul, li, course, item); resetTooltip();});
         complete_btn.addEventListener('click', function()
         {
             updateBubbles(course, item);
             removeSession(ul, li, course, item);
+            resetTooltip();
         });
         btn.addEventListener("mouseover", function(e)
         {
             e.target.style.backgroundColor = "rgb(127, 0, 0)";
+            if (forDeadlines)
+                createTooltip("Remove deadline", e.target);
+            else
+                createTooltip("Remove session", e.target);
         });
         btn.addEventListener("mouseleave", function(e)
         {
             e.target.style.backgroundColor = "rgb(255, 0, 0)";
+            resetTooltip();
         });
         complete_btn.addEventListener("mouseover", function(e)
         {
             e.target.style.backgroundColor = "rgb(0, 127, 0)";
+            createTooltip("Complete session", e.target);
         });
         complete_btn.addEventListener("mouseleave", function(e)
         {
             e.target.style.backgroundColor = "rgb(0, 255, 0)";
+            resetTooltip();
         });
     
         li.style.listStyle = "none";
@@ -522,7 +596,7 @@ function styleButton(btn)
     btn.type="button";
 }
 
-function updateBubbles(course, item)
+function updateBubbles(course, item) //this function is called when completing a session
 {
     let start = item.start;
     let end = item.end;
@@ -540,8 +614,10 @@ function updateBubbles(course, item)
         let minStart = parseInt(start.substring(idxStart + 1, start.length - 2));
         let minEnd = parseInt(end.substring(idxEnd + 1, end.length - 2));
 
-        if (!isAM1) hourStart += 12;
-        if (!isAM2) hourEnd += 12;
+        if (!isAM1 && hourStart !== 12) hourStart += 12;
+        else if (isAM1 && hourStart === 12) hourStart -= 12;
+        if (!isAM2 && hourEnd != 12) hourEnd += 12;
+        else if (isAM2 && hourEnd === 12) hourEnd -= 12;
 
         if (minEnd - minStart < 0)
         {
@@ -551,6 +627,9 @@ function updateBubbles(course, item)
 
         let hourDiff = hourEnd - hourStart;
         let minDiff = minEnd - minStart;
+
+        if (hourDiff < 0)
+            hourDiff += 24;
 
         course.addHours(hourDiff + (minDiff / 60));
         manager.updateMenu();
