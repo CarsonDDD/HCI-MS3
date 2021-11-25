@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+#tooltip {
+  position: absolute;
+  background-color: white;
+  padding: 0.5em;
+  z-index: 3;
+  border: 0.1rem solid black;
+  display: none;
+}
+
 /*------------------------------Layout---------------------------------------------------*/
 
 /*--------Side bar and its elements---------------------*/

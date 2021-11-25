@@ -1,5 +1,3 @@
-import {clickBubble} from "./InfoForm.js";
-
 class Bubble
 {
     constructor(cx, cy, rad, label, colour)
@@ -87,8 +85,9 @@ class BubbleMenu
     generateBubbles()
     {
         let sources = new Array();
+        
         let rect = document.getElementById("home_main_bubble").getBoundingClientRect();
-
+        
         if (this.bubbles.length > 0)
         {
           //place the first bubble in the middle of the parent
@@ -240,11 +239,13 @@ window.addEventListener("resize", function()
     menu.generateBubbles();
 });
 
-export let menu = new BubbleMenu();
+let menu = new BubbleMenu();
 
 function overBubble(e)
 {
     let done = false;
+
+    createTooltip("View course info", e.target);
 
     for(let i = 0; i < menu.bubbles.length && !done; i++)
     {
@@ -261,6 +262,8 @@ function overBubble(e)
 function leaveBubble(e)
 {
     let done = false;
+
+    resetTooltip();
 
     for(let i = 0; i < menu.bubbles.length && !done; i++)
     {
