@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="bubbleForm.css">
     <link rel="stylesheet" href="infoForm.css">
+    <link href="fullcalendar/main.css" rel="stylesheet" />
   </head>
   <body>
     <!------------------------->
@@ -44,7 +45,7 @@
           <div id="home_main_bubble">
           </div>
           <div id="home_main_footer">
-            
+
             <!--BUBBLE FORM START-->
             <button class="plus_button" id="plus_button"></button>
               <form
@@ -206,7 +207,11 @@
       </div>
 
       <!------------------CALENDAR PAGE------------------>
-      <div id="calendar_page"></div>
+      <div id="calendar_page">
+        <p>
+          <div id="calendar"></div>
+        </p>
+      </div>
       <!------------------------------------------------->
 
       <!----------------STATISTICS PAGE------------------>
@@ -219,5 +224,7 @@
     <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="Manager.js" charset="utf-8"></script>
     <script src="BubbleForm.js" charset="utf-8"></script>
+    <script src="fullcalendar/main.js"></script>
+    <script src="calTest.js"></script>
   </body>
 </html>
