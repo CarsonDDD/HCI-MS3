@@ -109,8 +109,15 @@
 
 #calendar_page {
   width: calc(100vw - 60px);
-  background-color: darkgoldenrod;
+  height: 100%;
   display: none;
+  overflow: auto;
+}
+
+#calendar {
+  width: 80%;
+  height: 80%;
+  margin: 1em auto;
 }
 
 /* End of calendar page and its elements---*/
@@ -137,6 +144,21 @@
     width: 85%;
     height: 200vh;
     overflow: auto;
+  }
+
+  #calendar_page {
+    width: 85%;
+    height: 200vh;
+  }
+
+  #calendar {
+    min-width: 25rem;
+    margin: 1em;
+  }
+
+  #statistics_page {
+    width: 85%;
+    height: 200vh;
   }
 
   #sidebar {

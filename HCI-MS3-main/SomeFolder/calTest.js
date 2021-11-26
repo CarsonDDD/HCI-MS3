@@ -1,4 +1,4 @@
-let sessions = manager.get
+let sessions = [];
 calendar();
 
 // Clears entire calendar
