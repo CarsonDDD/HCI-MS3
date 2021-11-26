@@ -52,6 +52,41 @@ class Course
 	{
 		this.sessionArray.push(session);
 	}
+	removeDeadline(deadline)
+	{
+		let idx = -1;
+		
+		for (let i = 0; i < this.deadlineArray.length && idx == -1; i++)
+		{
+			if (this.deadlineArray[i] === deadline)
+				idx = i;
+		}
 
+		if (idx >= 0 && idx < this.deadlineArray.length)
+		{
+			for (let i = idx; i < this.deadlineArray.length - 1; i++)
+				this.deadlineArray[i] = this.deadlineArray[i + 1];
+		
+			this.deadlineArray.pop();
+		}
+	}
+	removeSession(session)
+	{
+		let idx = -1;
+		
+		for (let i = 0; i < this.sessionArray.length && idx == -1; i++)
+		{
+			if (this.sessionArray[i] === session)
+				idx = i;
+		}
+
+		if (idx >= 0 && idx < this.sessionArray.length)
+		{
+			for (let i = idx; i < this.sessionArray.length - 1; i++)
+				this.sessionArray[i] = this.sessionArray[i + 1];
+		
+			this.sessionArray.pop();
+		}
+	}
 }
 

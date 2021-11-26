@@ -6,16 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Time</title>
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      ::-webkit-scrollbar-track {
-        background: white;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: green;
-      }
-    </style>
+    <link rel="stylesheet" href="bubbleForm.css">
+    <link rel="stylesheet" href="infoForm.css">
   </head>
   <body>
+    <!------------------------->
+    <div id="tooltip">Some text</div>
+    <!------------------------->
     <div class="container">
       <!---------------SIDE BAR---------------->
       <nav id="sidebar">
@@ -44,18 +41,17 @@
       <!----------------HOME PAGE------------------>
       <div id="home_page">
         <div id="home_main">
-          <div id="home_main_bubble"></div>
+          <div id="home_main_bubble">
+          </div>
           <div id="home_main_footer">
+            
             <!--BUBBLE FORM START-->
-            <button class="plus_button" id="plus_button">
-              <img src="./images/plus.png" />
-            </button>
-            <div class="form-popup" id="create_bubble">
+            <button class="plus_button" id="plus_button"></button>
               <form
                 action="/action_page.php"
                 class="form-container"
-                id="bubble_form"
                 target="home_main_bubble"
+                id="create_bubble"
                 method="get"
               >
                 <h1>Create Bubble</h1>
@@ -69,16 +65,14 @@
                   required
                 />
 
-                <label for="tar_gpa"><b>Target GPA</b></label>
+                <label for="tar_gpa"><b>Target Grade</b></label>
                 <input
                   type="text"
-                  placeholder="Enter Target GPA"
+                  placeholder="Enter Target Grade"
                   name="tar_gpa"
                   id="tarGPA"
                   required
                 />
-
-                <p style="font-size:1.25vw"><b>Choose a Colour</b></p><br>
 
                 <!--- SELECTION OPTION
                 <label for="bubbleColour">Bubble Colour</label>
@@ -89,54 +83,54 @@
                 </select><br><br>-->
 
                 <label class="colour1-label">
-                  <input type="checkbox" id="colour1"/>
+                  <input type="checkbox" id="colour1" />
                   <span class="colour1"></span>
                 </label>
 
                 <label class="colour2-label">
-                  <input type="checkbox" id="colour2"/>
+                  <input type="checkbox" id="colour2" />
                   <span class="colour2"></span>
                 </label>
 
                 <label class="colour3-label">
-                  <input type="checkbox" id="colour3"/>
+                  <input type="checkbox" id="colour3" />
                   <span class="colour3"></span>
                 </label>
 
                 <label class="colour4-label">
-                  <input type="checkbox" id="colour4"/>
+                  <input type="checkbox" id="colour4" />
                   <span class="colour4"></span>
                 </label>
 
                 <label class="colour5-label">
-                  <input type="checkbox" id="colour5"/>
+                  <input type="checkbox" id="colour5" />
                   <span class="colour5"></span> </label
                 ><br /><br /><br />
 
                 <label class="colour6-label">
-                  <input type="checkbox" id="colour6"/>
+                  <input type="checkbox" id="colour6" />
                   <span class="colour6"></span>
                 </label>
 
                 <label class="colour7-label">
-                  <input type="checkbox" id="colour7"/>
+                  <input type="checkbox" id="colour7" />
                   <span class="colour7"></span>
                 </label>
 
                 <label class="colour8-label">
-                  <input type="checkbox" id="colour8"/>
+                  <input type="checkbox" id="colour8" />
                   <span class="colour8"></span>
                 </label>
 
                 <label class="colour9-label">
-                  <input type="checkbox" id="colour9"/>
+                  <input type="checkbox" id="colour9" />
                   <span class="colour9"></span>
                 </label>
 
                 <label class="colour10-label">
-                  <input type="checkbox" id="colour10"/>
-                  <span class="colour10"></span> </label
-                ><br /><br /><br />
+                  <input type="checkbox" id="colour10" />
+                  <span class="colour10"></span>
+                </label></br></br></br>
 
                 <!---CHECK MARKS
                 <input type="checkbox" class="colour1" id="colour1" name="colour1" value="Blue" onclick="onlyOne(this.id)">
@@ -153,37 +147,77 @@
                   Close
                 </button>
               </form>
+
+              <!--INFO FORM START-->
+            <div id="info_div">
+              <h1>Course Info</h1>
+              <div id="name_div">
+                <h2 id="course_name">COMP 3020</h2>
+                <input type="text" id="course_name_text">
+                <div class="edit_btn" id="change_name"></div>
+              </div>
+              <div id="grade_div_label">
+                <p id="curr_grade_label">Current</p>
+                <p id="target_grade_label">Target Grade</p>
+              </div>
+              <div id="grade_div">
+                <p id="curr_grade">95</p>
+                <p id="target_grade">100</p>
+                <input type="text" id="target_grade_text">
+                <div class="edit_btn" id="change_grade"></div>
+              </div>
+              <div id="color_div">
+                <div id="color_container">
+                  <div id="color"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                </div>
+                <div class="edit_btn" id="change_color"></div>
+              </div>
+              <div id="color_div_aux">
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+                  <div class="picker"></div>
+              </div>
+              <div id="tasks_div_nav">
+                <div id="deadlines">Deadlines</div>
+                <div id="sessions">Sessions</div>
+              </div>
+              <div id="form_deadline_panel"></div>
+              <div id="form_session_panel"></div>
+              <div id="form_calendar_btn">Set a deadline/session</div>
+              <div id="form_stats_btn">View statistics</div>
+              <div id="close_btn">Close</div>
             </div>
+            <!--END OF INFO FORM-->
+
           </div>
         </div>
         <!-----------Dealine panel------------------>
         <div id="deadline_panel">
-          <div id="deadline_tag">
-            <h2>Deadlines</h2>
-          </div>
+          <h2>Deadlines</h2>
           <div id="deadline_list"></div>
         </div>
       </div>
 
       <!------------------CALENDAR PAGE------------------>
-      <div id="calendar_page" >
-        <div id="calendar_element">
-          <div id='calendar'></div>
-        </div>
-
-
-      </div>
+      <div id="calendar_page"></div>
       <!------------------------------------------------->
 
       <!----------------STATISTICS PAGE------------------>
       <div id="statistics_page"></div>
       <!----------------------------------------------->
     </div>
-    <script type="module" src="pageTransitions.js" charset="utf-8"></script>
-    <script type="module" src="bubbles.js" charset="utf-8"></script>
-    <script type="module" src="Manager.js" charset="utf-8"></script>
-    <link href='fullcalendar/main.css' rel='stylesheet' />
-    <script src='fullcalendar/main.js'></script>
-    <script src = "calendar.js"></script>
+    <script src="Tooltip.js" charset="utf-8"></script>
+    <script src="InfoForm.js" charset="utf-8"></script>
+    <script src="bubbles.js" charset="utf-8"></script>
+    <script src="pageTransitions.js" charset="utf-8"></script>
+    <script src="Manager.js" charset="utf-8"></script>
+    <script src="BubbleForm.js" charset="utf-8"></script>
   </body>
 </html>

@@ -11,51 +11,36 @@ let currPage = homePage, currBtn = homeBtn; //currPage is the current page, whil
 //color variables
 let hoverColor = "rgb(0, 170, 170)", selectedColor = "rgb(0, 128, 128)", defColor = "rgb(0, 85, 85)"; 
 
-let createBub = document.getElementById("create_bubble");//pointer to create bubble form div
-
-let submitBtn = document.getElementById("submit_btn");
-let cancelBtn = document.getElementById("cancel_btn");
-let plusBtn = document.getElementById("plus_button");
-
-let colourOne = document.getElementById("colour1");
-let colourTwo = document.getElementById("colour2");
-let colourThree = document.getElementById("colour3");
-let colourFour = document.getElementById("colour4");
-let colourFive = document.getElementById("colour5");
-let colourSix = document.getElementById("colour6");
-let colourSeven = document.getElementById("colour7");
-let colourEight = document.getElementById("colour8");
-let colourNine = document.getElementById("colour9");
-let colourTen = document.getElementById("colour10");
-
 //add click, mouseover, and mouseleave events to all the buttons
 
-homeBtn.addEventListener("click", function(e) { currPage = homePage; showPage(); currBtn = homeBtn; highlightBtn(e); });
+homeBtn.addEventListener("click", function(e) 
+{ 
+    currPage = homePage; 
+    showPage(); currBtn = homeBtn; 
+    highlightBtn(e); resetTooltip()}
+);
 homeBtn.addEventListener("mouseover", overBtn);
 homeBtn.addEventListener("mouseleave", leaveBtn);
 
-calendarBtn.addEventListener("click", function(e) { currPage = calendarPage; showPage(); currBtn = calendarBtn; highlightBtn(e);});
+calendarBtn.addEventListener("click", function(e) 
+{ 
+    currPage = calendarPage; 
+    showPage(); currBtn = calendarBtn; 
+    highlightBtn(e); 
+    resetTooltip()}
+);
 calendarBtn.addEventListener("mouseover", overBtn);
 calendarBtn.addEventListener("mouseleave", leaveBtn);
 
-statisticsBtn.addEventListener("click", function(e) { currPage = statisticsPage; showPage(); currBtn = statisticsBtn; highlightBtn(e);});
+statisticsBtn.addEventListener("click", function(e) 
+{ 
+    currPage = statisticsPage; 
+    showPage(); currBtn = statisticsBtn; 
+    highlightBtn(e); 
+    resetTooltip()}
+);
 statisticsBtn.addEventListener("mouseover", overBtn);
 statisticsBtn.addEventListener("mouseleave", leaveBtn);
-
-submitBtn.addEventListener("click", addCourse);
-cancelBtn.addEventListener("click", closeForm);
-plusBtn.addEventListener("click", openForm);
-
-colourOne.addEventListener("click", onlyOne);
-colourTwo.addEventListener("click", onlyOne);
-colourThree.addEventListener("click", onlyOne);
-colourFour.addEventListener("click", onlyOne);
-colourFive.addEventListener("click", onlyOne);
-colourSix.addEventListener("click", onlyOne);
-colourSeven.addEventListener("click", onlyOne);
-colourEight.addEventListener("click", onlyOne);
-colourNine.addEventListener("click", onlyOne);
-colourTen.addEventListener("click", onlyOne);
 
 function overBtn(e) 
 { 
@@ -64,6 +49,8 @@ function overBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = hoverColor; 
+        
+        createTooltip((e.target === homeBtn) ? "Home" : (e.target === calendarBtn) ? "Calendar" : "Statistics", e.target);
     }
 }
 function leaveBtn(e) 
@@ -73,6 +60,8 @@ function leaveBtn(e)
                                 //currBtn should still stay selected
     {
         e.target.style.backgroundColor = defColor; 
+
+        resetTooltip();
     }
 }
 
@@ -100,71 +89,13 @@ function showPage()
     statisticsPage.style.display = "none";
 
     currPage.style.display = "flex"; 
-}
 
-function openForm()
-{
-    createBub.style.display = "block";
-}
-  
-function closeForm()
-{
-    createBub.style.display = "none";
-    clear();//reset the entries and colours
-}
-
-import {m} from "./Manager.js";
-let colours = new Array(
-    "#F7F3CD",
-    "#B4F1B3",
-    "#A6D5FD",
-    "#B9CBD9",
-    "#CFE3E2",
-    "#BCB0EE",
-    "#FCCFF4",
-    "#FCC9C5",
-    "#FEDDD8",
-    "#EAE7E2"
-);
-
-
-function addCourse()
-{
-    let courseName = document.getElementById("courseName");
-    let tarGPA = document.getElementById("tarGPA");
-    let chosenColour = 0;
-
-    if (courseName.value !== "" && tarGPA !== "")
+    if (currPage === homePage)
     {
-        for(let i = 1; i <= 10; i++) //will need to alter depending on how many colours we have
-        {
-            if(document.getElementById("colour" + i).checked)
-            {
-                chosenColour = i - 1;
-            }
-        }
-        m.createCourse(courseName.value, 0, tarGPA.value, colours[chosenColour]);
-        closeForm();
-        clear();//reset the entries and colours
-    }
-}
-
-function onlyOne()
-{
-    for(let i = 1; i <= 10; i++)//will need to alter depending on how many colours we have
-    {
-        document.getElementById("colour" + i).checked = false;
-    }
-    this.checked = true;
-}
-
-function clear()//ensures each time form is open then input options are clear, called after submit and close
-{
-    let formPop = document.getElementById("bubble_form");
-    formPop.reset();
-    for(let i = 1; i <= 10; i++)//will need to alter depending on how many colours we have
-    {
-        document.getElementById("colour" + i).checked = false;
+        menu.bubbles.forEach(element => {
+            element.setDimensions(element.cx, element.cy, element.rad);
+        });
+        menu.generateBubbles();
     }
 }
 

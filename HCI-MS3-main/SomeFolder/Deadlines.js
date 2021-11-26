@@ -1,11 +1,12 @@
 class Deadlines
 {
 
-	constructor(course,date,time)
+	constructor(course,date,time,type)
 	{
 		this.course=course;
 		this.date=date;
 		this.time=time;
+		this.type = type;
 	}
 
 	course()
@@ -25,7 +26,6 @@ class Deadlines
 
     toPrint()
     {
-        return this.course+" "+this.date+" :"+this.time;
+        return this.course+" "+this.date+" :"+this.time + this.type;
     }
-
 }
