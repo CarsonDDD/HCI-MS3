@@ -6,6 +6,34 @@ let plusBtn = document.getElementById("plus_button");
 let createBub = document.getElementById("create_bubble");
 let parent = document.querySelector("body");
 
+let colourOne = document.getElementById("colour1");
+let colourTwo = document.getElementById("colour2");
+let colourThree = document.getElementById("colour3");
+let colourFour = document.getElementById("colour4");
+let colourFive = document.getElementById("colour5");
+let colourSix = document.getElementById("colour6");
+let colourSeven = document.getElementById("colour7");
+let colourEight = document.getElementById("colour8");
+let colourNine = document.getElementById("colour9");
+let colourTen = document.getElementById("colour10");
+let colourEleven = document.getElementById("colour11");
+let colourTwelve = document.getElementById("colour12");
+
+//Active listeners
+
+colourOne.addEventListener("click", onlyOne);
+colourTwo.addEventListener("click", onlyOne);
+colourThree.addEventListener("click", onlyOne);
+colourFour.addEventListener("click", onlyOne);
+colourFive.addEventListener("click", onlyOne);
+colourSix.addEventListener("click", onlyOne);
+colourSeven.addEventListener("click", onlyOne);
+colourEight.addEventListener("click", onlyOne);
+colourNine.addEventListener("click", onlyOne);
+colourTen.addEventListener("click", onlyOne);
+colourEleven.addEventListener("click", onlyOne);
+colourTwelve.addEventListener("click", onlyOne);
+
 //variables for dragging 
 
 let prevXBub = 0, prevYBub = 0;
@@ -135,6 +163,7 @@ function openBub()
     }
     else
     {
+        clear();
         closeBub();
     }
 }
@@ -145,10 +174,11 @@ function closeBub()
     createBub.style.left = "-1000px";
     createBub.style.top = "auto";
     createBub.style.bottom = "15%";
+    clear();
 }
 
 let colours = new Array(
-    "#F7F3CD",
+    "#9AB973",
     "#B4F1B3",
     "#A6D5FD",
     "#B9CBD9",
@@ -157,7 +187,9 @@ let colours = new Array(
     "#FCCFF4",
     "#FCC9C5",
     "#FEDDD8",
-    "#EAE7E2"
+    "#EAE7E2",
+    "#F7F3CD",
+    "#FAD6A5"
 );
 
 function addCourse()
@@ -167,7 +199,7 @@ function addCourse()
     let chosenColour = -1;
     let message = null;
 
-    for(let i = 1; i <= 10; i++) //will need to alter depending on how many colours we have
+    for(let i = 1; i <= 12; i++) //will need to alter depending on how many colours we have
     {
         if(document.getElementById("colour" + i).checked)
           chosenColour = i - 1;
@@ -188,11 +220,22 @@ function addCourse()
     if (message != null) alert(message);
 }
 
-function onlyOne(colour)//can have for loop or create a pointer to each colour and then a bunch of if and elses
+function onlyOne()
 {
-    for(let i = 1; i <= 10; i++)//will need to alter depending on how many colours we have
+    for(let i = 1; i <= 12; i++)//will need to alter depending on how many colours we have
     {
         document.getElementById("colour" + i).checked = false;
     }
-    document.getElementById(colour).checked = true;
+    this.checked = true;
 }
+
+function clear()//ensures each time form is open then input options are clear, called after submit and close
+{
+    let formPop = document.getElementById("create_bubble");
+    formPop.reset();
+    for(let i = 1; i <= 12; i++)//will need to alter depending on how many colours we have
+    {
+        document.getElementById("colour" + i).checked = false;
+    }
+}
+

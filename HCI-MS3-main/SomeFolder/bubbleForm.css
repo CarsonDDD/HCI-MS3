@@ -89,7 +89,7 @@
   cursor: pointer;
 }
 .colour6-label input {
-  position: absolute;
+  position: relative;
   opacity: 0;
   cursor: pointer;
 }
@@ -113,6 +113,16 @@
   opacity: 0;
   cursor: pointer;
 }
+.colour11-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
+.colour12-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+}
 
 /*-------------BUBBLE COLOURS--------------------------*/
 /*Customizing a spanning element behind the checkbox*/
@@ -120,31 +130,31 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  background-color: #f7f3cd;
+  background-color: #9ab973;
   border: 2px solid black;
 }
 .colour1-label .colour1::after {
   height: 0px;
   width: 0px;
-  background-color: #f7f3cd;
+  background-color: #9ab973;
   border: 5px solid black;
   opacity: 1;
 }
 /*Check our hiding checkmark*/
 .colour1-label input:checked ~ .colour1 {
-  background-color: #f7f3cd;
+  background-color: #9ab973;
   border: 5px solid black;
   opacity: 1;
 }
 .colour1-label input:checked ~ .colour1::after {
   opacity: 1;
-  background-color: #f7f3cd;
+  background-color: #9ab973;
   border: 2px solid black;
 }
 
 .colour2-label .colour2 {
   position: absolute;
-  left: 70px;
+  left: 73px;
   width: 40px;
   height: 40px;
   background-color: #b4f1b3; /*#CFE3E2;*/
@@ -171,7 +181,7 @@
 
 .colour3-label .colour3 {
   position: absolute;
-  left: 120px;
+  left: 121px;
   width: 40px;
   height: 40px;
   background-color: #a6d5fd;
@@ -198,7 +208,7 @@
 
 .colour4-label .colour4 {
   position: absolute;
-  left: 170px;
+  left: 169px;
   width: 40px;
   height: 40px;
   background-color: #b9cbd9;
@@ -225,7 +235,7 @@
 
 .colour5-label .colour5 {
   position: absolute;
-  left: 220px;
+  left: 217px;
   width: 40px;
   height: 40px;
   background-color: #cfe3e2;
@@ -252,6 +262,7 @@
 
 .colour6-label .colour6 {
   position: absolute;
+  left: 265px;
   width: 40px;
   height: 40px;
   background-color: #bcb0ee;
@@ -278,7 +289,7 @@
 
 .colour7-label .colour7 {
   position: absolute;
-  left: 70px;
+  left: 313px;
   width: 40px;
   height: 40px;
   background-color: #fccff4;
@@ -305,7 +316,7 @@
 
 .colour8-label .colour8 {
   position: absolute;
-  left: 120px;
+  left: 361px;
   width: 40px;
   height: 40px;
   background-color: #fcc9c5;
@@ -332,7 +343,7 @@
 
 .colour9-label .colour9 {
   position: absolute;
-  left: 170px;
+  left: 409px;
   width: 40px;
   height: 40px;
   background-color: #feddd8;
@@ -359,7 +370,7 @@
 
 .colour10-label .colour10 {
   position: absolute;
-  left: 220px;
+  left: 457px;
   width: 40px;
   height: 40px;
   background-color: #eae7e2;
@@ -381,6 +392,60 @@
 .colour10-label input:checked ~ .colour10::after {
   opacity: 1;
   background-color: #eae7e2;
+  border: 2px solid black;
+}
+
+.colour11-label .colour11 {
+  position: absolute;
+  left: 505px;
+  width: 40px;
+  height: 40px;
+  background-color: #F7F3CD;
+  border: 2px solid black;
+}
+.colour11-label .colour11::after {
+  height: 0px;
+  width: 0px;
+  background-color: #F7F3CD;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour11-label input:checked ~ .colour11 {
+  background-color: #F7F3CD;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour11-label input:checked ~ .colour11::after {
+  opacity: 1;
+  background-color: #F7F3CD;
+  border: 2px solid black;
+}
+
+.colour12-label .colour12 {
+  position: absolute;
+  left: 551px;
+  width: 40px;
+  height: 40px;
+  background-color: #FAD6A5;
+  border: 2px solid black;
+}
+.colour12-label .colour12::after {
+  height: 0px;
+  width: 0px;
+  background-color: #FAD6A5;
+  border: 5px solid black;
+  opacity: 1;
+}
+/*Check our hiding checkmark*/
+.colour12-label input:checked ~ .colour12 {
+  background-color: #FAD6A5;
+  border: 5px solid black;
+  opacity: 1;
+}
+.colour12-label input:checked ~ .colour12::after {
+  opacity: 1;
+  background-color: #FAD6A5;
   border: 2px solid black;
 }
 
