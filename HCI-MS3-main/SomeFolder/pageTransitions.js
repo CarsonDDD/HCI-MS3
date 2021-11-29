@@ -26,7 +26,7 @@ calendarBtn.addEventListener("click", function(e)
 { 
     currPage = calendarPage; 
     showPage(); currBtn = calendarBtn; 
-    highlightBtn(e); 
+    highlightBtn(e);
     resetTooltip()}
 );
 calendarBtn.addEventListener("mouseover", overBtn);
