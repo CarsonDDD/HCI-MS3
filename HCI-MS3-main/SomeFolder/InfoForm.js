@@ -16,6 +16,7 @@ let gradeText = document.getElementById("target_grade_text");
 
 let courseName = document.getElementById("course_name");
 let grade = document.getElementById("target_grade");
+let hours = document.getElementById("hours");
 
 let colorAux = document.getElementById("color_div_aux");
 let pickers = document.querySelectorAll(".picker");
@@ -466,6 +467,7 @@ function clickBubble(e)
         document.getElementById("course_name").innerHTML = course.name;
         document.getElementById("target_grade").innerHTML = course.grade;
         document.getElementById("color").style.backgroundColor = course.color;
+        document.getElementById("hours").innerHTML = Math.floor(course.totalHours) + " hr/s and " + Math.round((course.totalHours % 1) * 60, 0) + " min/s";
 
         generatePanel(course, deadline, true);
         generatePanel(course, session, false);      
@@ -634,5 +636,6 @@ function updateBubbles(course, item) //this function is called when completing a
         course.addHours(hourDiff + (minDiff / 60));
         manager.updateMenu();
         menu.generateBubbles();
+        hours.innerHTML = Math.floor(course.totalHours) + " hr/s and " + Math.round((course.totalHours % 1) * 60, 0) + " min/s";
     }
 }

@@ -1,3 +1,10 @@
+let cal = document.getElementById("calendar");
+
+cal.addEventListener("click", function()
+{
+  openCal1();
+})
+
 let sessions = [];
 calendar();
 

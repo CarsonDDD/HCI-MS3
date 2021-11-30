@@ -1,0 +1,248 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#sched_div > div {
+  margin-bottom: 1rem;
+}
+
+#sched_div p {
+  line-height: 3rem;
+  overflow: hidden;
+}
+
+#sched_div select,
+#time_text,
+#start_time,
+#end_time {
+  height: 2rem;
+  margin: 0.5rem 0;
+}
+
+#sched_div {
+  padding: 25px;
+  width: fit-content;
+  height: fit-content;
+  max-width: 50vw;
+  max-height: 80vh;
+  border-radius: 15px;
+  border: 3px solid #c9c3c3;
+  background-color: white;
+
+  position: absolute;
+  bottom: 15%;
+  left: -1000px;
+  opacity: 0;
+
+  overflow: auto;
+  cursor: grab;
+  user-select: none;
+  z-index: 2;
+  transition: opacity 0.5s;
+}
+
+#sched_div > div {
+  width: 20rem;
+}
+
+#deadline_form,
+#session_form {
+  border-top: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+}
+
+#session_form {
+  display: none;
+}
+
+/* CHILD DIVS */
+
+/* COURSES */
+
+#course_div {
+  height: 3rem;
+  display: flex;
+}
+
+#course_div > p {
+  width: 5rem;
+}
+
+#courses {
+  width: 15rem;
+}
+
+/* DATE */
+
+#date_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+  border-bottom: 0.1rem solid black;
+}
+
+#date_label {
+  width: 3rem;
+}
+
+#date {
+  width: 17rem;
+  border-left: 0.1rem solid black;
+  padding-left: 0.5rem;
+}
+
+/* DEADLINE OR SESSION */
+
+#task_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+}
+
+#deadline_div,
+#session_div {
+  width: 10rem;
+  display: flex;
+  align-items: center;
+}
+
+#deadline_radio,
+#session_radio {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 2rem;
+  margin: 0.5rem 0;
+  opacity: 0.8;
+  cursor: default;
+  outline: black solid;
+  outline-offset: 0.2rem;
+  position: relative;
+}
+
+#deadline_radio {
+  background-color: black;
+}
+
+#session_radio {
+  background-color: white;
+}
+
+#deadline_radio:hover,
+#session_radio:hover {
+  opacity: 1;
+}
+
+#task_div p {
+  width: 7rem;
+  padding-left: 0.5rem;
+}
+
+/* TYPE FOR DEADLINE */
+
+#type_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+#type_div p {
+  width: 5rem;
+}
+
+#deadline_types {
+  width: 15rem;
+}
+
+/* PURPOSE FOR SESSION */
+
+#purpose_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+#purpose_div p {
+  width: 5rem;
+}
+
+#session_purposes {
+  width: 15rem;
+}
+
+/* TIME FOR DEADLINE */
+
+#time_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+}
+
+#time_div p {
+  width: 5rem;
+}
+
+#time_text {
+  width: 15rem;
+}
+
+/* INTERVAL FOR SESSION */
+
+#interval_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+}
+
+#start_date_div,
+#end_date_div {
+  display: flex;
+  width: 10rem;
+}
+
+#interval_div p {
+  width: 3rem;
+}
+
+#interval_div input[type="time"] {
+  width: 6rem;
+}
+
+/* SUBMIT BTN */
+
+#calendar_submit_btn {
+  width: 20rem;
+  height: 3rem;
+  background-color: #04aa6d;
+  opacity: 0.8;
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 3rem;
+  color: white;
+}
+
+#calendar_submit_btn:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* CANCEL BTN */
+
+#calendar_close_btn {
+  width: 20rem;
+  height: 3rem;
+  background-color: #ff0000;
+  opacity: 0.8;
+  margin-bottom: 0;
+  text-align: center;
+  line-height: 3rem;
+  color: white;
+}
+
+#calendar_close_btn:hover {
+  opacity: 1;
+  cursor: pointer;
+}

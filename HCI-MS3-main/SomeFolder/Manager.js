@@ -302,18 +302,18 @@ let manager = new Manager();
 manager.createCourse("Comp3020", 0, 100, "#0000FF");
 manager.createCourse("Comp3040", 0, 90, "#00FF00");
 manager.createCourse("Comp3050", 0, 80, "#FF0000");
-manager.createDeadline("Comp3020", "21/11/2020", "12:00AM", "Midterm");
-manager.createDeadline("Comp3020", "27/10/2021", "12:00AM", "Assignment");
-manager.createDeadline("Comp3020", "27/10/2021", "1:00AM", "Midterm");
-manager.createDeadline("Comp3020", "12/7/2021", "12:00AM", "Assignment");
-manager.createDeadline("Comp3020", "5/5/2021", "12:00AM", "Midterm");
-manager.createDeadline("Comp3020", "10/10/2021", "12:00AM", "Assignment");
-manager.createSession("Comp3020", "20/11/2021", "9:00AM", "2:00PM", "Assignment");
-manager.createSession("Comp3040", "21/11/2021", "8:00AM", "9:34PM", "Quiz");
-manager.createSession("Comp3050", "21/12/2021", "2:00PM", "1:59PM", "General");
-manager.createSession("Comp3020", "21/11/2021", "8:00AM", "11:59PM", "Quiz");
-manager.createSession("Comp3040", "21/02/2021", "7:00AM", "7:30AM", "Assignment");
-manager.createSession("Comp3050", "21/04/2021", "4:45PM", "6:15PM", "General");
+// manager.createDeadline("Comp3020", "21/11/2020", "12:00AM", "Midterm");
+// manager.createDeadline("Comp3020", "27/10/2021", "12:00AM", "Assignment");
+// manager.createDeadline("Comp3020", "27/10/2021", "1:00AM", "Midterm");
+// manager.createDeadline("Comp3020", "12/7/2021", "12:00AM", "Assignment");
+// manager.createDeadline("Comp3020", "5/5/2021", "12:00AM", "Midterm");
+// manager.createDeadline("Comp3020", "10/10/2021", "12:00AM", "Assignment");
+// manager.createSession("Comp3020", "20/11/2021", "9:00AM", "2:00PM", "Assignment");
+// manager.createSession("Comp3040", "21/11/2021", "8:00AM", "9:34PM", "Quiz");
+// manager.createSession("Comp3050", "21/12/2021", "2:00PM", "1:59PM", "General");
+// manager.createSession("Comp3020", "21/11/2021", "8:00AM", "11:59PM", "Quiz");
+// manager.createSession("Comp3040", "21/02/2021", "7:00AM", "7:30AM", "Assignment");
+// manager.createSession("Comp3050", "21/04/2021", "4:45PM", "6:15PM", "General");
 
 function main() //this function generates the deadline panel
 {

@@ -122,16 +122,6 @@
 
 /* End of calendar page and its elements---*/
 
-/*------Statistics page and its elements---*/
-
-#statistics_page {
-  width: calc(100vw - 60px);
-  background-color: deeppink;
-  display: none;
-}
-
-/*-End of statistics page and its elements--*/
-
 /*-------End of main layout elements--------------------*/
 
 /*--------------------End of Layout------------------------------------------------------------*/

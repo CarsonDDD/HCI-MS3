@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="bubbleForm.css">
     <link rel="stylesheet" href="infoForm.css">
     <link href="fullcalendar/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="calendarForm1.css">
   </head>
   <body>
     <!------------------------->
@@ -26,13 +27,6 @@
               src="./images/calendar.png"
               alt="A calendar icon"
               id="calendar_btn"
-            />
-          </li>
-          <li id="statistics_li">
-            <img
-              src="./images/stats.png"
-              alt="A statistics icon"
-              id="statistics_btn"
             />
           </li>
         </ul>
@@ -75,13 +69,13 @@
                   required
                 />
 
-                <!--- SELECTION OPTION
-                <label for="bubbleColour">Bubble Colour</label>
+                <!--- SELECTION OPTION-->
+                <!-- <label for="bubbleColour">Bubble Colour</label>
                 <select id="bubbleColour" name="bubbleColour">
                   <option color="baby blue">Baby Blue</option>
                   <option value="baby pink">Baby Pink</option>
                   <option value="light Green">Light Green</option>
-                </select><br><br>-->
+                </select><br><br>  -->
 
                 <label class="colour1-label">
                   <input type="checkbox" id="colour1" />
@@ -167,6 +161,10 @@
                 <input type="text" id="target_grade_text">
                 <div class="edit_btn" id="change_grade"></div>
               </div>
+              <div id="hours_div">
+                <p id="hours_label">Time Spent</p>
+                <p id="hours">0 hr/s and 0 min/s</p>
+              </div>
               <div id="color_div">
                 <div id="color_container">
                   <div id="color"></div>
@@ -192,7 +190,6 @@
               <div id="form_deadline_panel"></div>
               <div id="form_session_panel"></div>
               <div id="form_calendar_btn">Set a deadline/session</div>
-              <div id="form_stats_btn">View statistics</div>
               <div id="close_btn">Close</div>
             </div>
             <!--END OF INFO FORM-->
@@ -211,19 +208,84 @@
         <p>
           <div id="calendar"></div>
         </p>
+        <div id="sched_div">
+         <h1>Set a Task</h1>
+         <div id="course_div">
+           <p>Course</p>
+           <select id="courses"></select>
+         </div>
+         <div id="date_div">
+           <p id="date_label">Date</p>
+           <p id="date">25/12/2021</p>
+         </div>
+         <div id="task_div">
+             <div id="deadline_div">
+               <div id="deadline_radio">
+               </div>
+               <p>Deadline</p>
+             </div>
+             <div id="session_div">
+               <div id="session_radio">
+               </div>
+               <p>Session</p>
+             </div>
+           </div>
+           <!----------------deadline inputs----------->
+           <div id="deadline_form">
+             <div id="type_div">
+               <p>Type</p>
+               <select id="deadline_types">
+                 <option value="Test">Test</option>
+                 <option value="Exam">Exam</option>
+                 <option value="Quiz">Quiz</option>
+                 <option value="Midterm">Midterm</option>
+                 <option value="Assignment">Assignment</option>
+                 <option value="Project">Project</option>
+               </select>
+             </div>
+             <div id="time_div">
+               <p>Time</p>
+               <input type="time" id="time_text">
+             </div>
+           </div>
+           <div id="session_form">
+             <div id="purpose_div">
+               <p>Purpose</p>
+               <select id="session_purposes">
+                 <option value="General">General</option>
+                <option value="Test">Test</option>
+                <option value="Exam">Exam</option>
+                <option value="Quiz">Quiz</option>
+                <option value="Midterm">Midterm</option>
+                <option value="Assignment">Assignment</option>
+                <option value="Project">Project</option>
+               </select>
+             </div>
+             <div id="interval_div">
+               <div id="start_date_div">
+                 <p>Start</p>
+                 <input type="time" id="start_time">
+               </div>
+               <div id="end_date_div">
+                 <p>End</p>
+                 <input type="time" id="end_time">
+               </div>
+             </div>
+           </div>
+           <div id="calendar_submit_btn">Submit</div>
+           <div id="calendar_close_btn">Cancel</div>
+         </div>
+        </div>
       </div>
       <!------------------------------------------------->
-
-      <!----------------STATISTICS PAGE------------------>
-      <div id="statistics_page"></div>
-      <!----------------------------------------------->
     </div>
     <script src="Tooltip.js" charset="utf-8"></script>
     <script src="InfoForm.js" charset="utf-8"></script>
+    <script src="BubbleForm.js" charset="utf-8"></script>
+    <script src="CalForm1.js" charset="utf-8"></script>
     <script src="bubbles.js" charset="utf-8"></script>
     <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="Manager.js" charset="utf-8"></script>
-    <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="fullcalendar/main.js"></script>
     <script src="calTest.js"></script>
   </body>
