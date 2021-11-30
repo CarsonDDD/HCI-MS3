@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-#sched_div > div {
-  margin-bottom: 1rem;
-}
-
 #sched_div p {
   line-height: 3rem;
   overflow: hidden;
@@ -51,6 +47,7 @@
 #session_form {
   border-top: 0.1rem solid black;
   border-bottom: 0.1rem solid black;
+  margin-bottom: 1rem;
 }
 
 #session_form {
@@ -64,6 +61,7 @@
 #course_div {
   height: 3rem;
   display: flex;
+  margin-bottom: 1rem;
 }
 
 #course_div > p {
@@ -81,6 +79,7 @@
   height: 3rem;
   display: flex;
   border-bottom: 0.1rem solid black;
+  margin-bottom: 2rem;
 }
 
 #date_label {
@@ -106,6 +105,7 @@
   width: 10rem;
   display: flex;
   align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 #deadline_radio,
@@ -145,7 +145,6 @@
   width: 20rem;
   height: 3rem;
   display: flex;
-  margin-bottom: 1rem;
 }
 
 #type_div p {
@@ -162,7 +161,6 @@
   width: 20rem;
   height: 3rem;
   display: flex;
-  margin-bottom: 1rem;
 }
 
 #purpose_div p {
@@ -195,12 +193,13 @@
   width: 20rem;
   height: 3rem;
   display: flex;
+  justify-content: space-between;
 }
 
 #start_date_div,
 #end_date_div {
   display: flex;
-  width: 10rem;
+  width: 9rem;
 }
 
 #interval_div p {
