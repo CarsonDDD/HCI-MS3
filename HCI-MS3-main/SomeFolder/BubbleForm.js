@@ -31,22 +31,31 @@ plusBtn.addEventListener("mouseleave", function()
 createBub.addEventListener("mousedown", function(e)
 {
     let inside = false;
-    let children = createBub.children;
+    let clickables = new Array(submitBtn, cancelBtn, 
+    document.getElementById("courseName"),
+    document.getElementById("tarGPA"),
+    document.querySelector(".colour1"),
+    document.querySelector(".colour2"),
+    document.querySelector(".colour3"),
+    document.querySelector(".colour4"),
+    document.querySelector(".colour5"),
+    document.querySelector(".colour6"),
+    document.querySelector(".colour7"),
+    document.querySelector(".colour8"),
+    document.querySelector(".colour9"),
+    document.querySelector(".colour10"));
 
-    for (let i = 0; i < children.length; i++) //we don't drag is mouse is over a textbox
+    //check to see if mouse is over a textbox; we don't want to drag the form if so
+    for (let i = 0; i < clickables.length; i++)
     {
-        let c = children[i];
-        if (c.getAttribute("type") === "text")
-        {
-            let rect = c.getBoundingClientRect();
-            let x = e.pageX;
-            let y = e.pageY;
-
-            if (x >= rect.left && x < rect.right &&
-                y >= rect.top + window.scrollY && y < rect.bottom + window.scrollY)
-                inside = true;
-        }
+        let rect = clickables[i].getBoundingClientRect();
+        let x = e.pageX;
+        let y = e.pageY;
+        if (x >= rect.left && x < rect.right &&
+            y >= rect.top + window.scrollY && y < rect.bottom + window.scrollY)
+            inside = true;      
     }
+
 
     if (!inside)
     {

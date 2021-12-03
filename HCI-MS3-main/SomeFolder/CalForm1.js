@@ -26,17 +26,35 @@ let leftCal1 = -1, topCal1 = -1;
 
 calForm1.addEventListener("mousedown", function(e)
 {
-    prevXCal1 = e.pageX;
-    prevYCal1 = e.pageY;
-    leftCal1 = (calForm1.getBoundingClientRect().left - parent.getBoundingClientRect().left);
-    topCal1 = (calForm1.getBoundingClientRect().top - parent.getBoundingClientRect().top);
-    calForm1.style.cursor = "grabbing";
-    parent.addEventListener("mousemove", moveCal1);
-    parent.addEventListener("mouseleave", function()
+    let inside = false;
+    let clickables = new Array(closeBtnCal1, submitBtnCal1, courses, deadline_types, session_purposes,
+        start_time, end_time, time_text, deadline_radio, session_radio);
+
+    //check to see if mouse is over a textbox; we don't want to drag the form if so
+    for (let i = 0; i < clickables.length; i++)
     {
-        calForm1.style.cursor = "grab";
-        parent.removeEventListener("mousemove", moveCal1);
-    })
+        let rect = clickables[i].getBoundingClientRect();
+        let x = e.pageX;
+        let y = e.pageY;
+        if (x >= rect.left && x < rect.right &&
+            y >= rect.top + window.scrollY && y < rect.bottom + window.scrollY)
+            inside = true;      
+    }
+
+    if (!inside)
+    {
+        prevXCal1 = e.pageX;
+        prevYCal1 = e.pageY;
+        leftCal1 = (calForm1.getBoundingClientRect().left - parent.getBoundingClientRect().left);
+        topCal1 = (calForm1.getBoundingClientRect().top - parent.getBoundingClientRect().top);
+        calForm1.style.cursor = "grabbing";
+        parent.addEventListener("mousemove", moveCal1);
+        parent.addEventListener("mouseleave", function()
+        {
+            calForm1.style.cursor = "grab";
+            parent.removeEventListener("mousemove", moveCal1);
+        })
+    }
 })
 window.addEventListener("mouseup", function()
 {

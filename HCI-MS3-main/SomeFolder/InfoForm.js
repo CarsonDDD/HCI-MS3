@@ -1,6 +1,7 @@
 //pointers to html elements
 
 let closeBtn = document.getElementById("close_btn");
+let formCalendarBtn = document.getElementById("form_calendar_btn");
 let infoDiv = document.getElementById("info_div");
 let deadline_btn = document.getElementById("deadlines");
 let session_btn = document.getElementById("sessions");
@@ -42,12 +43,14 @@ let currBubbleDiv = null;
 infoDiv.addEventListener("mousedown", function(e)
 {
     let inside = false;
-    let texts = new Array(nameText, gradeText);
+    let clickables = new Array(nameText, gradeText, changeName, changeGrade, changeColor, deadline_btn, session_btn, closeBtn, formCalendarBtn);
+    clickables = clickables.concat(Array.from(document.querySelectorAll(".picker")));
+    clickables = clickables.concat(Array.from(document.querySelectorAll(".clickable")));
 
     //check to see if mouse is over a textbox; we don't want to drag the form if so
-    for (let i = 0; i < texts.length; i++)
+    for (let i = 0; i < clickables.length; i++)
     {
-        let rect = texts[i].getBoundingClientRect();
+        let rect = clickables[i].getBoundingClientRect();
         let x = e.pageX;
         let y = e.pageY;
         if (x >= rect.left && x < rect.right &&
@@ -596,6 +599,7 @@ function styleButton(btn)
     btn.style.position = "absolute";
     btn.style.top = "0";
     btn.type="button";
+    btn.className = "clickable";
 }
 
 function updateBubbles(course, item) //this function is called when completing a session
