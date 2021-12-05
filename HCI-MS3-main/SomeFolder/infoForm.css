@@ -204,6 +204,21 @@
   cursor: pointer;
 }
 
+#form_undo_btn1,
+#form_undo_btn2 {
+  background-image: url("./images/undo.png");
+  background-color: white;
+  border: none;
+  background-size: 70%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+  margin-top: 1em;
+  opacity: 0.5;
+}
+
 #form_deadline_panel {
   width: 20rem;
   height: fit-content;

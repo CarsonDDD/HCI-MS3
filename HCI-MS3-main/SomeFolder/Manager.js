@@ -7,6 +7,9 @@ class Course {
 		this.color = color;
 		this.deadlineArray = new Array();
 		this.sessionArray = new Array();
+		this.removedDeadlines = new Array();
+		this.removedSessions = new Array();
+		this.removeOrComplete = new Array();
 	}
 
 	name() {
@@ -49,13 +52,16 @@ class Course {
 		}
 
 		if (idx >= 0 && idx < this.deadlineArray.length) {
+
+			this.removedDeadlines.push(this.deadlineArray[idx]);
+
 			for (let i = idx; i < this.deadlineArray.length - 1; i++)
 				this.deadlineArray[i] = this.deadlineArray[i + 1];
 
 			this.deadlineArray.pop();
 		}
 	}
-	removeSession(session) {
+	removeSession(session, removed) {
 		let idx = -1;
 
 		for (let i = 0; i < this.sessionArray.length && idx == -1; i++) {
@@ -64,6 +70,9 @@ class Course {
 		}
 
 		if (idx >= 0 && idx < this.sessionArray.length) {
+			this.removedSessions.push(this.sessionArray[idx]);
+			this.removeOrComplete.push(removed);
+
 			for (let i = idx; i < this.sessionArray.length - 1; i++)
 				this.sessionArray[i] = this.sessionArray[i + 1];
 
@@ -131,7 +140,7 @@ class Manager {
 		this.numCourses = 0;
 		this.courseList = new Array();
 		this.deadlineList = new Array();
-
+		this.removedDeadlines = new Array();
 	}
 
 	createCourse(name, totalHours, grade, color) {
@@ -164,16 +173,18 @@ class Manager {
 	removeDeadline(deadline) {
 		let idx = -1;
 
-		for (let i = 0; i < manager.deadlineList.length && idx == -1; i++) {
-			if (manager.deadlineList[i] === deadline)
+		for (let i = 0; i < this.deadlineList.length && idx == -1; i++) {
+			if (this.deadlineList[i] === deadline)
 				idx = i;
 		}
 
-		if (idx >= 0 && idx < manager.deadlineList.length) {
-			for (let i = idx; i < manager.deadlineList.length - 1; i++)
-				manager.deadlineList[i] = manager.deadlineList[i + 1];
+		if (idx >= 0 && idx < this.deadlineList.length) {
+			this.removedDeadlines.push(this.deadlineList[idx]);
 
-			manager.deadlineList.pop();
+			for (let i = idx; i < this.deadlineList.length - 1; i++)
+				this.deadlineList[i] = this.deadlineList[i + 1];
+
+			this.deadlineList.pop();
 		}
 	}
 
@@ -298,6 +309,47 @@ function sort(a, b) {
 sort(new Deadlines("d", "31/09/2021", "11:20AM", "Midterm"), new Deadlines("d", "31/09/2021", "12:19AM", "Midterm"));
 
 let manager = new Manager();
+let undo_btn = document.getElementById("undo_btn");
+
+undo_btn.addEventListener("mouseover", function()
+{
+    if (undo_btn.style.opacity == 1)
+    {
+        undo_btn.style.backgroundColor = "rgb(200, 200, 200)";
+        createTooltip("Undo", undo_btn);
+    }
+});
+
+undo_btn.addEventListener("mouseleave", function()
+{
+    undo_btn.style.backgroundColor = "rgb(255, 255, 255)";
+    resetTooltip();
+});
+
+undo_btn.addEventListener("click", function()
+{
+	if (undo_btn.style.opacity == 1)
+	{
+		let last = manager.removedDeadlines.pop();
+		let idx = -1;
+
+    	for (let i = 0; i < manager.courseList.length && idx === -1; i++)
+    	{
+        	if (manager.courseList[i].name === last.course)
+            	idx = i;
+    	}
+
+    	let course = manager.courseList[idx];
+    	course.removedDeadlines.pop();
+    	manager.createDeadline(last.course, last.date, last.time, last.type);
+
+    	generatePanel(course, deadline, true); 
+    	updateUndoBtns(course);
+		updateUndo();
+    	main();
+    	resetTooltip();
+	}
+});
 
 manager.createCourse("Comp3020", 0, 100, "#0000FF");
 manager.createCourse("Comp3040", 0, 90, "#00FF00");
@@ -359,8 +411,10 @@ function main() //this function generates the deadline panel
 				}
 			}
 
-			if (course != -1) {
+			if (course !== -1) {
 				generatePanel(course, document.getElementById("form_deadline_panel"), true); //update the panel on the info form (in case it is open)
+				updateUndoBtns(course);
+				updateUndo();
 			}
 
 			resetTooltip();
@@ -417,6 +471,17 @@ function handleSize() //media query for the deadline panel (since dynamically st
 			element.style.position = "absolute";
 			element.style.left = "50%";
 		})
+	}
+}
+
+function updateUndo()
+{
+	if (manager.removedDeadlines.length !== 0)
+		undo_btn.style.opacity = 1;
+	else   
+	{ 
+		undo_btn.style.opacity = 0.5;
+		undo_btn.style.backgroundColor = "rgb(255, 255, 255)";
 	}
 }
 
