@@ -1,3 +1,5 @@
+/*let sessions = [];
+
 let cal = document.getElementById("calendar");
 
 cal.addEventListener("click", function()
@@ -8,46 +10,23 @@ cal.addEventListener("click", function()
 let sessions = [];
 calendar();
 
+
 // Clears entire calendar
 //calendar.getEvents().forEach(event=>event.remove());
 
-function calendar() {
-  let inputElem,
-    dummyElem,
-    dateInput,
-    timeInput,
-    calendar,
-    button;
-
-  // test code
-  /*inputElem = document.getElementById("title");
-  dummyElem = document.getElementById("dummy");
-  button = document.getElementById("addBtn");
-  dateInput = document.getElementById("date");
-  timeInput = document.getElementById("time");*/
-
-  //button.addEventListener("click", addEntry, false);
-  // end test code
-
-  initCalendar();
-
-  // inits session array
-  sessions.forEach(calObj => {
-    addCalendarEntry(calObj);
-  });
 
   function addEntry(event) {
-    /*let inputValue = inputElem.value;
-    inputElem.value = "";
+    // let inputValue = inputElem.value;
+    // inputElem.value = "";
 
-    let dummyValue = dummyElem.value;
-    dummyElem.value = "";
+    // let dummyValue = dummyElem.value;
+    // dummyElem.value = "";
 
-    let dateValue = dateInput.value;
-    dateInput.value = "";
+    // let dateValue = dateInput.value;
+    // dateInput.value = "";
 
-    let timeValue = timeInput.value;
-    timeInput.value = "";*/
+    // let timeValue = timeInput.value;
+    // timeInput.value = "";
     // instead of getting values from input, get from form. Does this need to be called after Session Form??
 
     let newEntry = {
@@ -90,9 +69,9 @@ function calendar() {
   function initCalendar() {
     var calendarEl = document.getElementById('calendar');
 
-    calendar = new FullCalendar.Calendar(calendarEl, {
+    let calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
-      initialDate: '2021-11-25',
+      initialDate: '2021-12-25',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -100,9 +79,14 @@ function calendar() {
       },
       navLinks: true,
       height: 600,
+      contentHeight: 'auto',
       events: [],
 
-      eventClick: function (info) {
+    dayClick: function() {
+        window.alert("This works");
+    }
+      /*eventClick: function (info) {
+        window.alert("This worked");
         showSessionInfo(info.event);
 
         // change the border color just for fun
@@ -111,9 +95,65 @@ function calendar() {
     });
 
     calendar.render();
-    //.updateSize()
   }
 
 
+function calendar() {
+  let inputElem,
+    dummyElem,
+    dateInput,
+    timeInput,
+    calendar,
+    button;
 
+  // test code
+  // inputElem = document.getElementById("title");
+  // dummyElem = document.getElementById("dummy");
+  // button = document.getElementById("addBtn");
+  // dateInput = document.getElementById("date");
+  // timeInput = document.getElementById("time");
+
+  //button.addEventListener("click", addEntry, false);
+  // end test code
+
+  initCalendar();
+
+  // inits session array
+  sessions.forEach(calObj => {
+    addCalendarEntry(calObj);
+  });
 }
+calendar();
+*/
+
+/*$(document).ready(function() {
+  $('#schedule-calendar').fullCalendar({
+      header: {
+          left: 'title',
+      },
+      events: [{
+              title: 'Schedule 1',
+              start: '2018-02-21'
+          },
+          {
+              title: 'Schedule 2',
+              start: '2018-02-11'
+          },
+          {
+              title: 'Schedule 3',
+              start: '2021-12-08'
+          },
+          {
+              title: 'Schedule 4',
+              start: '2018-03-12'
+          }
+      ],
+      eventClick: function(event) {
+          var modal = $("#schedule-edit");
+          modal.modal();
+      },
+      dayClick: function(date, jsEvent, view) {
+          $('#schedule-add').modal('show');
+      }
+  });
+});*/
