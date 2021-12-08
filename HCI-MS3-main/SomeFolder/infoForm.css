@@ -6,6 +6,7 @@
 
 #info_div > div > p {
   line-height: 3rem;
+  overflow: hidden;
 }
 
 #info_div h2 {
@@ -45,8 +46,8 @@
 #name_div {
   display: flex;
   width: 20rem;
-  height: 3em;
-  margin-bottom: 1em;
+  height: 3rem;
+  margin-bottom: 1rem;
 }
 
 #course_name {
@@ -76,12 +77,12 @@
 }
 
 #curr_grade_label {
-  width: 4rem;
+  width: 6rem;
   border-bottom: black solid 0.1rem;
 }
 
 #target_grade_label {
-  width: 16em;
+  width: 14rem;
   padding-left: 0.5rem;
   border-left: black solid 0.1rem;
   border-bottom: black solid 0.1rem;
@@ -100,21 +101,42 @@
 }
 
 #curr_grade {
-  width: 4rem;
+  width: 6rem;
 }
 
 #target_grade {
-  width: 13rem;
+  width: 11rem;
   overflow: hidden;
   padding-left: 0.5rem;
   border-left: black solid 0.1rem;
 }
 
 #target_grade_text {
-  width: 13rem;
+  width: 11rem;
   height: 3rem;
   padding-left: 0.5rem;
   display: none;
+}
+
+/*---------------*/
+
+/* hours div */
+
+#hours_div {
+  width: 20rem;
+  display: flex;
+  border-bottom: black solid 0.1rem;
+  margin-bottom: 1rem;
+}
+
+#hours_label {
+  width: 6rem;
+}
+
+#hours {
+  padding-left: 0.5rem;
+  width: 14rem;
+  border-left: black solid 0.1rem;
 }
 
 /*---------------*/
@@ -182,6 +204,21 @@
   cursor: pointer;
 }
 
+#form_undo_btn1,
+#form_undo_btn2 {
+  background-image: url("./images/undo.png");
+  background-color: white;
+  border: none;
+  background-size: 70%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+  margin-top: 1em;
+  opacity: 0.5;
+}
+
 #form_deadline_panel {
   width: 20rem;
   height: fit-content;
@@ -226,18 +263,6 @@
   color: white;
 }
 
-#form_stats_btn {
-  width: 20rem;
-  height: 3rem;
-  line-height: 3rem;
-  text-align: center;
-  background-color: rgb(12, 12, 12);
-  opacity: 0.8;
-  margin-bottom: 10px;
-  cursor: pointer;
-  color: white;
-}
-
 #close_btn {
   width: 20rem;
   height: 3rem;
@@ -250,7 +275,6 @@
 }
 
 #form_calendar_btn:hover,
-#form_stats_btn:hover,
 #close_btn:hover {
   opacity: 1;
 }

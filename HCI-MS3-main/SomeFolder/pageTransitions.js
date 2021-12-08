@@ -1,10 +1,8 @@
 let homePage = document.getElementById("home_page"); //a pointer to the home page div
 let calendarPage = document.getElementById("calendar_page"); //a pointer to the calendar page div
-let statisticsPage = document.getElementById("statistics_page"); //a pointer to the statistics page div
 
 let homeBtn = document.getElementById("home_btn"); //a pointer to the home img 
 let calendarBtn = document.getElementById("calendar_btn"); //a pointer to the calendar img
-let statisticsBtn = document.getElementById("statistics_btn"); //a pointer to the statistics img
 
 let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
                                             
@@ -15,32 +13,36 @@ let hoverColor = "rgb(0, 170, 170)", selectedColor = "rgb(0, 128, 128)", defColo
 
 homeBtn.addEventListener("click", function(e) 
 { 
+    if (currPage != homePage)
+    {
+        closeCal1();
+    }
+    
     currPage = homePage; 
-    showPage(); currBtn = homeBtn; 
-    highlightBtn(e); resetTooltip()}
-);
+    showPage(); 
+    currBtn = homeBtn; 
+    highlightBtn(e); 
+    resetTooltip()
+});
 homeBtn.addEventListener("mouseover", overBtn);
 homeBtn.addEventListener("mouseleave", leaveBtn);
 
 calendarBtn.addEventListener("click", function(e) 
 { 
+    if (currPage != calendarPage)
+    {
+        closeBub();
+        closeInfo();
+    }
+
     currPage = calendarPage; 
     showPage(); currBtn = calendarBtn; 
-    highlightBtn(e);
-    resetTooltip()}
-);
+    highlightBtn(e); 
+    resetTooltip()
+});
+
 calendarBtn.addEventListener("mouseover", overBtn);
 calendarBtn.addEventListener("mouseleave", leaveBtn);
-
-statisticsBtn.addEventListener("click", function(e) 
-{ 
-    currPage = statisticsPage; 
-    showPage(); currBtn = statisticsBtn; 
-    highlightBtn(e); 
-    resetTooltip()}
-);
-statisticsBtn.addEventListener("mouseover", overBtn);
-statisticsBtn.addEventListener("mouseleave", leaveBtn);
 
 function overBtn(e) 
 { 
@@ -71,10 +73,8 @@ function highlightBtn()
 
     homeBtn.style.backgroundColor = defColor;
     calendarBtn.style.backgroundColor = defColor;
-    statisticsBtn.style.backgroundColor = defColor;
     homeBtn.style.cursor = "pointer";
     calendarBtn.style.cursor = "pointer";
-    statisticsBtn.style.cursor = "pointer";
 
     currBtn.style.backgroundColor = selectedColor; //change the color of crrBtn to indicate that it is selected
     currBtn.style.cursor = "default"; //make sure that the user does not get the idea that currBtn is still clickable
@@ -86,7 +86,6 @@ function showPage()
 
     homePage.style.display = "none";
     calendarPage.style.display = "none";
-    statisticsPage.style.display = "none";
 
     currPage.style.display = "flex"; 
 
