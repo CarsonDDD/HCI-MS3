@@ -1,5 +1,16 @@
 /*let sessions = [];
 
+let cal = document.getElementById("calendar");
+
+cal.addEventListener("click", function()
+{
+  openCal1();
+})
+
+let sessions = [];
+calendar();
+
+
 // Clears entire calendar
 //calendar.getEvents().forEach(event=>event.remove());
 
@@ -115,7 +126,7 @@ function calendar() {
 calendar();
 */
 
-$(document).ready(function() {
+/*$(document).ready(function() {
   $('#schedule-calendar').fullCalendar({
       header: {
           left: 'title',
@@ -145,4 +156,4 @@ $(document).ready(function() {
           $('#schedule-add').modal('show');
       }
   });
-});
+});*/

@@ -103,6 +103,20 @@
   cursor: pointer;
 }
 
+#undo_btn {
+  background-image: url("./images/undo.png");
+  background-color: white;
+  border: none;
+  background-size: 70%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+  margin-top: 1em;
+  opacity: 0.5;
+}
+
 /*--End of home page and its elements-----*/
 
 /*-------Calendar page and its elements----*/
@@ -121,16 +135,6 @@
 }
 
 /* End of calendar page and its elements---*/
-
-/*------Statistics page and its elements---*/
-
-#statistics_page {
-  width: calc(100vw - 60px);
-  background-color: deeppink;
-  display: none;
-}
-
-/*-End of statistics page and its elements--*/
 
 /*-------End of main layout elements--------------------*/
 

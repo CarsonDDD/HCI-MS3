@@ -1,6 +1,7 @@
 //pointers to html elements
 
 let closeBtn = document.getElementById("close_btn");
+let formCalendarBtn = document.getElementById("form_calendar_btn");
 let infoDiv = document.getElementById("info_div");
 let deadline_btn = document.getElementById("deadlines");
 let session_btn = document.getElementById("sessions");
@@ -16,10 +17,14 @@ let gradeText = document.getElementById("target_grade_text");
 
 let courseName = document.getElementById("course_name");
 let grade = document.getElementById("target_grade");
+let hours = document.getElementById("hours");
 
 let colorAux = document.getElementById("color_div_aux");
 let pickers = document.querySelectorAll(".picker");
 let color = document.getElementById("color");
+
+let undo_btn1 = document.getElementById("form_undo_btn1");
+let undo_btn2 = document.getElementById("form_undo_btn2");
 
 //variables for dragging
 
@@ -41,12 +46,14 @@ let currBubbleDiv = null;
 infoDiv.addEventListener("mousedown", function(e)
 {
     let inside = false;
-    let texts = new Array(nameText, gradeText);
+    let clickables = new Array(nameText, gradeText, changeName, changeGrade, changeColor, deadline_btn, session_btn, closeBtn, formCalendarBtn);
+    clickables = clickables.concat(Array.from(document.querySelectorAll(".picker")));
+    clickables = clickables.concat(Array.from(document.querySelectorAll(".clickable")));
 
     //check to see if mouse is over a textbox; we don't want to drag the form if so
-    for (let i = 0; i < texts.length; i++)
+    for (let i = 0; i < clickables.length; i++)
     {
-        let rect = texts[i].getBoundingClientRect();
+        let rect = clickables[i].getBoundingClientRect();
         let x = e.pageX;
         let y = e.pageY;
         if (x >= rect.left && x < rect.right &&
@@ -294,6 +301,103 @@ changeColor.addEventListener("click", function(e)
     }
 });
 
+undo_btn1.addEventListener("mouseover", function()
+{
+    if (undo_btn1.style.opacity == 1)
+    {
+        undo_btn1.style.backgroundColor = "rgb(200, 200, 200)";
+        createTooltip("Undo", undo_btn1);
+    }
+});
+
+undo_btn1.addEventListener("mouseleave", function()
+{
+    undo_btn1.style.backgroundColor = "rgb(255, 255, 255)";
+    resetTooltip();
+});
+
+undo_btn1.addEventListener("click", function()
+{
+    if (currBubbleDiv !== null && undo_btn1.style.opacity == 1)
+    {
+        let idx = -1;
+
+        for (let i = 0; i < menu.bubbles.length && idx === -1; i++)
+        {
+            if (menu.bubbles[i].div === currBubbleDiv)
+                idx = i;
+        }
+
+        let course = manager.courseList[idx];
+        let last = course.removedDeadlines.pop();
+
+        idx = -1;
+
+        for (let i = 0; i < manager.removedDeadlines.length && idx === -1; i++)
+        {
+            if (manager.removedDeadlines[i] === last)
+                idx = i;
+        }
+
+        for (let i = idx; i < manager.removedDeadlines.length - 1; i++)
+        {
+            manager.removedDeadlines[i] = manager.removedDeadlines[i + 1];
+        }
+
+        manager.removedDeadlines.pop();
+
+        manager.createDeadline(last.course, last.date, last.time, last.type);
+
+        generatePanel(course, deadline, true); 
+        updateUndoBtns(course);
+        updateUndo();
+        main();
+        resetTooltip();
+    }
+});
+
+undo_btn2.addEventListener("mouseover", function()
+{
+    if (undo_btn2.style.opacity == 1)
+    {
+        undo_btn2.style.backgroundColor = "rgb(200, 200, 200)";
+        createTooltip("Undo", undo_btn2);
+    }
+});
+
+undo_btn2.addEventListener("mouseleave", function()
+{
+    undo_btn2.style.backgroundColor = "rgb(255, 255, 255)";
+    resetTooltip();
+})
+
+undo_btn2.addEventListener("click", function()
+{
+    if (currBubbleDiv !== null && undo_btn2.style.opacity == 1)
+    {
+        let idx = -1;
+
+        for (let i = 0; i < menu.bubbles.length && idx === -1; i++)
+        {
+            if (menu.bubbles[i].div === currBubbleDiv)
+                idx = i;
+        }
+
+        let course = manager.courseList[idx];
+        let last = course.removedSessions.pop();
+        let rOrC = course.removeOrComplete.pop();
+        manager.createSession(last.course, last.date, last.start, last.end, last.type);
+
+        if (!rOrC)
+            updateBubbles(course, last, true);
+
+        generatePanel(course, session, false); 
+        updateUndoBtns(course);
+        main();
+        resetTooltip();
+    }
+});
+
 /**************************************************************************************** */
 
 function pickPicker(e)
@@ -466,9 +570,11 @@ function clickBubble(e)
         document.getElementById("course_name").innerHTML = course.name;
         document.getElementById("target_grade").innerHTML = course.grade;
         document.getElementById("color").style.backgroundColor = course.color;
+        document.getElementById("hours").innerHTML = Math.floor(course.totalHours) + " hr/s and " + Math.round((course.totalHours % 1) * 60, 0) + " min/s";
 
         generatePanel(course, deadline, true);
         generatePanel(course, session, false);      
+        updateUndoBtns(course);
 
         openInfo();
     }
@@ -478,94 +584,139 @@ function clickBubble(e)
     }
 }
 
+function updateUndoBtns(course)
+{
+    let idx = -1;
+
+    for (let i = 0; i < menu.bubbles.length && idx === -1; i++)
+    {
+        if (menu.bubbles[i].div === currBubbleDiv)
+        idx = i;
+    }
+
+    let c = manager.courseList[idx];
+
+    if (c === course)
+    {
+        if (course.removedDeadlines.length !== 0)
+            undo_btn1.style.opacity = 1;
+        else
+        {    
+            undo_btn1.style.opacity = 0.5;
+            undo_btn1.style.backgroundColor = "rgb(255, 255, 255)";
+        }
+
+        if (course.removedSessions.length !== 0)
+            undo_btn2.style.opacity = 1;
+        else    
+        {
+            undo_btn2.style.opacity = 0.5;
+            undo_btn2.style.backgroundColor = "rgb(255, 255, 255)";
+        }
+    }
+}
+
 function generatePanel(course, panel, forDeadlines) //this function generates both the deadline and session panel on the form
 {
-    const ul = document.createElement('ul');
+    let idx = -1;
 
-    let n = panel.children.length;
-    if (n > 0)
-        panel.removeChild(panel.lastChild);
+    for (let i = 0; i < menu.bubbles.length && idx === -1; i++)
+    {
+        if (menu.bubbles[i].div === currBubbleDiv)
+            idx = i;
+    }
 
-    panel.appendChild(ul);
+    let c = manager.courseList[idx];
 
-    let array = (forDeadlines) ? course.deadlineArray : course.sessionArray;
-    array.sort(sort);
+    if (c === course)
+    {
+        const ul = document.createElement('ul');
 
-    array.forEach(function (item) {
-        const li = document.createElement('li');
-        const btn = document.createElement('button');
-        const complete_btn = document.createElement('button');
-        const p = document.createElement('p');
+        let n = panel.children.length;
+        if (n > 0)
+            panel.removeChild(panel.lastChild);
+
+        panel.appendChild(ul);
+
+        let array = (forDeadlines) ? course.deadlineArray : course.sessionArray;
+        array.sort(sort);
+
+        array.forEach(function (item) {
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            const complete_btn = document.createElement('button');
+            const p = document.createElement('p');
     
-        btn.style.backgroundImage = "url('./images/ex.png')";
-        btn.style.backgroundColor = "rgb(255, 0, 0)";      
-        btn.style.right = "0";
-        styleButton(btn);
+            btn.style.backgroundImage = "url('./images/ex.png')";
+            btn.style.backgroundColor = "rgb(255, 0, 0)";      
+            btn.style.right = "0";
+            styleButton(btn);
 
-        complete_btn.style.backgroundImage = "url('./images/check.png')";
-        complete_btn.style.backgroundColor = "rgb(0, 255, 0)";
-        complete_btn.style.right = "6em";
-        styleButton(complete_btn);
+            complete_btn.style.backgroundImage = "url('./images/check.png')";
+            complete_btn.style.backgroundColor = "rgb(0, 255, 0)";
+            complete_btn.style.right = "6em";
+            styleButton(complete_btn);
 
-        btn.addEventListener('click', 
-        (forDeadlines) ? 
-        function() { removeDeadline(ul, li, course, item); resetTooltip(); } :
-        function() { removeSession(ul, li, course, item); resetTooltip();});
-        complete_btn.addEventListener('click', function()
-        {
-            updateBubbles(course, item);
-            removeSession(ul, li, course, item);
-            resetTooltip();
-        });
-        btn.addEventListener("mouseover", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(127, 0, 0)";
+            btn.addEventListener('click', 
+            (forDeadlines) ? 
+            function() { removeDeadline(ul, li, course, item); resetTooltip(); } :
+            function() { removeSession(ul, li, course, item, true); resetTooltip();});
+            complete_btn.addEventListener('click', function()
+            {
+                updateBubbles(course, item, false);
+                removeSession(ul, li, course, item, false);
+                resetTooltip();
+            });
+            btn.addEventListener("mouseover", function(e)
+            {
+                e.target.style.backgroundColor = "rgb(127, 0, 0)";
+                if (forDeadlines)
+                    createTooltip("Remove deadline", e.target);
+                else
+                    createTooltip("Remove session", e.target);
+            });
+            btn.addEventListener("mouseleave", function(e)
+            {
+                e.target.style.backgroundColor = "rgb(255, 0, 0)";
+                resetTooltip();
+            });
+            complete_btn.addEventListener("mouseover", function(e)
+            {
+                e.target.style.backgroundColor = "rgb(0, 127, 0)";
+                createTooltip("Complete session", e.target);
+            });
+            complete_btn.addEventListener("mouseleave", function(e)
+            {
+                e.target.style.backgroundColor = "rgb(0, 255, 0)";
+                resetTooltip();
+            });
+    
+            li.style.listStyle = "none";
+            li.style.margin = "1.5em 0";
+            li.style.position = "relative";
+            li.style.lineHeight = "1.5em";
+            li.style.borderBottom = "0.1em solid black";
+            li.innerHTML += item.type + "</br>";
+            li.innerHTML += item.date + "</br>";
+    
+            p.style.position = "absolute";
+            p.style.left = "50%";
+            p.style.bottom = "0";
+
             if (forDeadlines)
-                createTooltip("Remove deadline", e.target);
+                p.innerHTML += item.time;
             else
-                createTooltip("Remove session", e.target);
-        });
-        btn.addEventListener("mouseleave", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(255, 0, 0)";
-            resetTooltip();
-        });
-        complete_btn.addEventListener("mouseover", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(0, 127, 0)";
-            createTooltip("Complete session", e.target);
-        });
-        complete_btn.addEventListener("mouseleave", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(0, 255, 0)";
-            resetTooltip();
-        });
-    
-        li.style.listStyle = "none";
-        li.style.margin = "2em 0";
-        li.style.position = "relative";
-        li.style.lineHeight = "1.5em";
-        li.style.borderBottom = "0.1em solid black";
-        li.innerHTML += item.type + "</br>";
-        li.innerHTML += item.date + "</br>";
-    
-        p.style.position = "absolute";
-        p.style.left = "50%";
-        p.style.bottom = "0";
-
-        if (forDeadlines)
-            p.innerHTML += item.time;
-        else
-            li.innerHTML += item.start + " - " + item.end + "</br>";
+                li.innerHTML += item.start + " - " + item.end + "</br>";
         
-        if (forDeadlines)
-            li.appendChild(p);
-        else    
-            li.appendChild(complete_btn);
+            if (forDeadlines)
+                li.appendChild(p);
+            else    
+                li.appendChild(complete_btn);
 
-        li.appendChild(btn);
-        ul.appendChild(li);
+            li.appendChild(btn);
+            ul.appendChild(li);
         });
+    }
 }
 
 function removeDeadline(ul, li, course, item)
@@ -573,13 +724,16 @@ function removeDeadline(ul, li, course, item)
     ul.removeChild(li);
     course.removeDeadline(item);
     manager.removeDeadline(item);
+    undo_btn1.style.opacity = 1;
+    updateUndo();
     main();
 }
 
-function removeSession(ul, li, course, item)
+function removeSession(ul, li, course, item, removed)
 {
     ul.removeChild(li);
-    course.removeSession(item);
+    course.removeSession(item, removed);
+    undo_btn2.style.opacity = 1;
 }
 
 function styleButton(btn)
@@ -594,9 +748,10 @@ function styleButton(btn)
     btn.style.position = "absolute";
     btn.style.top = "0";
     btn.type="button";
+    btn.className = "clickable";
 }
 
-function updateBubbles(course, item) //this function is called when completing a session
+function updateBubbles(course, item, undo) //this function is called when completing a session
 {
     let start = item.start;
     let end = item.end;
@@ -631,8 +786,13 @@ function updateBubbles(course, item) //this function is called when completing a
         if (hourDiff < 0)
             hourDiff += 24;
 
-        course.addHours(hourDiff + (minDiff / 60));
+        if (undo)
+            course.addHours(-(hourDiff + (minDiff / 60)));
+        else
+            course.addHours(hourDiff + (minDiff / 60));
+
         manager.updateMenu();
         menu.generateBubbles();
+        hours.innerHTML = Math.floor(course.totalHours) + " hr/s and " + Math.round((course.totalHours % 1) * 60, 0) + " min/s";
     }
 }

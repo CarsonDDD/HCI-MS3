@@ -9,6 +9,8 @@ class Course
 		this.color=color;
 		this.deadlineArray=new Array();
 		this.sessionArray=new Array();
+		this.removedDeadlines = new Array();
+		this.removedSessions = new Array();
 	}
 
 	name()
@@ -64,6 +66,8 @@ class Course
 
 		if (idx >= 0 && idx < this.deadlineArray.length)
 		{
+			this.removedDeadlines.push(this.deadlineArray[idx]);
+
 			for (let i = idx; i < this.deadlineArray.length - 1; i++)
 				this.deadlineArray[i] = this.deadlineArray[i + 1];
 		
@@ -82,6 +86,8 @@ class Course
 
 		if (idx >= 0 && idx < this.sessionArray.length)
 		{
+			this.removedSessions.push(this.sessionArray[idx]);
+
 			for (let i = idx; i < this.sessionArray.length - 1; i++)
 				this.sessionArray[i] = this.sessionArray[i + 1];
 		
