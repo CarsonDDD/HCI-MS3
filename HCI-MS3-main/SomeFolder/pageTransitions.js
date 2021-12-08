@@ -40,6 +40,7 @@ calendarBtn.addEventListener("click", function(e)
     highlightBtn(e); 
     resetTooltip()
 });
+
 calendarBtn.addEventListener("mouseover", overBtn);
 calendarBtn.addEventListener("mouseleave", leaveBtn);
 
