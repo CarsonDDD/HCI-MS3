@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="infoForm.css">
     <link href="fullcalendar/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="calendarForm1.css">
+    <link rel="stylesheet" type = "text/css" href="icons/css/all.css">
 
   </head>
   <body>
@@ -18,10 +19,11 @@
     <!------------------------->
     <div class="container">
       <!---------------SIDE BAR---------------->
-      <nav id="sidebar">
+      <nav class = "sidebar" id = "sidebar">
+        <!--
         <ul>
           <li id="home_li">
-            <img src="./images/home.png" alt="A home icon" id="home_btn" />
+            <img src="./images/home.png" alt="A home icon" id="home_btn" class="sizebar_img"/>
           </li>
           <li id="calendar_li">
             <img
@@ -30,6 +32,13 @@
               id="calendar_btn"
             />
           </li>
+        </ul>
+        -->
+        <ul>
+          <li class = "side-item" id = "home_btn"><i class="fas fa-home" id = "home_icon"></i>Home</li>
+          <li class = "side-item" id="calendar_btn"><i class="fas fa-calendar" id = "calendar_icon"></i>Calendar</li>
+          <li class = "side-item" id = "stats_btn"><i class="fas fa-chart-line" id = "stats_icon"></i>Statistics</li>
+
         </ul>
       </nav>
       <!----------------------------------------------->
@@ -102,7 +111,7 @@
 
                 <label class="colour5-label">
                   <input type="checkbox" id="colour5" />
-                  <span class="colour5"></span> 
+                  <span class="colour5"></span>
                 </label>
 
                 <label class="colour6-label">
@@ -129,7 +138,7 @@
                   <input type="checkbox" id="colour10" />
                   <span class="colour10"></span>
                 </label>
-              
+
                 <label class="colour11-label">
                   <input type="checkbox" id="colour11" />
                   <span class="colour11"></span>
@@ -199,7 +208,7 @@
               <div id="tasks_div_nav">
                 <div id="deadlines">Deadlines</div>
                 <div id="sessions">Sessions</div>
-              </div>               
+              </div>
               <div id="form_deadline_panel">
                 <button id="form_undo_btn1" class="clickable"></button>
               </div>
@@ -226,7 +235,7 @@
         <p>
           <div id="calendar">
             <!--------------------TEST------------>
-            
+
             <!--------------------TEST------------>
           </div>
         </p>
@@ -306,11 +315,11 @@
     <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="CalForm1.js" charset="utf-8"></script>
     <script src="bubbles.js" charset="utf-8"></script>
-    <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="Manager.js" charset="utf-8"></script>
     <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="fullcalendar/main.js" charset="utf-8"></script>
     <script src="calendar.js" charset="utf-8"></script>
+    <script src="pageTransitions.js" charset="utf-8"></script>
     <!--<script src="calTest.js" charset="utf-8"></script>--->
 
   </body>
