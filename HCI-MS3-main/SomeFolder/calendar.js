@@ -29,7 +29,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     calendar.unselect()
   },
   eventClick: function(arg) {
-    if (confirm('Are you sure you want to delete this event?')) {
+    if (confirm('Are you sure you want to delete this event?')) {//this will call the completion form instead
       arg.event.remove()
     }
   },
@@ -37,7 +37,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   dayMaxEvents: true, // allow "more" link when too many events
   events: [
     {
-      title: 'Exam Session',
+      title: 'Exam Session',//this is a hardcoded example to point to
       start: '2021-12-07',
       end: '2021-12-10'
     }
