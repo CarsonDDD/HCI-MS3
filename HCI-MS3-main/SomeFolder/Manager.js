@@ -351,9 +351,9 @@ undo_btn.addEventListener("click", function()
 	}
 });
 
-manager.createCourse("Comp3020", 0, 100, "#0000FF");
-manager.createCourse("Comp3040", 0, 90, "#00FF00");
-manager.createCourse("Comp3050", 0, 80, "#FF0000");
+manager.createCourse("Comp3020", 0, 100, "#5c5cFF");
+manager.createCourse("Comp3040", 0, 90, "#5cFF5c");
+manager.createCourse("Comp3050", 0, 80, "#FF5c5c");
 // manager.createDeadline("Comp3020", "21/11/2020", "12:00AM", "Midterm");
 // manager.createDeadline("Comp3020", "27/10/2021", "12:00AM", "Assignment");
 // manager.createDeadline("Comp3020", "27/10/2021", "1:00AM", "Midterm");
