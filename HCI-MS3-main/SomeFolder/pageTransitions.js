@@ -1,127 +1,127 @@
-let homePage = document.getElementById("home_page"); //a pointer to the home page div
-let calendarPage = document.getElementById("calendar_page"); //a pointer to the calendar page div
+// I dont know how to make structs/my old method wasnt working as intended. Using parallel arrays to keep track of items
+// WHEN ADDING STATS PAGE UPDATE THE PAGES ARRAY!!!
+let pages = [document.getElementById("home_page"),document.getElementById("calendar_page"), document.getElementById("home_page")];
+var icons = [document.getElementById("icon_home"), document.getElementById("icon_calendar"), document.getElementById("icon_stats")];
+var buttons = [document.getElementById("home_btn"), document.getElementById("calendar_btn"), document.getElementById("stats_btn")];
 
-let homeBtn = document.getElementById("home_btn"); //a pointer to the home img
-let calendarBtn = document.getElementById("calendar_btn"); //a pointer to the calendar img
-let statsBtn = document.getElementById("stats_btn"); //a pointer to the calendar img
+const pos_home = 0, pos_calendar = 1, pos_stats = 2;
 
-//Icons
-let homeIcon = document.getElementById("home_icon"); //a pointer to the home img
-let calendarIcon = document.getElementById("calendar_icon"); //a pointer to the calendar img
-let statsIcon = document.getElementById("stats_icon"); //a pointer to the calendar img
+let pos_selectedItem = pos_home; // starting page is the home page
 
-let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
-
-//color variables hover handled in css
 let hoverColor = "rgb(0, 128, 128)", selectedColor = "rgb(0, 128, 128)", defColor = "rgb(0, 85, 85)";
 
-//add click, mouseover, and mouseleave events to all the buttons
 
-homeBtn.addEventListener("click", function(e)
-{
-    if (currPage != homePage)
-    {
-        closeCal1();
-    }
-
-    currPage = homePage;
-    showPage();
-    currBtn = homeBtn;
-    highlightBtn(e);
-});
-homeBtn.addEventListener("mouseover", overBtn);
-homeBtn.addEventListener("mouseleave", leaveBtn);
-
-calendarBtn.addEventListener("click", function(e)
-{
-    if (currPage != calendarPage)
-    {
-        closeBub();
-        closeInfo();
-    }
-
-    currPage = calendarPage;
-    showPage(); currBtn = calendarBtn;
-    highlightBtn(e);
-});
-
-calendarBtn.addEventListener("mouseover", overBtn);
-calendarBtn.addEventListener("mouseleave", leaveBtn);
-
-
-statsBtn.addEventListener("click", function(e)
-{
-    if (currPage != statsPage)
-    {
-        closeBub();
-        closeInfo();
-    }
-
-    //currPage = statsPage;
-    showPage(); currBtn = statsBtn;
-    highlightBtn(e);
-});
-
-statsBtn.addEventListener("mouseover", overBtn);
-statsBtn.addEventListener("mouseleave", leaveBtn);
-
-function overBtn(e)
-{
-    if (e.target !== currBtn)
-    {
-        e.target.style.backgroundColor = hoverColor; // handled in css
-        //e.target.style.color = hoverColor;
-
-        //createTooltip((e.target === homeBtn) ? "Home" : (e.target === calendarBtn) ? "Calendar" : "Statistics", e.target);
-    }
+// Initalizes events
+if(buttons.length != icons.length || icons.length != pages.length || buttons.length != pages.length){
+	console.log("ERROR pageTransitions.js: button length doesnt match icon length.");
 }
-function leaveBtn(e)
-{
-    if (e.target !== currBtn)
-    {
-        e.target.style.backgroundColor = defColor;
-        //e.target.style.color = defColor;
-    }
+else{
+	for(i =0; i < buttons.length;i++){
+		buttons[i].addEventListener("click", clickBtn);
+		buttons[i].addEventListener("mouseover", enterBtn);
+		buttons[i].addEventListener("mouseleave", leaveBtn);
+
+		icons[i].addEventListener("click", clickBtn);
+		icons[i].addEventListener("mouseover", enterBtn);
+		icons[i].addEventListener("mouseleave", leaveBtn);
+	}
 }
 
-function itemClick(menuItem){
+// Determines item clicked on, updates sidemenu and changes page
+function clickBtn(item){
+
+	let highlightPosition = getSelectedPosition(item);
+
+	//updates sidebar and page
+	if(highlightPosition == -1){
+		console.log(`ERROR clickBtn: invalid item '${item}'`);
+	}
+	else{
+
+		if(highlightPosition != pos_selectedItem){// if statement transated from orginal file
+			closeBub();
+        	closeInfo();
+		}
+		pos_selectedItem = highlightPosition;
+		focusListItem(highlightPosition);
+		showPage();
+	}
+}
+
+// Determines which item to highlight simular to clickBtn but without changing the page
+function enterBtn(item){
+
+	let highlightPosition = getSelectedPosition(item);
+
+	//updates sidebar
+	if(highlightPosition == -1){
+		console.log(`ERROR enterBtn: invalid item '${item}'`);
+	}
+	else{
+		focusListItem(highlightPosition);
+	}
+}
+
+// Resets all selection colors by focusing on the associated page
+function leaveBtn(){
+	focusListItem(pos_selectedItem);
+}
+
+function getSelectedPosition(item){
+	let position = -1;
+
+	if(item.target.id.includes("stats")){
+		position = pos_stats;
+	}
+	else if(item.target.id.includes("calendar")){
+		position = pos_calendar;
+	}
+	else if(item.target.id.includes("home")){
+		position = pos_home;
+	}
+
+	return position;
+}
+
+// Scans through arrays resetting their color. Then highlighting important items
+function focusListItem(position){
+
+	// resets all bgcolors to default state
+	for(i =0; i < buttons.length; i++){
+		console.log("Clearing color");
+		buttons[i].style.backgroundColor = defColor;
+		icons[i].style.backgroundColor = defColor;
+	}
+
+	//highlights item
+	icons[position].style.backgroundColor = hoverColor;
+	buttons[position].style.backgroundColor = hoverColor;
+
+	//highlights current pos_selectedItem
+	icons[pos_selectedItem].style.backgroundColor = selectedColor;
+	buttons[pos_selectedItem].style.backgroundColor = selectedColor;
 
 }
 
-function highlightBtn()
-{
-    //if we click a button, we want to unselect the previously clicked button
+// Translated from original file
+function showPage(){
+	//hide every page except for currPage
 
-    homeBtn.style.backgroundColor = defColor;
-    statsBtn.style.backgroundColor = defColor;
-    //homeBtn.style.color = defColor;
-    //calendarBtn.style.color = defColor;
-    calendarBtn.style.backgroundColor = defColor;
-    //homeBtn.style.cursor = "pointer";
-    //calendarBtn.style.cursor = "pointer";
+	for(i = 0; i < pages.length;i++){
+		pages[i].style.display = "none";
+	}
 
-    currBtn.style.backgroundColor = selectedColor; //change the color of crrBtn to indicate that it is selected
-    currBtn.style.cursor = "default"; //make sure that the user does not get the idea that currBtn is still clickable
+	pages[pos_selectedItem].style.display = "flex";
+
+	if (pos_selectedItem == pos_home)
+	{
+		menu.bubbles.forEach(element => {
+			element.setDimensions(element.cx, element.cy, element.rad);
+		});
+		menu.generateBubbles();
+	}
 }
 
-function showPage()
-{
-    //hide every page except for currPage
-
-    homePage.style.display = "none";
-    calendarPage.style.display = "none";
-
-    currPage.style.display = "flex";
-
-    if (currPage === homePage)
-    {
-        menu.bubbles.forEach(element => {
-            element.setDimensions(element.cx, element.cy, element.rad);
-        });
-        menu.generateBubbles();
-    }
-}
 
 showPage();
-highlightBtn();
-
+focusListItem(pos_home);
