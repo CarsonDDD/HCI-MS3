@@ -82,6 +82,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  background-color: rgb(255, 255, 190);
   background-size: 40px 40px;
   background-image:
   linear-gradient(to right, rgb(201, 201, 201) 1px, transparent 1px),
