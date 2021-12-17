@@ -1,6 +1,6 @@
 class Bubble
 {
-    scale = 3;
+    //scale = 3;
     constructor(cx, cy, rad, label, colour)
     {
         this.cx = cx;
@@ -38,7 +38,7 @@ class Bubble
         this.div.style.height = rad * 2 + "px";
         this.div.style.borderRadius = rad + "px";
         this.div.style.fontSize = rad / 3 + "px";
-        this.div.style.scale = this.scale;
+        //this.div.style.scale = this.scale;
     }
 
     intersects(x, y, rad)
