@@ -30,20 +30,26 @@ else{
 // Determines item clicked on, updates sidemenu and changes page
 function clickBtn(item){
 
-	let highlightPosition = getSelectedPosition(item);
+	let destinationPosition = getSelectedPosition(item);
 
 	//updates sidebar and page
-	if(highlightPosition == -1){
+	if(destinationPosition == -1){
 		console.log(`ERROR clickBtn: invalid item '${item}'`);
 	}
 	else{
 
-		if(highlightPosition != pos_selectedItem){// if statement transated from orginal file
-			closeBub();
-        	closeInfo();
+		// if statements transated from orginal file
+		if(destinationPosition != pos_home){
+			closeCal1();
+			alert("Not home");
 		}
-		pos_selectedItem = highlightPosition;
-		focusListItem(highlightPosition);
+		if(destinationPosition != pos_calendar){
+			closeBub();
+			closeInfo();
+		}
+
+		pos_selectedItem = destinationPosition;
+		focusListItem(destinationPosition);
 		showPage();
 	}
 }
@@ -100,7 +106,6 @@ function focusListItem(position){
 	//highlights current pos_selectedItem
 	icons[pos_selectedItem].style.backgroundColor = selectedColor;
 	buttons[pos_selectedItem].style.backgroundColor = selectedColor;
-
 }
 
 // Translated from original file
@@ -125,3 +130,38 @@ function showPage(){
 
 showPage();
 focusListItem(pos_home);
+
+
+
+/*
+Functions from old code
+homeBtn.addEventListener("click", function(e)
+{
+    if (currPage != homePage)
+    {
+        closeCal1();
+    }
+
+    currPage = homePage;
+    showPage();
+    currBtn = homeBtn;
+    highlightBtn(e);
+    resetTooltip()
+});
+homeBtn.addEventListener("mouseover", overBtn);
+homeBtn.addEventListener("mouseleave", leaveBtn);
+
+calendarBtn.addEventListener("click", function(e)
+{
+    if (currPage != calendarPage)
+    {
+        closeBub();
+        closeInfo();
+    }
+
+    currPage = calendarPage;
+    showPage(); currBtn = calendarBtn;
+    highlightBtn(e);
+    resetTooltip()
+});
+*/
