@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Time</title>
+    <link rel="stylesheet" href="CompletionForm.css">
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="bubbleForm.css">
     <link rel="stylesheet" href="infoForm.css">
@@ -40,7 +41,6 @@
           <div id="home_main_bubble">
           </div>
           <div id="home_main_footer">
-
             <!--BUBBLE FORM START-->
             <button class="plus_button" id="plus_button"></button>
               <form
@@ -70,8 +70,6 @@
                   required
                 />
 
-                <p style="font-size:1.25vw"><b>Choose a Colour</b></p><br>
-
                 <!--- SELECTION OPTION
                 <label for="bubbleColour">Bubble Colour</label>
                 <select id="bubbleColour" name="bubbleColour">
@@ -79,6 +77,8 @@
                   <option value="baby pink">Baby Pink</option>
                   <option value="light Green">Light Green</option>
                 </select><br><br>  -->
+
+                <p style="font-size:1.25vw"><b>Choose a Colour</b></p><br>
 
                 <label class="colour1-label">
                   <input type="checkbox" id="colour1" />
@@ -139,14 +139,6 @@
                   <input type="checkbox" id="colour12" />
                   <span class="colour12"></span>
                 </label></br></br></br>
-
-                <!---CHECK MARKS
-                <input type="checkbox" class="colour1" id="colour1" name="colour1" value="Blue" onclick="onlyOne(this.id)">
-                <label for="colour1"> Blue</label>
-                <input type="checkbox" class="colour2" id="colour2" name="colour2" value="Pink" onclick="onlyOne(this.id)">
-                <label for="colour2"> Pink</label><br>
-                <input type="checkbox" class="colour3" id="colour3" name="colour3" value="Green" onclick="onlyOne(this.id)">
-                <label for="colour3"> Green</label><br><br>-->
 
                 <button type="button" class="btn" id="submit_btn">
                   Submit
@@ -210,7 +202,6 @@
               <div id="close_btn">Close</div>
             </div>
             <!--END OF INFO FORM-->
-
           </div>
         </div>
         <!-----------Dealine panel------------------>
@@ -230,6 +221,35 @@
             <!--------------------TEST------------>
           </div>
         </p>
+        <div id="completion_div">
+          <h1>Task Info</h1>
+          <div id="completion_name_div">
+            <h2 id="completion_course_name">COMP 3020</h2>
+            <input type="text" id="completion_course_name_text">
+          </div>
+          <!-- place sessions
+          <div id="grade_div_label">
+            <p id="curr_grade_label">Current</p>
+            <p id="target_grade_label">Target Grade</p>
+          </div>
+          <div id="grade_div">
+            <p id="curr_grade">95</p>
+            <p id="target_grade">100</p>
+            <input type="text" id="target_grade_text">
+            <div class="edit_btn" id="change_grade"></div>
+          </div>
+          <div id="hours_div">
+            <p id="hours_label">Time Spent</p>
+            <p id="hours">0 hr/s and 0 min/s</p>
+          </div>
+          -->
+          <div id="completion_close_btn">Close</div>
+        </div>
+        <!--END OF COMPLETION FORM-->
+         </div>
+         <div id="calendar_submit_btn">Submit</div>
+         <div id="calendar_close_btn">Cancel</div>
+       </div>
         <div id="sched_div">
          <h1>Set a Task</h1>
          <div id="course_div">
@@ -293,10 +313,8 @@
                  <input type="time" id="end_time">
                </div>
              </div>
-           </div>
-           <div id="calendar_submit_btn">Submit</div>
-           <div id="calendar_close_btn">Cancel</div>
-         </div>
+             <!--COMPLETION FORM START-->
+          
         </div>
       </div>
       <!------------------------------------------------->
@@ -310,6 +328,7 @@
     <script src="Manager.js" charset="utf-8"></script>
     <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="fullcalendar/main.js" charset="utf-8"></script>
+    <script src="CompletionForm.js" charset="utf-8"></script>
     <script src="calendar.js" charset="utf-8"></script>
     <!--<script src="calTest.js" charset="utf-8"></script>--->
 
