@@ -1,6 +1,7 @@
 // I dont know how to make structs/my old method wasnt working as intended. Using parallel arrays to keep track of items
 // WHEN ADDING STATS PAGE UPDATE THE PAGES ARRAY!!!
-let pages = [document.getElementById("home_page"),document.getElementById("calendar_page"), document.getElementById("home_page")];
+// PAGE VALUE OF '-1' IS AN EMPTY PAGE, THE APP DOESNT TRANISTION TO EMPTY PAGES
+let pages = [document.getElementById("home_page"),document.getElementById("calendar_page"), -1];
 var icons = [document.getElementById("icon_home"), document.getElementById("icon_calendar"), document.getElementById("icon_stats")];
 var buttons = [document.getElementById("home_btn"), document.getElementById("calendar_btn"), document.getElementById("stats_btn")];
 
@@ -41,16 +42,21 @@ function clickBtn(item){
 		// if statements transated from orginal file
 		if(destinationPosition != pos_home){
 			closeCal1();
-			alert("Not home");
+			//alert("Not home");
 		}
 		if(destinationPosition != pos_calendar){
 			closeBub();
 			closeInfo();
 		}
 
-		pos_selectedItem = destinationPosition;
-		focusListItem(destinationPosition);
-		showPage();
+		if(pages[destinationPosition] != -1){
+			pos_selectedItem = destinationPosition;
+			focusListItem(destinationPosition);
+			showPage();
+		}
+		else{
+			console.log("EMPTY PAGE!!!");
+		}
 	}
 }
 
@@ -113,7 +119,9 @@ function showPage(){
 	//hide every page except for currPage
 
 	for(i = 0; i < pages.length;i++){
-		pages[i].style.display = "none";
+		if(pages[i] != -1){
+			pages[i].style.display = "none";
+		}
 	}
 
 	pages[pos_selectedItem].style.display = "flex";
