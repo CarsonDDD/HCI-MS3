@@ -40,7 +40,7 @@
 
   top: 0;
   left: 0;
-  width: 70px;
+  width: 75px;
   height: 100%;
 
   z-index: 999;
@@ -137,6 +137,7 @@
   width: 20em;
   height: 50vh;
   padding: 2em 2em;
+  margin-top: 1%;
   overflow: auto;
   background-color: rosybrown;
   filter: drop-shadow(10px 10px 5px #5e5e5e);
