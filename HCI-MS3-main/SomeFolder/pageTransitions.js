@@ -9,7 +9,7 @@ const pos_home = 0, pos_calendar = 1, pos_stats = 2, pos_plus = 3;
 
 let pos_selectedItem = pos_home; // starting page is the home page
 
-let hoverColor = "rgb(0, 128, 128)", selectedColor = "rgb(0, 128, 128)", defColor = "rgb(0, 85, 85)";
+let hoverColor = "rgb(0, 128, 128)", selectedColor = "rgb(0, 160, 160)", defColor = "rgb(0, 85, 85)";
 
 
 // Initalizes events
