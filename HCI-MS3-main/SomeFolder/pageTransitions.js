@@ -1,11 +1,11 @@
 // I dont know how to make structs/my old method wasnt working as intended. Using parallel arrays to keep track of items
 // WHEN ADDING STATS PAGE UPDATE THE PAGES ARRAY!!!
 // PAGE VALUE OF '-1' IS AN EMPTY PAGE, THE APP DOESNT TRANISTION TO EMPTY PAGES
-let pages = [document.getElementById("home_page"),document.getElementById("calendar_page"), -1];
-var icons = [document.getElementById("icon_home"), document.getElementById("icon_calendar"), document.getElementById("icon_stats")];
-var buttons = [document.getElementById("home_btn"), document.getElementById("calendar_btn"), document.getElementById("stats_btn")];
+let pages = [document.getElementById("home_page"),document.getElementById("calendar_page"), -1, -1];
+var icons = [document.getElementById("icon_home"), document.getElementById("icon_calendar"), document.getElementById("icon_stats"), document.getElementById("icon_plus")];
+var buttons = [document.getElementById("home_btn"), document.getElementById("calendar_btn"), document.getElementById("stats_btn"), document.getElementById("plus_button"),];
 
-const pos_home = 0, pos_calendar = 1, pos_stats = 2;
+const pos_home = 0, pos_calendar = 1, pos_stats = 2, pos_plus = 3;
 
 let pos_selectedItem = pos_home; // starting page is the home page
 
@@ -18,13 +18,16 @@ if(buttons.length != icons.length || icons.length != pages.length || buttons.len
 }
 else{
 	for(i =0; i < buttons.length;i++){
-		buttons[i].addEventListener("click", clickBtn);
-		buttons[i].addEventListener("mouseover", enterBtn);
-		buttons[i].addEventListener("mouseleave", leaveBtn);
+		if(pages[i] != -1){
+			buttons[i].addEventListener("click", clickBtn);
+			icons[i].addEventListener("click", clickBtn);
+		}
 
-		icons[i].addEventListener("click", clickBtn);
-		icons[i].addEventListener("mouseover", enterBtn);
+		buttons[i].addEventListener("mouseleave", leaveBtn);
 		icons[i].addEventListener("mouseleave", leaveBtn);
+
+		icons[i].addEventListener("mouseover", enterBtn);
+		buttons[i].addEventListener("mouseover", enterBtn);
 	}
 }
 
@@ -90,6 +93,9 @@ function getSelectedPosition(item){
 	}
 	else if(item.target.id.includes("home")){
 		position = pos_home;
+	}
+	else if(item.target.id.includes("plus")){
+		position = pos_plus;
 	}
 
 	return position;
