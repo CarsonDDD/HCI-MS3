@@ -43,6 +43,8 @@
   width: 70px;
   height: 100%;
 
+  z-index: 999;
+
   background-color: rgb(0, 85, 85);
   /*border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;*/
