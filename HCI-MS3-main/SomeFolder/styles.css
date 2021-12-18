@@ -108,7 +108,7 @@
   /*border: 2px black solid;*/
 }
 
-#home_main_footer {
+/*#home_main_footer {
   height: 15%;
   background-color: white;
   display: flex;
@@ -129,7 +129,7 @@
 
 #plus_button:hover {
   background-color: rgb(130, 190, 190);
-}
+}*/
 
 #deadline_panel {
   width: 20em;
