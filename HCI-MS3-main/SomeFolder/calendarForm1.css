@@ -12,7 +12,10 @@
 #sched_div select,
 #time_text,
 #start_time,
-#end_time {
+#end_time,
+#deadline_date,
+#start_date,
+#end_date {
   height: 2rem;
   margin: 0.5rem 0;
 }
@@ -70,26 +73,6 @@
 
 #courses {
   width: 15rem;
-}
-
-/* DATE */
-
-#date_div {
-  width: 20rem;
-  height: 3rem;
-  display: flex;
-  border-bottom: 0.1rem solid black;
-  margin-bottom: 2rem;
-}
-
-#date_label {
-  width: 3rem;
-}
-
-#date {
-  width: 17rem;
-  border-left: 0.1rem solid black;
-  padding-left: 0.5rem;
 }
 
 /* DEADLINE OR SESSION */
@@ -155,12 +138,29 @@
   width: 15rem;
 }
 
+/* DATE */
+
+#deadline_date_div {
+  width: 20rem;
+  height: 3rem;
+  display: flex;
+}
+
+#deadline_date_div p {
+  width: 5rem;
+}
+
+#deadline_date {
+  width: 15rem;
+}
+
 /* PURPOSE FOR SESSION */
 
 #purpose_div {
   width: 20rem;
-  height: 3rem;
+  height: 2.5rem;
   display: flex;
+  margin-bottom: 1rem;
 }
 
 #purpose_div p {
@@ -191,23 +191,60 @@
 
 #interval_div {
   width: 20rem;
-  height: 3rem;
+  height: 5rem;
+  margin-bottom: 0.5rem;
+}
+
+#start_time_div,
+#end_time_div {
   display: flex;
-  justify-content: space-between;
+  width: 20rem;
+  height: 2.5rem;
+}
+
+#interval_div p {
+  width: 5rem;
+}
+
+#interval_div input[type="time"] {
+  width: 15rem;
+}
+
+/* DATES FOR SESSION */
+
+#session_date_div {
+  width: 20rem;
+  height: 5rem;
+  margin-bottom: 1rem;
 }
 
 #start_date_div,
 #end_date_div {
   display: flex;
-  width: 9rem;
+  width: 20rem;
+  height: 2.5rem;
 }
 
-#interval_div p {
-  width: 3rem;
+#session_date_div p {
+  width: 5rem;
 }
 
-#interval_div input[type="time"] {
-  width: 6rem;
+#session_date_div input[type="date"] {
+  width: 15rem;
+}
+
+/* COMMENTS */
+
+#comments_div {
+  width: 20rem;
+  height: 9rem;
+  margin-bottom: 2rem;
+}
+
+textarea {
+  resize: none;
+  width: 20rem;
+  height: 6rem;
 }
 
 /* SUBMIT BTN */
