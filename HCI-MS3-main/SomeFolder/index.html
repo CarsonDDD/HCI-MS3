@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Time</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="bubbleForm.css">
     <link rel="stylesheet" href="infoForm.css">
     <link href="fullcalendar/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="calendarForm1.css">
+    <link rel="stylesheet" href="statspage.css">
 
   </head>
   <body>
@@ -28,6 +30,13 @@
               src="./images/calendar.png"
               alt="A calendar icon"
               id="calendar_btn"
+            />
+          </li>
+          <li id="statistics_li">
+            <img
+              src="./images/stats.png"
+              alt="A statistics icon"
+              id="statistics_btn"
             />
           </li>
         </ul>
@@ -221,12 +230,33 @@
         </div>
       </div>
 
+      <!-----------------------Stats Page-------------------------->
+      <div id="statistics_page">
+        <button id="general_btn">General</button>
+        <button id="comp3020_btn">Comp3020</button>
+        <button id="comp3040_btn">Comp3040</button>
+        <button id="comp3050_btn">Comp3050</button>
+        <div id="history">Course History</div>
+        <div id="chart_area">
+          <div>
+            <canvas id="pie_area" height="300" width="300"></canvas>
+          </div>
+          <div>
+            <canvas id="graph_area"height="300" width="300"></canvas>
+          </div>
+          
+            <div id="projected"></div>
+          
+        </div>
+        
+      </div>
+
       <!------------------CALENDAR PAGE------------------>
       <div id="calendar_page">
         <p>
           <div id="calendar">
             <!--------------------TEST------------>
-            
+
             <!--------------------TEST------------>
           </div>
         </p>
@@ -299,7 +329,6 @@
          </div>
         </div>
       </div>
-      <!------------------------------------------------->
     </div>
     <script src="Tooltip.js" charset="utf-8"></script>
     <script src="InfoForm.js" charset="utf-8"></script>
@@ -311,6 +340,7 @@
     <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="fullcalendar/main.js" charset="utf-8"></script>
     <script src="calendar.js" charset="utf-8"></script>
+    <script src="statspage.js" charset="utf-8"></script>
     <!--<script src="calTest.js" charset="utf-8"></script>--->
 
   </body>
