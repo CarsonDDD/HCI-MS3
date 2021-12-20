@@ -137,6 +137,16 @@
 
 /* End of calendar page and its elements---*/
 
+/* Statistics page*/
+
+#statistics_page {
+  width: 95%;
+  overflow:auto;
+  display: none;
+}
+
+
+
 /*-------End of main layout elements--------------------*/
 
 /*--------------------End of Layout------------------------------------------------------------*/

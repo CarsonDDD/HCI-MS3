@@ -1,8 +1,10 @@
 let homePage = document.getElementById("home_page"); //a pointer to the home page div
 let calendarPage = document.getElementById("calendar_page"); //a pointer to the calendar page div
+let statisticsPage = document.getElementById("statistics_page"); //a pointer to the statistics page div
 
 let homeBtn = document.getElementById("home_btn"); //a pointer to the home img 
 let calendarBtn = document.getElementById("calendar_btn"); //a pointer to the calendar img
+let statisticsBtn = document.getElementById("statistics_btn"); //a pointer to the statistics img
 
 let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
                                             
@@ -46,6 +48,17 @@ calendarBtn.addEventListener("click", function(e)
 calendarBtn.addEventListener("mouseover", overBtn);
 calendarBtn.addEventListener("mouseleave", leaveBtn);
 
+statisticsBtn.addEventListener("click", function(e) 
+{ 
+    currPage = statisticsPage; 
+    showPage(); 
+    currBtn = statisticsBtn; 
+    highlightBtn(e); 
+    resetTooltip()}
+);
+statisticsBtn.addEventListener("mouseover", overBtn);
+statisticsBtn.addEventListener("mouseleave", leaveBtn);
+
 function overBtn(e) 
 { 
     if (e.target !== currBtn) //change the color of the image when mouse is over it
@@ -75,8 +88,10 @@ function highlightBtn()
 
     homeBtn.style.backgroundColor = defColor;
     calendarBtn.style.backgroundColor = defColor;
+    statisticsBtn.style.backgroundColor = defColor;
     homeBtn.style.cursor = "pointer";
     calendarBtn.style.cursor = "pointer";
+    statisticsBtn.style.cursor = "pointer";
 
     currBtn.style.backgroundColor = selectedColor; //change the color of crrBtn to indicate that it is selected
     currBtn.style.cursor = "default"; //make sure that the user does not get the idea that currBtn is still clickable
@@ -88,6 +103,7 @@ function showPage()
 
     homePage.style.display = "none";
     calendarPage.style.display = "none";
+    statisticsPage.style.display = "none";
 
     currPage.style.display = "flex"; 
 
