@@ -12,7 +12,7 @@
     <link href="fullcalendar/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="calendarForm1.css">
     <link rel="stylesheet" href="statspage.css">
-
+    <link rel="stylesheet" href="CompletionForm.css">
   </head>
   <body>
     <!------------------------->
@@ -266,10 +266,6 @@
            <p>Course</p>
            <select id="courses"></select>
          </div>
-         <div id="date_div">
-           <p id="date_label">Date</p>
-           <p id="date">25/12/2021</p>
-         </div>
          <div id="task_div">
              <div id="deadline_div">
                <div id="deadline_radio">
@@ -287,14 +283,15 @@
              <div id="type_div">
                <p>Type</p>
                <select id="deadline_types">
-                 <option value="Test">Test</option>
-                 <option value="Exam">Exam</option>
-                 <option value="Quiz">Quiz</option>
-                 <option value="Midterm">Midterm</option>
                  <option value="Assignment">Assignment</option>
                  <option value="Project">Project</option>
+                 <option value="Lab">Lab</option>
                </select>
              </div>
+             <div id="deadline_date_div">
+              <p>Date</p>
+              <input type="date" id="deadline_date">
+            </div>
              <div id="time_div">
                <p>Time</p>
                <input type="time" id="time_text">
@@ -304,29 +301,46 @@
              <div id="purpose_div">
                <p>Purpose</p>
                <select id="session_purposes">
-                 <option value="General">General</option>
+                <option value="Study">Study</option>
+                <option value="Work">Work</option>
                 <option value="Test">Test</option>
                 <option value="Exam">Exam</option>
                 <option value="Quiz">Quiz</option>
                 <option value="Midterm">Midterm</option>
-                <option value="Assignment">Assignment</option>
-                <option value="Project">Project</option>
                </select>
              </div>
+             <div id="session_date_div">
+              <div id="start_date_div">
+                <p>Start Date</p>
+                <input type="date" id="start_date">
+              </div>
+              <div id="end_date_div">
+                <p>End Date</p>
+                <input type="date" id="end_date">
+              </div>
+            </div>
              <div id="interval_div">
-               <div id="start_date_div">
-                 <p>Start</p>
+               <div id="start_time_div">
+                 <p>Start Time</p>
                  <input type="time" id="start_time">
                </div>
-               <div id="end_date_div">
-                 <p>End</p>
+               <div id="end_time_div">
+                 <p>End Time</p>
                  <input type="time" id="end_time">
                </div>
              </div>
            </div>
+           <div id="comments_div">
+             <p>Comments</p>
+             <textarea name="" id="comments" cols="30" rows="10"></textarea>
+           </div>
            <div id="calendar_submit_btn">Submit</div>
            <div id="calendar_close_btn">Cancel</div>
          </div>
+         <div id="completion_div">
+          <h1 id="task_type">Deadline Info</h1>
+          <div id="task_info"></div>  
+          <div id="completion_close_btn">Close</div>
         </div>
       </div>
     </div>
@@ -334,10 +348,10 @@
     <script src="InfoForm.js" charset="utf-8"></script>
     <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="CalForm1.js" charset="utf-8"></script>
+    <script src="CompletionForm.js" charset="utf-8"></script>
     <script src="bubbles.js" charset="utf-8"></script>
     <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="Manager.js" charset="utf-8"></script>
-    <script src="BubbleForm.js" charset="utf-8"></script>
     <script src="fullcalendar/main.js" charset="utf-8"></script>
     <script src="calendar.js" charset="utf-8"></script>
     <script src="statspage.js" charset="utf-8"></script>

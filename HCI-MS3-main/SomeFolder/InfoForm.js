@@ -346,7 +346,7 @@ undo_btn1.addEventListener("click", function()
 
         manager.removedDeadlines.pop();
 
-        manager.createDeadline(last.course, last.date, last.time, last.type);
+        manager.createDeadline(last.course, last.date, last.time, last.type, last.comments);
 
         generatePanel(course, deadline, true); 
         updateUndoBtns(course);
@@ -386,7 +386,7 @@ undo_btn2.addEventListener("click", function()
         let course = manager.courseList[idx];
         let last = course.removedSessions.pop();
         let rOrC = course.removeOrComplete.pop();
-        manager.createSession(last.course, last.date, last.start, last.end, last.type);
+        manager.createSession(last.course, last.date, last.endDate, last.start, last.end, last.type, last.comments);
 
         if (!rOrC)
             updateBubbles(course, last, true);
@@ -397,6 +397,19 @@ undo_btn2.addEventListener("click", function()
         resetTooltip();
     }
 });
+
+formCalendarBtn.addEventListener("click", function()
+{
+    closeBub();
+    closeInfo();
+
+    currPage = calendarPage; 
+    showPage(); currBtn = calendarBtn; 
+    highlightBtn(calendarBtn);
+    taskShown = null;
+    calendar.render();
+    resetTooltip()
+})
 
 /**************************************************************************************** */
 
@@ -646,6 +659,7 @@ function generatePanel(course, panel, forDeadlines) //this function generates bo
             const btn = document.createElement('button');
             const complete_btn = document.createElement('button');
             const p = document.createElement('p');
+            const c = document.createElement('div');
     
             btn.style.backgroundImage = "url('./images/ex.png')";
             btn.style.backgroundColor = "rgb(255, 0, 0)";      
@@ -654,17 +668,17 @@ function generatePanel(course, panel, forDeadlines) //this function generates bo
 
             complete_btn.style.backgroundImage = "url('./images/check.png')";
             complete_btn.style.backgroundColor = "rgb(0, 255, 0)";
-            complete_btn.style.right = "6em";
+            complete_btn.style.right = "3em";
             styleButton(complete_btn);
 
             btn.addEventListener('click', 
             (forDeadlines) ? 
-            function() { removeDeadline(ul, li, course, item); resetTooltip(); } :
-            function() { removeSession(ul, li, course, item, true); resetTooltip();});
+            function() { removeDeadline(ul, li, c, course, item); resetTooltip(); } :
+            function() { removeSession(ul, li, c, course, item, true); resetTooltip();});
             complete_btn.addEventListener('click', function()
             {
                 updateBubbles(course, item, false);
-                removeSession(ul, li, course, item, false);
+                removeSession(ul, li, c, course, item, false);
                 resetTooltip();
             });
             btn.addEventListener("mouseover", function(e)
@@ -692,16 +706,35 @@ function generatePanel(course, panel, forDeadlines) //this function generates bo
             });
     
             li.style.listStyle = "none";
-            li.style.margin = "1.5em 0";
+            li.style.marginTop = "1.5em";
             li.style.position = "relative";
             li.style.lineHeight = "1.5em";
-            li.style.borderBottom = "0.1em solid black";
             li.innerHTML += item.type + "</br>";
-            li.innerHTML += item.date + "</br>";
-    
+
+            if (!forDeadlines && getDuration(item.date, item.endDate, "12:00 AM", "12:00 AM") > 0)
+                li.innerHTML += item.date + " - " + item.endDate + "</br>";
+            else
+                li.innerHTML += item.date + "</br>";
+
             p.style.position = "absolute";
             p.style.left = "50%";
             p.style.bottom = "0";
+
+            c.innerHTML += item.comments + "</br>";
+		    c.style.overflow = "auto";
+		    c.style.borderBottom = "0.1rem solid black";
+		    c.style.whiteSpace = "pre-wrap";
+		    c.style.lineHeight = "1.5em";
+            c.style.marginBottom = "0.5em";
+            
+		    if (item.comments.length === 0)
+		    {
+			    c.style.display = "none";
+			    li.style.borderBottom = "0.1rem solid black";
+                li.style.marginBottom = "0.5em";
+		    }
+		    else
+			    c.style.display = "block";
 
             if (forDeadlines)
                 p.innerHTML += item.time;
@@ -715,13 +748,15 @@ function generatePanel(course, panel, forDeadlines) //this function generates bo
 
             li.appendChild(btn);
             ul.appendChild(li);
+            ul.appendChild(c);
         });
     }
 }
 
-function removeDeadline(ul, li, course, item)
+function removeDeadline(ul, li, c, course, item)
 {
     ul.removeChild(li);
+    ul.removeChild(c);
     course.removeDeadline(item);
     manager.removeDeadline(item);
     undo_btn1.style.opacity = 1;
@@ -729,9 +764,10 @@ function removeDeadline(ul, li, course, item)
     main();
 }
 
-function removeSession(ul, li, course, item, removed)
+function removeSession(ul, li, c, course, item, removed)
 {
     ul.removeChild(li);
+    ul.removeChild(c);
     course.removeSession(item, removed);
     undo_btn2.style.opacity = 1;
 }
@@ -753,46 +789,22 @@ function styleButton(btn)
 
 function updateBubbles(course, item, undo) //this function is called when completing a session
 {
-    let start = item.start;
-    let end = item.end;
+    let duration = getDuration(item.date, item.endDate, item.start, item.end);
+   
+    if (undo)
+        course.addHours(-duration);
+    else
+        course.addHours(duration);
 
-    let isAM1 = (start.substring(start.length - 2, start.length) === "AM");
-    let isAM2 = (end.substring(end.length - 2, end.length) === "AM");
+    manager.updateMenu();
+    menu.generateBubbles();
+    hours.innerHTML = Math.floor(course.totalHours) + " hr/s and " + Math.round((course.totalHours % 1) * 60, 0) + " min/s";
+}
 
-    let idxStart = start.indexOf(":");
-    let idxEnd = end.indexOf(":");
+function getDuration(startDate, endDate, startTime, endTime)
+{
+    let a = new Session("", startDate, 0, startTime, 0, 0, "");
+    let b = new Session("", endDate, 0, endTime, 0, 0, "");
 
-    if (idxStart >= 0 && idxEnd >= 0)
-    {
-        let hourStart = parseInt(start.substring(0, idxStart));
-        let hourEnd = parseInt(end.substring(0, idxEnd));
-        let minStart = parseInt(start.substring(idxStart + 1, start.length - 2));
-        let minEnd = parseInt(end.substring(idxEnd + 1, end.length - 2));
-
-        if (!isAM1 && hourStart !== 12) hourStart += 12;
-        else if (isAM1 && hourStart === 12) hourStart -= 12;
-        if (!isAM2 && hourEnd != 12) hourEnd += 12;
-        else if (isAM2 && hourEnd === 12) hourEnd -= 12;
-
-        if (minEnd - minStart < 0)
-        {
-            hourEnd--;
-            minEnd += 60;
-        }
-
-        let hourDiff = hourEnd - hourStart;
-        let minDiff = minEnd - minStart;
-
-        if (hourDiff < 0)
-            hourDiff += 24;
-
-        if (undo)
-            course.addHours(-(hourDiff + (minDiff / 60)));
-        else
-            course.addHours(hourDiff + (minDiff / 60));
-
-        manager.updateMenu();
-        menu.generateBubbles();
-        hours.innerHTML = Math.floor(course.totalHours) + " hr/s and " + Math.round((course.totalHours % 1) * 60, 0) + " min/s";
-    }
+    return sort(b, a) / 1000 / 3600;
 }

@@ -18,6 +18,8 @@ homeBtn.addEventListener("click", function(e)
     if (currPage != homePage)
     {
         closeCal1();
+        completionCloseInfo();
+        calendar.unselect();
     }
     
     currPage = homePage; 

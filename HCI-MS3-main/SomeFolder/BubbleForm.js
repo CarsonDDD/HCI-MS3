@@ -1,5 +1,4 @@
 //pointers to html elements
-
 let submitBtn = document.getElementById("submit_btn");
 let cancelBtn = document.getElementById("cancel_btn");
 let plusBtn = document.getElementById("plus_button");
@@ -34,12 +33,12 @@ colourTen.addEventListener("click", onlyOne);
 colourEleven.addEventListener("click", onlyOne);
 colourTwelve.addEventListener("click", onlyOne);
 
-//variables for dragging 
+// //variables for dragging 
 
 let prevXBub = 0, prevYBub = 0;
 let leftBub = -1, topBub = -1;
 
-/************************Event Listeners***************************************/
+// /************************Event Listeners***************************************/
 
 submitBtn.addEventListener("click", addCourse);
 cancelBtn.addEventListener("click", closeBub);
@@ -117,7 +116,7 @@ window.addEventListener("resize", function()
     }
 })
 
-/*********************************************************************************** */
+// /*********************************************************************************** */
 
 function moveBub(e)
 {
@@ -229,13 +228,13 @@ function addCourse()
     if (message != null) alert(message);
 }
 
-function onlyOne()
+function onlyOne(e)
 {
     for(let i = 1; i <= 12; i++)//will need to alter depending on how many colours we have
     {
         document.getElementById("colour" + i).checked = false;
     }
-    this.checked = true;
+    e.target.checked = true;
 }
 
 function clear()//ensures each time form is open then input options are clear, called after submit and close

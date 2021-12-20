@@ -132,6 +132,7 @@
   width: 80%;
   height: 80%;
   margin: 1em auto;
+  z-index: 1;
 }
 
 /* End of calendar page and its elements---*/
