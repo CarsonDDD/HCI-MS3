@@ -83,12 +83,14 @@ class Course {
 
 class Session {
 
-	constructor(course, date, start, end, type) {
+	constructor(course, date, endDate, start, end, type, comments) {
 		this.course = course;
 		this.date = date;
+		this.endDate = endDate;
 		this.start = start;
 		this.end = end;
 		this.type = type;
+		this.comments = comments;
 	}
 
 	course() {
@@ -111,11 +113,12 @@ class Session {
 
 class Deadlines {
 
-	constructor(course, date, time, type) {
+	constructor(course, date, time, type, comments) {
 		this.course = course;
 		this.date = date;
 		this.time = time;
 		this.type = type;
+		this.comments = comments;
 	}
 
 	course() {
@@ -160,8 +163,8 @@ class Manager {
 			return false;
 	}
 
-	createDeadline(courseName, date, time, type) {
-		let d = new Deadlines(courseName, date, time, type);
+	createDeadline(courseName, date, time, type, comments) {
+		let d = new Deadlines(courseName, date, time, type, comments);
 		for (let i = 0; i < this.numCourses; i++) {
 			if (this.courseList[i].name == courseName) {
 				this.courseList[i].addDeadline(d);
@@ -188,8 +191,8 @@ class Manager {
 		}
 	}
 
-	createSession(courseName, date, start, end, type) {
-		let s = new Session(courseName, date, start, end, type);
+	createSession(courseName, date, endDate, start, end, type, comments) {
+		let s = new Session(courseName, date, endDate, start, end, type, comments);
 		for (let i = 0; i < this.numCourses; i++) {
 			if (this.courseList[i].name == courseName) {
 				this.courseList[i].addSession(s);
@@ -240,73 +243,22 @@ class Manager {
 }
 
 function sort(a, b) {
-	let yearAIdx = a.date.lastIndexOf("/");
-	let yearBIdx = b.date.lastIndexOf("/");
+	
+	let dateA, dateB;
 
-	let yearA = Number(a.date.substring(yearAIdx + 1));
-	let yearB = Number(b.date.substring(yearBIdx + 1));
-
-	if (yearA !== yearB)
-		return yearA - yearB;
-
-	let monthAIdx = a.date.indexOf("/");
-	let monthBIdx = b.date.indexOf("/");
-
-	let monthA = Number(a.date.substring(monthAIdx + 1, yearAIdx));
-	let monthB = Number(b.date.substring(monthBIdx + 1, yearBIdx));
-
-	if (monthA !== monthB)
-		return monthA - monthB;
-
-	let dayA = Number(a.date.substring(0, monthAIdx));
-	let dayB = Number(b.date.substring(0, monthBIdx));
-
-	if (dayA !== dayB)
-		return dayA - dayB;
-
-	let aIsAM, bIsAM, colonAIdx, colonBIdx, hoursA, hoursB, minA, minB;
-
-	if (a instanceof Deadlines) //if deadline
+	if (a instanceof Deadlines)
 	{
-		aIsAM = a.time.substring(a.time.length - 2, a.time.length) === "AM";
-		bIsAM = b.time.substring(b.time.length - 2, b.time.length) === "AM";
-
-		colonAIdx = a.time.indexOf(":");
-		colonBIdx = b.time.indexOf(":");
-
-		hoursA = Number(a.time.substring(0, colonAIdx));
-		hoursB = Number(b.time.substring(0, colonBIdx));
-
-		minA = Number(a.time.substring(colonAIdx + 1, a.time.length - 2));
-		minB = Number(b.time.substring(colonBIdx + 1, b.time.length - 2));
+		dateA = new Date(a.date + "T" + convertTime(a.time) + "Z");
+		dateB = new Date(b.date + "T" + convertTime(b.time) + "Z");
 	}
-	else //if session
+	else 
 	{
-		aIsAM = a.start.substring(a.start.length - 2, a.start.length) === "AM";
-		bIsAM = b.start.substring(b.start.length - 2, b.start.length) === "AM";
-
-		colonAIdx = a.start.indexOf(":");
-		colonBIdx = b.start.indexOf(":");
-
-		hoursA = Number(a.start.substring(0, colonAIdx));
-		hoursB = Number(b.start.substring(0, colonBIdx));
-
-		minA = Number(a.start.substring(colonAIdx + 1, a.start.length - 2));
-		minB = Number(b.start.substring(colonBIdx + 1, b.start.length - 2));
+		dateA = new Date(a.date + "T" + convertTime(a.start) + "Z");
+		dateB = new Date(b.date + "T" + convertTime(b.start) + "Z");
 	}
 
-	if (!aIsAM && hoursA !== 12) hoursA += 12;
-	else if (aIsAM && hoursA === 12) hoursA -= 12;
-	if (!bIsAM && hoursB !== 12) hoursB += 12;
-	else if (bIsAM && hoursB === 12) hoursB -= 12;
-
-	if (hoursA !== hoursB)
-		return hoursA - hoursB;
-
-	return minA - minB;
+	return dateA - dateB;
 }
-
-sort(new Deadlines("d", "31/09/2021", "11:20AM", "Midterm"), new Deadlines("d", "31/09/2021", "12:19AM", "Midterm"));
 
 let manager = new Manager();
 let undo_btn = document.getElementById("undo_btn");
@@ -341,7 +293,7 @@ undo_btn.addEventListener("click", function()
 
     	let course = manager.courseList[idx];
     	course.removedDeadlines.pop();
-    	manager.createDeadline(last.course, last.date, last.time, last.type);
+    	manager.createDeadline(last.course, last.date, last.time, last.type, last.comments);
 
     	generatePanel(course, deadline, true); 
     	updateUndoBtns(course);
@@ -383,6 +335,7 @@ function main() //this function generates the deadline panel
 		const li = document.createElement('li');
 		const btn = document.createElement('button');
 		const p = document.createElement('p');
+		const c = document.createElement('div');
 
 		btn.style.backgroundImage = "url('./images/ex.png')";
 		btn.style.backgroundColor = "rgb(255, 0, 0)";
@@ -400,6 +353,7 @@ function main() //this function generates the deadline panel
 		btn.className = "deadline_btn";
 		btn.addEventListener('click', function () {
 			ul.removeChild(li);
+			ul.removeChild(c);
 			manager.removeDeadline(item); //remove deadline from deadline list
 
 			let course = -1;
@@ -429,10 +383,9 @@ function main() //this function generates the deadline panel
 		})
 
 		li.style.listStyle = "none";
-		li.style.margin = "2em 0";
+		li.style.marginTop = "1.5em";
 		li.style.position = "relative";
 		li.style.lineHeight = "1.5em";
-		li.style.borderBottom = "0.1em solid black";
 		li.innerHTML += item.course + "</br>";
 		li.innerHTML += item.type + "</br>";
 		li.innerHTML += item.date + "</br>";
@@ -440,12 +393,29 @@ function main() //this function generates the deadline panel
 		p.style.position = "absolute";
 		p.style.left = "50%";
 		p.style.bottom = "0";
-		p.innerHTML += item.time;
+		p.innerHTML += item.time + "</br>";
 		p.className = "deadline_p";
+
+		c.innerHTML += item.comments + "</br>";
+		c.style.overflow = "auto";
+		c.style.borderBottom = "0.1rem solid black";
+		c.style.whiteSpace = "pre-wrap";
+		c.style.lineHeight = "1.5em";
+		c.style.marginBottom = "0.5em";
+
+		if (item.comments.length === 0)
+		{
+			c.style.display = "none";
+			li.style.borderBottom = "0.1rem solid black";
+			li.style.marginBottom = "0.5em";
+		}
+		else
+			c.style.display = "block";
 
 		li.appendChild(p);
 		li.appendChild(btn);
 		ul.appendChild(li);
+		ul.appendChild(c);
 	});
 }
 
