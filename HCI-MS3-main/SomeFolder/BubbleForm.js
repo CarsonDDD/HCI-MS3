@@ -34,7 +34,7 @@ colourTen.addEventListener("click", onlyOne);
 colourEleven.addEventListener("click", onlyOne);
 colourTwelve.addEventListener("click", onlyOne);
 
-//variables for dragging
+//variables for dragging 
 
 let prevXBub = 0, prevYBub = 0;
 let leftBub = -1, topBub = -1;
@@ -48,18 +48,18 @@ plusBtn.addEventListener("click", function()
     resetTooltip();
     openBub();
 });
-/*plusBtn.addEventListener("mouseover", function()
+plusBtn.addEventListener("mouseover", function()
 {
     createTooltip("Add a course", plusBtn);
 });
 plusBtn.addEventListener("mouseleave", function()
 {
     resetTooltip();
-});*/
+});
 createBub.addEventListener("mousedown", function(e)
 {
     let inside = false;
-    let clickables = new Array(submitBtn, cancelBtn,
+    let clickables = new Array(submitBtn, cancelBtn, 
     document.getElementById("courseName"),
     document.getElementById("tarGPA"),
     document.querySelector(".colour1"),
@@ -81,7 +81,7 @@ createBub.addEventListener("mousedown", function(e)
         let y = e.pageY;
         if (x >= rect.left && x < rect.right &&
             y >= rect.top + window.scrollY && y < rect.bottom + window.scrollY)
-            inside = true;
+            inside = true;      
     }
 
 
@@ -122,7 +122,7 @@ window.addEventListener("resize", function()
 function moveBub(e)
 {
     leftBub += e.pageX - prevXBub;
-    topBub += e.pageY - prevYBub;
+    topBub += e.pageY - prevYBub;    
 
     fitBub();
 
@@ -163,7 +163,7 @@ function openBub()
             createBub.style.left = "calc(" + 100 * middle + "% - " + createBub.getBoundingClientRect().width / 2 + "px)";
         }
         else
-        {
+        {   
             createBub.style.left = leftBub + "px";
             createBub.style.top = topBub + "px";
         }
@@ -176,7 +176,7 @@ function openBub()
         closeBub();
     }
 }
-
+  
 function closeBub()
 {
     createBub.style.opacity = 0;
@@ -222,7 +222,7 @@ function addCourse()
     {
         if(manager.createCourse(courseName, 0, tarGPA, colours[chosenColour]))
             closeBub();
-        else
+        else    
             message = "Invalid course: " + courseName + " already exists.";
     }
 
