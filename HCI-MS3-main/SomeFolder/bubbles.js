@@ -1,5 +1,6 @@
 class Bubble
 {
+    //scale = 3;
     constructor(cx, cy, rad, label, colour)
     {
         this.cx = cx;
@@ -7,7 +8,7 @@ class Bubble
         this.rad = rad;
         this.label = label;
         this.colour = colour;
-        
+
         this.div = document.createElement("div");
         this.div.style.position = "absolute";
 
@@ -36,7 +37,8 @@ class Bubble
         this.div.style.width = rad * 2 + "px";
         this.div.style.height = rad * 2 + "px";
         this.div.style.borderRadius = rad + "px";
-        this.div.style.fontSize = rad / 3 + "px"; 
+        this.div.style.fontSize = rad / 3 + "px";
+        //this.div.style.scale = this.scale;
     }
 
     intersects(x, y, rad)
@@ -71,7 +73,7 @@ class BubbleMenu
             //remove the bubble from the list of bubbles
             for (let i = idx; i < this.bubbles.length - 1; i++)
                 this.bubbles[i] = this.bubbles[i + 1];
-            
+
             this.bubbles.pop();
         }
     }
@@ -85,9 +87,9 @@ class BubbleMenu
     generateBubbles()
     {
         let sources = new Array();
-        
+
         let rect = document.getElementById("home_main_bubble").getBoundingClientRect();
-        
+
         if (this.bubbles.length > 0)
         {
           //place the first bubble in the middle of the parent
@@ -95,7 +97,7 @@ class BubbleMenu
           curr.cx = rect.width / 2;
           curr.cy = rect.height / 2;
           curr.setDimensions(curr.cx, curr.cy, curr.rad);
-    
+
           if (this.bubbles.length > 1)
           {
             let src = curr;
@@ -103,16 +105,16 @@ class BubbleMenu
             let keepGoing = true;
             let idx = 2;
             let angle = 0;
-    
+
             //place the second bubble to the left of the first bubble
             curr = this.bubbles[1];
             curr.cx = (src.cx - (src.rad + curr.rad));
             curr.cy = src.cy;
             curr.setDimensions(curr.cx, curr.cy, curr.rad);
             prev = curr;
-    
+
             sources.push(curr);
-    
+
             while (keepGoing && idx < this.bubbles.length)
             {
               curr = this.bubbles[idx];
@@ -125,17 +127,17 @@ class BubbleMenu
               let b = src.rad + prev.rad;
               let theta = Math.acos((a * a + b * b - c * c) / (2 * a * b));
               angle -= theta;
-    
+
               let cx = src.cx + Math.cos(angle) * a;
               let cy = src.cy - Math.sin(angle) * a;
-    
+
               if (this.validBubble(cx, cy, curr.rad, idx))
               {
                 curr.cx = cx;
                 curr.cy = cy;
                 curr.setDimensions(curr.cx, curr.cy, curr.rad);
                 sources.push(curr);
-    
+
                 idx++;
                 prev = curr;
               } else
@@ -143,11 +145,11 @@ class BubbleMenu
                 keepGoing = false;
               }
             }
-    
+
             while (idx < this.bubbles.length)
             {
               let i = 0;
-    
+
               while (i < sources.length - 1 && idx < this.bubbles.length)
               {
                 src = sources[i];
@@ -160,10 +162,10 @@ class BubbleMenu
                 let b = src.rad + prev.rad;
                 let theta = Math.acos((a * a + b * b - c * c) / (2 * a * b));
                 angle += theta;
-    
+
                 let cx = src.cx + Math.cos(angle) * a;
                 let cy = src.cy - Math.sin(angle) * a;
-    
+
                 if (this.validBubble(cx, cy, curr.rad, idx))
                 {
                     curr.cx = cx;
@@ -172,9 +174,9 @@ class BubbleMenu
 
                     //insert curr to sources as its (i + 1)th element
                     sources.push(0);
-                    for (let j = sources.length - 1; j >= i + 2; j--) 
+                    for (let j = sources.length - 1; j >= i + 2; j--)
                         sources[j] = sources[j - 1];
-                  
+
                     sources[i + 1] = curr;
                     i += 2;
                     idx++;
@@ -213,7 +215,7 @@ class BubbleMenu
             bubble.cx -= minLeft;
             bubble.cy -= minTop;
             bubble.setDimensions(bubble.cx, bubble.cy, bubble.rad);
-        }  
+        }
     }
 
     validBubble(x, y, r, n)

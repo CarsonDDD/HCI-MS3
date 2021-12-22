@@ -229,7 +229,7 @@ class Manager {
 
 	updateMenu() {
 		let totalHours = this.getTotalHours();
-		let minSize = 50, maxSize = 200;
+		let minSize = 100, maxSize = 250;
 
 		for (let i = 0; i < menu.bubbles.length; i++) {
 			let percent = (totalHours === 0) ? 0 : this.courseList[i].totalHours / totalHours;
@@ -343,7 +343,7 @@ undo_btn.addEventListener("click", function()
     	course.removedDeadlines.pop();
     	manager.createDeadline(last.course, last.date, last.time, last.type);
 
-    	generatePanel(course, deadline, true); 
+    	generatePanel(course, deadline, true);
     	updateUndoBtns(course);
 		updateUndo();
     	main();
@@ -351,9 +351,9 @@ undo_btn.addEventListener("click", function()
 	}
 });
 
-manager.createCourse("Comp3020", 0, 100, "#0000FF");
-manager.createCourse("Comp3040", 0, 90, "#00FF00");
-manager.createCourse("Comp3050", 0, 80, "#FF0000");
+manager.createCourse("Comp3020", 0, 100, "#5c5cFF");
+manager.createCourse("Comp3040", 0, 90, "#5cFF5c");
+manager.createCourse("Comp3050", 0, 80, "#FF5c5c");
 // manager.createDeadline("Comp3020", "21/11/2020", "12:00AM", "Midterm");
 // manager.createDeadline("Comp3020", "27/10/2021", "12:00AM", "Assignment");
 // manager.createDeadline("Comp3020", "27/10/2021", "1:00AM", "Midterm");
@@ -478,8 +478,8 @@ function updateUndo()
 {
 	if (manager.removedDeadlines.length !== 0)
 		undo_btn.style.opacity = 1;
-	else   
-	{ 
+	else
+	{
 		undo_btn.style.opacity = 0.5;
 		undo_btn.style.backgroundColor = "rgb(255, 255, 255)";
 	}
