@@ -9,13 +9,17 @@ let session_purposes = document.getElementById("session_purposes");
 let time_text = document.getElementById("time_text");
 let start_time = document.getElementById("start_time");
 let end_time = document.getElementById("end_time");
-let date = document.getElementById("date");
+let deadline_date = document.getElementById("deadline_date");
+let start_date = document.getElementById("start_date");
+let end_date = document.getElementById("end_date");
 
 let deadline_radio = document.getElementById("deadline_radio");
 let session_radio = document.getElementById("session_radio");
 
 let deadline_form = document.getElementById("deadline_form");
 let session_form = document.getElementById("session_form");
+
+let comments = document.getElementById("comments");
 
 //variables for dragging
 
@@ -28,7 +32,7 @@ calForm1.addEventListener("mousedown", function(e)
 {
     let inside = false;
     let clickables = new Array(closeBtnCal1, submitBtnCal1, courses, deadline_types, session_purposes,
-        start_time, end_time, time_text, deadline_radio, session_radio);
+        deadline_date, start_time, end_time, time_text, start_date, end_date, deadline_radio, session_radio, comments);
 
     //check to see if mouse is over a textbox; we don't want to drag the form if so
     for (let i = 0; i < clickables.length; i++)
@@ -109,13 +113,17 @@ submitBtnCal1.addEventListener("click", function()
     {
         let message = null;
 
-        if (time_text.value.length === 0)
+        if (courses.value.length === 0)
+            message = "Invalid course";
+        else if (time_text.value.length === 0)
             message = "Invalid time";
+        else if (deadline_date.value.length === 0)
+            message = "Invalid date";
         else
         {
             let time = getTime(time_text.value);
 
-            manager.createDeadline(courses.value, date.innerHTML, time, deadline_types.value);
+            manager.createDeadline(courses.value, deadline_date.value, time, deadline_types.value, comments.value);
 
             main();
             closeCal1();
@@ -128,16 +136,24 @@ submitBtnCal1.addEventListener("click", function()
     {
         let message = null;
 
-        if (start_time.value.length === 0)
+        if (courses.value.length === 0)
+            message = "Invalid course";
+        else if (start_time.value.length === 0)
             message = "Invalid start time";
         else if (end_time.value.length === 0)
             message = "Invalid end time";
+        else if (start_date.value.length === 0)
+            message = "Invalid start date";
+        else if (end_date.value.length === 0)
+            message = "Invalid end date";
+        else if (getDuration(start_date.value, end_date.value, getTime(start_time.value), getTime(end_time.value)) < 0)
+            message = "Invalid end date: Can't be before start date"
         else
         {
             let startTime = getTime(start_time.value);
             let endTime = getTime(end_time.value);
-            
-            manager.createSession(courses.value, date.innerHTML, startTime, endTime, session_purposes.value);
+                   
+            manager.createSession(courses.value, start_date.value, end_date.value, startTime, endTime, session_purposes.value, comments.value);
 
             closeCal1();
         }
@@ -149,6 +165,16 @@ submitBtnCal1.addEventListener("click", function()
 
 function getTime(time)
 {
+    let n = 0;
+    for (let i = 0; i < time.length; i++)
+    {
+        if (time[i] === ":")
+            n++;
+    }
+
+    if (n != 1)
+        time = time.substring(0, time.lastIndexOf(":"));
+
     let colonIdx = time.indexOf(":");
     let hrs = parseInt(time.substring(0, colonIdx));
     let min = time.substring(colonIdx + 1);
@@ -165,7 +191,7 @@ function getTime(time)
     if (hrs === 0)
         hrs = 12;
     
-    time = hrs + ":" + min + t;
+    time = hrs + ":" + min + " " + t;
 
     return time;
 }
@@ -242,13 +268,14 @@ function openCal1()
         //reset everything
         deadline_radio.style.backgroundColor = "black";
         session_radio.style.backgroundColor = "white";
-        deadline_types.value = "Test";
-        session_purposes.value = "General";
+        deadline_types.value = "Assignment";
+        session_purposes.value = "Study";
         deadline_form.style.display = "block";
         session_form.style.display = "none";
         time_text.value = "";
         start_time.value = "";
         end_time.value = "";
+        comments.value = "";
     }
 }
   
@@ -258,4 +285,6 @@ function closeCal1()
     calForm1.style.left = "-1000px";
     calForm1.style.top = "auto";
     calForm1.style.bottom = "15%";
+    updateCalendar();
+    calendar.unselect();
 }

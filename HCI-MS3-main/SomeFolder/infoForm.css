@@ -33,7 +33,7 @@
   overflow: auto;
   cursor: grab;
   user-select: none;
-  z-index: 2;
+  z-index: 3;
   transition: opacity 0.5s;
 }
 
@@ -226,7 +226,7 @@
   background-color: rosybrown;
   margin-bottom: 1rem;
   overflow: auto;
-  padding: 0 2em;
+  padding: 0 2rem;
 }
 
 #form_session_panel {
@@ -236,7 +236,7 @@
   background-color: rosybrown;
   margin-bottom: 1rem;
   overflow: auto;
-  padding: 0 2em;
+  padding: 0 2rem;
 }
 
 #form_deadline_panel li button {

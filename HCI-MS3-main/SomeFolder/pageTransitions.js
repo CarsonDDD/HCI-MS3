@@ -1,3 +1,4 @@
+
 // I dont know how to make structs/my old method wasnt working as intended. Using parallel arrays to keep track of items
 // WHEN ADDING STATS PAGE UPDATE THE PAGES ARRAY!!!
 // PAGE VALUE OF '-1' IS AN EMPTY PAGE, THE APP DOESNT TRANISTION TO EMPTY PAGES
@@ -153,6 +154,7 @@ homeBtn.addEventListener("click", function(e)
 {
     if (currPage != homePage)
     {
+
         closeCal1();
     }
 
