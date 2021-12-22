@@ -44,17 +44,17 @@ submitBtn.addEventListener("click", addCourse);
 cancelBtn.addEventListener("click", closeBub);
 plusBtn.addEventListener("click", function()
 {
-    resetTooltip();
+    // resetTooltip();
     openBub();
 });
-plusBtn.addEventListener("mouseover", function()
-{
-    createTooltip("Add a course", plusBtn);
-});
-plusBtn.addEventListener("mouseleave", function()
-{
-    resetTooltip();
-});
+// plusBtn.addEventListener("mouseover", function()
+// {
+//     createTooltip("Add a course", plusBtn);
+// });
+// plusBtn.addEventListener("mouseleave", function()
+// {
+//     resetTooltip();
+// });
 createBub.addEventListener("mousedown", function(e)
 {
     let inside = false;
@@ -220,7 +220,12 @@ function addCourse()
     else
     {
         if(manager.createCourse(courseName, 0, tarGPA, colours[chosenColour]))
+        {
+            document.getElementById("home_main_bubble").style.fontSize = 0;
+            document.getElementById("home_main_bubble").paddingTop = "0%";
+            
             closeBub();
+        }
         else    
             message = "Invalid course: " + courseName + " already exists.";
     }

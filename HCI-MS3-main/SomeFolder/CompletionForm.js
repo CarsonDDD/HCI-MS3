@@ -3,7 +3,31 @@
 let completionCloseBtn = document.getElementById("completion_close_btn");
 let completionDiv = document.getElementById("completion_div");
 let taskType = document.getElementById("task_type");
-let taskInfo = document.getElementById("task_info");
+let courseNameEvent = document.getElementById("courseNameEvent"); 
+let deadlineInfoDiv = document.getElementById("deadline_info_div");
+let sessionInfoDiv = document.getElementById("session_info_div");
+
+let deadline_info_type_p = document.getElementById("deadline_info_type_p");
+let deadline_info_date_p = document.getElementById("deadline_info_date_p");
+let deadline_info_time_p = document.getElementById("deadline_info_time_p");
+
+let session_info_purpose_p = document.getElementById("session_info_purpose_p");
+let session_info_startDate_p = document.getElementById("session_info_startDate_p");
+let session_info_endDate_p = document.getElementById("session_info_endDate_p");
+let session_info_startTime_p = document.getElementById("session_info_startTime_p");
+let session_info_endTime_p = document.getElementById("session_info_endTime_p");
+
+let event_comments = document.getElementById("event_comments");
+let event_comments_div = document.getElementById("event_comments_div");
+
+let complete_event_btn = document.getElementById("complete_event_btn");
+let remove_event_btn = document.getElementById("remove_event_btn");
+
+let undo_button = document.getElementById("undo_btn");
+
+let removedTasks = new Array();
+let rOrC = new Array();
+
 let taskShown = null;
 
 //variables for dragging
@@ -16,7 +40,7 @@ let completionLeftInfo = -1, completionTopInfo = -1;
 completionDiv.addEventListener("mousedown", function(e)
 {
     let inside = false;
-    let clickables = new Array(completionCloseBtn);
+    let clickables = new Array(completionCloseBtn, complete_event_btn, remove_event_btn);
     clickables = clickables.concat(Array.from(document.querySelectorAll(".clickable")));
 
     //check to see if mouse is over a textbox; we don't want to drag the form if so
@@ -70,6 +94,142 @@ completionCloseBtn.addEventListener("click", function()
 {
     completionCloseInfo();
 })
+remove_event_btn.addEventListener("click", function()
+{
+    if (taskShown !== null)
+    {
+        let course = null;
+
+        for (let i = 0; i < manager.courseList.length && course === null; i++)
+        {
+            let c = manager.courseList[i];
+            if (c.name === taskShown.course)
+            {
+                course = c;
+            }
+        }
+
+        if (course !==  null)
+        {
+            if (taskShown instanceof Deadlines)
+            {
+                manager.removeDeadline(taskShown);
+                course.removeDeadline(taskShown);
+                main();
+            }
+            else
+            {
+                course.removeSession(taskShown, true);
+            }
+            undo_button.style.opacity = 1;
+
+            removedTasks.push(taskShown);
+            rOrC.push(true);
+
+            updateUndo();
+            completionCloseInfo();
+        }
+    }
+})
+complete_event_btn.addEventListener("click", function()
+{
+    if (taskShown !== null)
+    {
+        let course = null;
+
+        for (let i = 0; i < manager.courseList.length && course === null; i++)
+        {
+            let c = manager.courseList[i];
+            if (c.name === taskShown.course)
+            {
+                course = c;
+            }
+        }
+
+        if (course !==  null)
+        {
+            if (taskShown instanceof Session)
+            {
+                updateBubbles(course, taskShown, false);
+                course.removeSession(taskShown);
+
+                removedTasks.push(taskShown);
+                rOrC.push(false);
+
+                completionCloseInfo();
+                undo_button.style.opacity = 1;
+                updateUndo();
+            }
+        }
+    }
+})
+
+undo_button.addEventListener("mouseover", function()
+{
+    if (undo_button.style.opacity == 1)
+    {
+        undo_button.style.backgroundColor = "#05613f";     
+        undo_button.style.cursor = "pointer";
+        createTooltip("Undo", undo_button);
+    }
+})
+
+undo_button.addEventListener("mouseleave", function()
+{
+    undo_button.style.backgroundColor = "#04aa6d";
+    undo_button.style.cursor = "default";
+    resetTooltip();
+})
+
+undo_button.addEventListener("click", function()
+{
+    if (undo_button.style.opacity == 1)
+    {
+        let last = removedTasks.pop();
+        let lastROrC = rOrC.pop();
+        let idx = -1;
+
+        for (let i = 0; i < manager.courseList.length && idx === -1; i++)
+        {
+            if (manager.courseList[i].name === last.course)
+            {
+                idx = i;
+            }
+        }
+
+        if (last instanceof Deadlines)
+        {
+            manager.createDeadline(last.course, last.date, last.time, last.type, last.comments);
+        }
+        else
+        {
+            manager.createSession(last.course, last.date, last.endDate, last.start, last.end, last.type, last.comments);
+
+            if (!lastROrC)
+            {
+                updateBubbles(manager.courseList[idx], last, true);
+            }
+        }
+
+        main();
+        updateUndo();
+        updateCalendar();
+        resetTooltip();
+    }
+})
+
+function updateUndo()
+{
+    if (removedTasks.length !== 0)
+    {
+        undo_button.style.opacity = 1;
+    }
+    else
+    {
+        undo_button.style.opacity = 0.5;
+        undo_button.style.backgroundColor = "#04aa6d";
+    }
+}
 
 function completionMoveInfo(e)//moveInfo(e)
 {
@@ -139,111 +299,51 @@ function generateCompletionForm(item, isDeadline, course)
 {
     if (taskShown === null || taskShown !== item)
     {
-        taskType.innerHTML = (isDeadline) ? "Deadline Info" : "Session Info";
+        taskType.innerHTML = (isDeadline) ? "Date Info" : "Session Info";
+        courseNameEvent.innerHTML = item.course;
 
-        const li = document.createElement('li');
-        const btn = document.createElement('button');
-        const complete_btn = document.createElement('button');
-        const p = document.createElement('p');
-        const c = document.createElement('div');
-
-        let n = taskInfo.children.length;
-        while (n > 0)
+        if (isDeadline)
         {
-            taskInfo.removeChild(taskInfo.lastChild);
-            n--;
+            deadlineInfoDiv.style.display = "flex";
+            sessionInfoDiv.style.display = "none";
+
+            deadline_info_type_p.innerHTML = item.type;
+            deadline_info_date_p.innerHTML = item.date;
+            deadline_info_time_p.innerHTML = item.time;
+        }
+        else
+        {
+            deadlineInfoDiv.style.display = "none";
+            sessionInfoDiv.style.display = "flex";
+
+            session_info_purpose_p.innerHTML = item.type;
+            session_info_startDate_p.innerHTML = item.date;
+            session_info_endDate_p.innerHTML = item.endDate;
+            session_info_startTime_p.innerHTML = item.start;
+            session_info_endTime_p.innerHTML = item.end;
         }
 
-        btn.style.backgroundImage = "url('./images/ex.png')";
-        btn.style.backgroundColor = "rgb(255, 0, 0)";      
-        btn.style.right = "0";
-        styleButton(btn);
-
-        complete_btn.style.backgroundImage = "url('./images/check.png')";
-        complete_btn.style.backgroundColor = "rgb(0, 255, 0)";
-        complete_btn.style.right = "3em";
-        styleButton(complete_btn);
-
-        btn.addEventListener('click', 
-        (isDeadline) ? 
-        function() { removeDeadline(taskInfo, li, c, course, item); resetTooltip(); completionCloseInfo(); } :
-        function() { removeSession(taskInfo, li, c, course, item, true); resetTooltip(); completionCloseInfo(); });
-        complete_btn.addEventListener('click', function()
-        {
-            updateBubbles(course, item, false);
-            removeSession(taskInfo, li, c, course, item, false);
-            resetTooltip();
-            completionCloseInfo();
-        });
-        btn.addEventListener("mouseover", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(127, 0, 0)";
-            if (isDeadline)
-                createTooltip("Remove deadline", e.target);
-            else
-                createTooltip("Remove session", e.target);
-        });
-        btn.addEventListener("mouseleave", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(255, 0, 0)";
-            resetTooltip();
-        });
-        complete_btn.addEventListener("mouseover", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(0, 127, 0)";
-            createTooltip("Complete session", e.target);
-        });
-        complete_btn.addEventListener("mouseleave", function(e)
-        {
-            e.target.style.backgroundColor = "rgb(0, 255, 0)";
-            resetTooltip();
-        });
-
-        li.style.listStyle = "none";
-        li.style.marginTop = "1.5em";
-        li.style.position = "relative";
-        li.style.lineHeight = "1.5em";
-        li.innerHTML += item.course + "</br>";
-        li.innerHTML += item.type + "</br>";
-        
-        if (!isDeadline && getDuration(item.date, item.endDate, "12:00 AM", "12:00 AM") > 0)
-            li.innerHTML += item.date + " - " + item.endDate + "</br>";
-        else
-            li.innerHTML += item.date + "</br>";
-
-        p.style.position = "absolute";
-        p.style.left = "50%";
-        p.style.bottom = "0";
-
-        c.innerHTML += item.comments + "</br>";
-        c.style.overflow = "auto";
-        c.style.borderBottom = "0.1rem solid black";
-        c.style.whiteSpace = "pre-wrap";
-        c.style.lineHeight = "1.5em";
-        c.style.marginBottom = "0.5em";
-        
         if (item.comments.length === 0)
         {
-            c.style.display = "none";
-            li.style.borderBottom = "0.1rem solid black";
-            li.style.marginBottom = "0.5em";
+            event_comments.style.display = "none";
         }
         else
-            c.style.display = "block";
+        {
+            event_comments.style.display = "flex";
+        }
+        event_comments.innerHTML = item.comments;
 
         if (isDeadline)
-            p.innerHTML += item.time;
+        {
+            complete_event_btn.style.display = "none";
+            remove_event_btn.innerHTML = "Remove date";
+        }
         else
-            li.innerHTML += item.start + " - " + item.end + "</br>";
-
-        if (isDeadline)
-            li.appendChild(p);
-        else    
-            li.appendChild(complete_btn);
-
-        li.appendChild(btn);
-        taskInfo.appendChild(li);
-        taskInfo.appendChild(c);
+        {
+            complete_event_btn.style.display = "block";
+            complete_event_btn.innerHTML = "Complete session";
+            remove_event_btn.innerHTML = "Remove session";
+        }
 
         completionOpenInfo();
 

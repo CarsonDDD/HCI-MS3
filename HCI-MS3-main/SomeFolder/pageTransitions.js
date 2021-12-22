@@ -113,6 +113,11 @@ function showPage()
             element.setDimensions(element.cx, element.cy, element.rad);
         });
         menu.generateBubbles();
+
+        if (menu.bubbles.length === 0)
+        {
+            document.getElementById("home_main_bubble").innerHTML = "You currently have no courses. Click the plus button below to add one!";
+        }
     }
 }
 
