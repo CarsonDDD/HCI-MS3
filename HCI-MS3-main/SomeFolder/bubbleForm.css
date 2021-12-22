@@ -18,7 +18,7 @@
   overflow: auto;
   cursor: grab;
   user-select: none;
-  z-index: 2;
+  z-index: 3;
   transition: opacity 0.5s;
 }
 
@@ -400,25 +400,25 @@
   left: 505px;
   width: 40px;
   height: 40px;
-  background-color: #F7F3CD;
+  background-color: #f7f3cd;
   border: 2px solid black;
 }
 .colour11-label .colour11::after {
   height: 0px;
   width: 0px;
-  background-color: #F7F3CD;
+  background-color: #f7f3cd;
   border: 5px solid black;
   opacity: 1;
 }
 /*Check our hiding checkmark*/
 .colour11-label input:checked ~ .colour11 {
-  background-color: #F7F3CD;
+  background-color: #f7f3cd;
   border: 5px solid black;
   opacity: 1;
 }
 .colour11-label input:checked ~ .colour11::after {
   opacity: 1;
-  background-color: #F7F3CD;
+  background-color: #f7f3cd;
   border: 2px solid black;
 }
 
@@ -427,25 +427,25 @@
   left: 551px;
   width: 40px;
   height: 40px;
-  background-color: #FAD6A5;
+  background-color: #fad6a5;
   border: 2px solid black;
 }
 .colour12-label .colour12::after {
   height: 0px;
   width: 0px;
-  background-color: #FAD6A5;
+  background-color: #fad6a5;
   border: 5px solid black;
   opacity: 1;
 }
 /*Check our hiding checkmark*/
 .colour12-label input:checked ~ .colour12 {
-  background-color: #FAD6A5;
+  background-color: #fad6a5;
   border: 5px solid black;
   opacity: 1;
 }
 .colour12-label input:checked ~ .colour12::after {
   opacity: 1;
-  background-color: #FAD6A5;
+  background-color: #fad6a5;
   border: 2px solid black;
 }
 

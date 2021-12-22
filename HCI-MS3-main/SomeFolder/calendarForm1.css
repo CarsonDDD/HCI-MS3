@@ -38,7 +38,7 @@
   overflow: auto;
   cursor: grab;
   user-select: none;
-  z-index: 2;
+  z-index: 3;
   transition: opacity 0.5s;
 }
 

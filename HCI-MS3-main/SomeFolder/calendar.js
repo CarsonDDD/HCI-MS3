@@ -43,7 +43,7 @@ calendar = new FullCalendar.Calendar(calendarEl, {
     arg.el.style.cursor = "pointer";
     
     if (arg.event.extendedProps.isDeadline)
-      createTooltip("View deadline info", arg.el);
+      createTooltip("View date info", arg.el);
     else
       createTooltip("View session info", arg.el);
   },

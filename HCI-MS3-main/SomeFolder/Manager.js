@@ -261,51 +261,11 @@ function sort(a, b) {
 }
 
 let manager = new Manager();
-let undo_btn = document.getElementById("undo_btn");
-
-undo_btn.addEventListener("mouseover", function()
-{
-    if (undo_btn.style.opacity == 1)
-    {
-        undo_btn.style.backgroundColor = "rgb(200, 200, 200)";
-        createTooltip("Undo", undo_btn);
-    }
-});
-
-undo_btn.addEventListener("mouseleave", function()
-{
-    undo_btn.style.backgroundColor = "rgb(255, 255, 255)";
-    resetTooltip();
-});
-
-undo_btn.addEventListener("click", function()
-{
-	if (undo_btn.style.opacity == 1)
-	{
-		let last = manager.removedDeadlines.pop();
-		let idx = -1;
-
-    	for (let i = 0; i < manager.courseList.length && idx === -1; i++)
-    	{
-        	if (manager.courseList[i].name === last.course)
-            	idx = i;
-    	}
-
-    	let course = manager.courseList[idx];
-    	course.removedDeadlines.pop();
-    	manager.createDeadline(last.course, last.date, last.time, last.type, last.comments);
-
-    	generatePanel(course, deadline, true); 
-    	updateUndoBtns(course);
-		updateUndo();
-    	main();
-    	resetTooltip();
-	}
-});
 
 manager.createCourse("Comp3020", 0, 100, "#0000FF");
 manager.createCourse("Comp3040", 0, 90, "#00FF00");
 manager.createCourse("Comp3050", 0, 80, "#FF0000");
+
 // manager.createDeadline("Comp3020", "21/11/2020", "12:00AM", "Midterm");
 // manager.createDeadline("Comp3020", "27/10/2021", "12:00AM", "Assignment");
 // manager.createDeadline("Comp3020", "27/10/2021", "1:00AM", "Midterm");
@@ -331,14 +291,28 @@ function main() //this function generates the deadline panel
 	elem.appendChild(ul);
 	manager.deadlineList.sort(sort);
 
+	if (manager.deadlineList.length === 0)
+	{
+		elem.innerHTML = "You have no important dates. Go to the Calendar page to set one!"
+		elem.style.paddingTop = "20%";
+		elem.style.fontSize = "1.5rem";
+		elem.style.textAlign = "center";
+	}
+	else
+	{
+		elem.style.paddingTop = "0%";
+		elem.style.textAlign = "left";
+		elem.style.fontSize = 0;
+	}
+
 	manager.deadlineList.forEach(function (item) {
 		const li = document.createElement('li');
 		const btn = document.createElement('button');
 		const p = document.createElement('p');
 		const c = document.createElement('div');
 
-		btn.style.backgroundImage = "url('./images/ex.png')";
-		btn.style.backgroundColor = "rgb(255, 0, 0)";
+		btn.style.backgroundImage = "url('./images/edit.png')";
+		btn.style.backgroundColor = "rgb(255, 255, 255)";
 		btn.style.border = "none";
 		btn.style.backgroundSize = "50%";
 		btn.style.backgroundPosition = "center center"
@@ -351,34 +325,26 @@ function main() //this function generates the deadline panel
 		btn.style.top = "0";
 		btn.type = "button";
 		btn.className = "deadline_btn";
-		btn.addEventListener('click', function () {
-			ul.removeChild(li);
-			ul.removeChild(c);
-			manager.removeDeadline(item); //remove deadline from deadline list
+		btn.addEventListener('click', function()
+        {
+            closeBub();
+            closeInfo();
+            currPage = calendarPage;
+            showPage();
+            currBtn = calendarBtn;
+            highlightBtn(calendarBtn);
+            taskShown = null;
+            calendar.render();
+            generateCompletionForm(item, item instanceof Deadlines, c);
 
-			let course = -1;
-
-			for (let i = 0; i < manager.courseList.length && course == -1; i++) {
-				if (manager.courseList[i].name === item.course) {
-					course = manager.courseList[i]; //also need to remove the deadline from the list of course
-					course.removeDeadline(item);
-				}
-			}
-
-			if (course !== -1) {
-				generatePanel(course, document.getElementById("form_deadline_panel"), true); //update the panel on the info form (in case it is open)
-				updateUndoBtns(course);
-				updateUndo();
-			}
-
-			resetTooltip();
-		});
+        	resetTooltip();
+        })
 		btn.addEventListener("mouseover", function (e) {
-			e.target.style.backgroundColor = "rgb(127, 0, 0)";
-			createTooltip("Remove deadline", e.target);
+			e.target.style.backgroundColor = "rgb(127, 127, 127)";
+			createTooltip("Edit deadline", e.target);
 		})
 		btn.addEventListener("mouseleave", function (e) {
-			e.target.style.backgroundColor = "rgb(255, 0, 0)";
+			e.target.style.backgroundColor = "rgb(255, 255, 255)";
 			resetTooltip();
 		})
 
@@ -389,6 +355,7 @@ function main() //this function generates the deadline panel
 		li.innerHTML += item.course + "</br>";
 		li.innerHTML += item.type + "</br>";
 		li.innerHTML += item.date + "</br>";
+		li.style.fontSize = "1rem";
 
 		p.style.position = "absolute";
 		p.style.left = "50%";
@@ -441,17 +408,6 @@ function handleSize() //media query for the deadline panel (since dynamically st
 			element.style.position = "absolute";
 			element.style.left = "50%";
 		})
-	}
-}
-
-function updateUndo()
-{
-	if (manager.removedDeadlines.length !== 0)
-		undo_btn.style.opacity = 1;
-	else   
-	{ 
-		undo_btn.style.opacity = 0.5;
-		undo_btn.style.backgroundColor = "rgb(255, 255, 255)";
 	}
 }
 

@@ -51,7 +51,7 @@
           <div id="home_main_footer">
 
             <!--BUBBLE FORM START-->
-            <button class="plus_button" id="plus_button"></button>
+            <button class="plus_button" id="plus_button">Add a course</button>
               <form
                 action="/action_page.php"
                 class="form-container"
@@ -206,16 +206,14 @@
                   <div class="picker"></div>
               </div>
               <div id="tasks_div_nav">
-                <div id="deadlines">Deadlines</div>
+                <div id="deadlines">Important Dates</div>
                 <div id="sessions">Sessions</div>
               </div>               
               <div id="form_deadline_panel">
-                <button id="form_undo_btn1" class="clickable"></button>
               </div>
               <div id="form_session_panel">
-                <button id="form_undo_btn2" class="clickable"></button>
               </div>
-              <div id="form_calendar_btn">Set a deadline/session</div>
+              <div id="form_calendar_btn">Schedule an event</div>
               <div id="close_btn">Close</div>
             </div>
             <!--END OF INFO FORM-->
@@ -224,8 +222,7 @@
         </div>
         <!-----------Dealine panel------------------>
         <div id="deadline_panel">
-          <h2>Deadlines</h2>
-          <div id="undo_btn"></div>
+          <h2>Important Dates</h2>
           <div id="deadline_list"></div>
         </div>
       </div>
@@ -253,15 +250,19 @@
 
       <!------------------CALENDAR PAGE------------------>
       <div id="calendar_page">
-        <p>
+        <div id="calendar_ctn">
           <div id="calendar">
             <!--------------------TEST------------>
 
             <!--------------------TEST------------>
           </div>
-        </p>
+        </div>
+        <div id="undo_button_panel">
+          <div id="undo_btn"></div>
+        </div>
+        
         <div id="sched_div">
-         <h1>Set a Task</h1>
+         <h1>Schedule an event</h1>
          <div id="course_div">
            <p>Course</p>
            <select id="courses"></select>
@@ -270,7 +271,7 @@
              <div id="deadline_div">
                <div id="deadline_radio">
                </div>
-               <p>Deadline</p>
+               <p>Important Date</p>
              </div>
              <div id="session_div">
                <div id="session_radio">
@@ -281,11 +282,15 @@
            <!----------------deadline inputs----------->
            <div id="deadline_form">
              <div id="type_div">
-               <p>Type</p>
+               <p>Purpose</p>
                <select id="deadline_types">
                  <option value="Assignment">Assignment</option>
                  <option value="Project">Project</option>
                  <option value="Lab">Lab</option>
+                 <option value="Quiz">Quiz</option>
+                 <option value="Exam">Exam</option>
+                 <option value="Test">Test</option>
+                 <option value="Other">Other</option>
                </select>
              </div>
              <div id="deadline_date_div">
@@ -303,10 +308,7 @@
                <select id="session_purposes">
                 <option value="Study">Study</option>
                 <option value="Work">Work</option>
-                <option value="Test">Test</option>
-                <option value="Exam">Exam</option>
-                <option value="Quiz">Quiz</option>
-                <option value="Midterm">Midterm</option>
+                <option value="Other">Other</option>
                </select>
              </div>
              <div id="session_date_div">
@@ -331,15 +333,73 @@
              </div>
            </div>
            <div id="comments_div">
-             <p>Comments</p>
+             <p>Notes</p>
              <textarea name="" id="comments" cols="30" rows="10"></textarea>
            </div>
            <div id="calendar_submit_btn">Submit</div>
            <div id="calendar_close_btn">Cancel</div>
          </div>
+
          <div id="completion_div">
           <h1 id="task_type">Deadline Info</h1>
-          <div id="task_info"></div>  
+          <div id="event_course">
+          <h2 id="courseNameEvent">Comp2150
+          </h2>
+          <div class="edit_btn clickable"></div>
+        </div>
+          <div id="deadline_info_div">
+            <div id="deadline_info_type_div">
+              <p id="deadline_info_type_label_p">Purpose</p>
+              <p id="deadline_info_type_p">Exam</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+            <div id="deadline_info_date_div">
+              <p id="deadline_info_date_label_p">Date</p>
+              <p id="deadline_info_date_p">Gibberish</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+            <div id="deadline_info_time_div">
+              <p id="deadline_info_time_label_p">Time</p>
+              <p id="deadline_info_time_p">Gibberish</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+          </div>
+          <div id="session_info_div">
+            <div id="session_info_purpose_div">
+              <p id="session_info_purpose_label_p">Purpose</p>
+              <p id="session_info_purpose_p">Exam</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+            <div id="session_info_startDate_div">
+              <p id="session_info_startDate_label_p">Start Date</p>
+              <p id="session_info_startDate_p">Gibberish</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+            <div id="session_info_endDate_div">
+              <p id="session_info_endDate_label_p">End Date</p>
+              <p id="session_info_endDate_p">Gibberish</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+            <div id="session_info_startTime_div">
+              <p id="session_info_startTime_label_p">Start Time</p>
+              <p id="session_info_startTime_p">Gibberish</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+            <div id="session_info_endTime_div">
+              <p id="session_info_endTime_label_p">End Time</p>
+              <p id="session_info_endTime_p">Gibberish</p>
+              <div class="edit_btn clickable"></div>
+            </div>
+          </div>
+          <div id="event_comments_div">
+            <div id="event_comments_header">
+              <p id="comments_label">Notes</p>
+              <div class="edit_btn clickable"></div>
+          </div>
+            <div id="event_comments"></div>
+          </div>
+          <div id="complete_event_btn"></div>
+          <div id="remove_event_btn"></div>
           <div id="completion_close_btn">Close</div>
         </div>
       </div>
@@ -350,8 +410,8 @@
     <script src="CalForm1.js" charset="utf-8"></script>
     <script src="CompletionForm.js" charset="utf-8"></script>
     <script src="bubbles.js" charset="utf-8"></script>
-    <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="Manager.js" charset="utf-8"></script>
+    <script src="pageTransitions.js" charset="utf-8"></script>
     <script src="fullcalendar/main.js" charset="utf-8"></script>
     <script src="calendar.js" charset="utf-8"></script>
     <script src="statspage.js" charset="utf-8"></script>

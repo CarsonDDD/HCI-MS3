@@ -113,7 +113,9 @@ submitBtnCal1.addEventListener("click", function()
     {
         let message = null;
 
-        if (time_text.value.length === 0)
+        if (courses.value.length === 0)
+            message = "Invalid course";
+        else if (time_text.value.length === 0)
             message = "Invalid time";
         else if (deadline_date.value.length === 0)
             message = "Invalid date";
@@ -134,7 +136,9 @@ submitBtnCal1.addEventListener("click", function()
     {
         let message = null;
 
-        if (start_time.value.length === 0)
+        if (courses.value.length === 0)
+            message = "Invalid course";
+        else if (start_time.value.length === 0)
             message = "Invalid start time";
         else if (end_time.value.length === 0)
             message = "Invalid end time";
@@ -143,12 +147,12 @@ submitBtnCal1.addEventListener("click", function()
         else if (end_date.value.length === 0)
             message = "Invalid end date";
         else if (getDuration(start_date.value, end_date.value, getTime(start_time.value), getTime(end_time.value)) < 0)
-            message = "Invalid end time: Can't be before start time"
+            message = "Invalid end date: Can't be before start date"
         else
         {
             let startTime = getTime(start_time.value);
             let endTime = getTime(end_time.value);
-        
+                   
             manager.createSession(courses.value, start_date.value, end_date.value, startTime, endTime, session_purposes.value, comments.value);
 
             closeCal1();
