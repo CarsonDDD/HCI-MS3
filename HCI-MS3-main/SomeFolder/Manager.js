@@ -363,18 +363,18 @@ function main() //this function generates the deadline panel
 		p.innerHTML += item.time + "</br>";
 		p.className = "deadline_p";
 
-		c.innerHTML += item.comments + "</br>";
-		c.style.overflow = "auto";
+		// c.innerHTML += item.comments + "</br>";
+		// c.style.overflow = "auto";
 		c.style.borderBottom = "0.1rem solid black";
-		c.style.whiteSpace = "pre-wrap";
-		c.style.lineHeight = "1.5em";
-		c.style.marginBottom = "0.5em";
+		// c.style.whiteSpace = "pre-wrap";
+		// c.style.lineHeight = "1.5em";
+		c.style.marginBottom = "0.5rem";
 
 		if (item.comments.length === 0)
 		{
 			c.style.display = "none";
 			li.style.borderBottom = "0.1rem solid black";
-			li.style.marginBottom = "0.5em";
+			li.style.marginBottom = "0.5rem";
 		}
 		else
 			c.style.display = "block";
