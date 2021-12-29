@@ -232,7 +232,7 @@ class Manager {
 
 	updateMenu() {
 		let totalHours = this.getTotalHours();
-		let minSize = 50, maxSize = 200;
+		let minSize = 100, maxSize = 200;
 
 		for (let i = 0; i < menu.bubbles.length; i++) {
 			let percent = (totalHours === 0) ? 0 : this.courseList[i].totalHours / totalHours;
@@ -243,7 +243,7 @@ class Manager {
 }
 
 function sort(a, b) {
-	
+
 	let dateA, dateB;
 
 	if (a instanceof Deadlines)
@@ -251,7 +251,7 @@ function sort(a, b) {
 		dateA = new Date(a.date + "T" + convertTime(a.time) + "Z");
 		dateB = new Date(b.date + "T" + convertTime(b.time) + "Z");
 	}
-	else 
+	else
 	{
 		dateA = new Date(a.date + "T" + convertTime(a.start) + "Z");
 		dateB = new Date(b.date + "T" + convertTime(b.start) + "Z");
