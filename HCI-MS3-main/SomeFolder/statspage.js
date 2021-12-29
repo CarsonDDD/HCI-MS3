@@ -1,4 +1,4 @@
-let statsPage = document.getElementById("statistics_page"); 
+let statsPage = document.getElementById("statistics_page");
 
 let generalbtn=document.getElementById("general_btn");
 let btn3020=document.getElementById("comp3020_btn");
@@ -84,7 +84,7 @@ btn3050.addEventListener("click", function(e)
 function initiate()
 {
     //History panel
-   
+
 const coursehist= ["Comp3020-Study Session: 10/10/21","Comp3020-Study Session: 12/10/21","Comp3020-Study Session: 14/10/21","Comp3020-Study Session: 16/10/21","Comp3020-Study Session: 18/10/21",
     "Comp3020-Study Session: 10/10/21","Comp3020-Study Session: 12/10/21","Comp3020-Study Session: 14/10/21","Comp3020-Study Session: 16/10/21","Comp3020-Study Session: 18/10/21"
     ,"Comp3040-Study Session: 10/11/21","Comp3040-Study Session: 13/10/21","Comp3040-Study Session: 15/10/21","Comp3040-Study Session: 02/11/21","Comp3040-Study Session: 04/11/21"
@@ -198,9 +198,9 @@ function generateBar()
                 text:"Completed vs Target Hours Spent"
             }
           }
-        
+
     }
-    
+
 });
 }
 
@@ -261,7 +261,7 @@ if(grade!=0)
 }
 
 }
-
+let statisticsBtn = document.getElementById("statistics_btn");
 statisticsBtn.addEventListener("click", function(e) {
     initiate();
     generatePie();

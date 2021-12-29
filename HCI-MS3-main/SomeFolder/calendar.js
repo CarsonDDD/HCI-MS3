@@ -20,7 +20,7 @@ calendar = new FullCalendar.Calendar(calendarEl, {
   select: function(arg)
   {
     openCal1();
-    
+
     let date = convertDate(arg.start);
     let endDate = convertDate(arg.end);
 
@@ -41,7 +41,7 @@ calendar = new FullCalendar.Calendar(calendarEl, {
   eventMouseEnter: function(arg)
   {
     arg.el.style.cursor = "pointer";
-    
+
     if (arg.event.extendedProps.isDeadline)
       createTooltip("View date info", arg.el);
     else
@@ -56,9 +56,10 @@ calendar = new FullCalendar.Calendar(calendarEl, {
 });
 
     calendar.render();
-    calendarBtn.addEventListener("click", function(e) 
-    { 
-      calendar.render();  
+    let calendarBtn = document.getElementById("calendar_btn");
+    calendarBtn.addEventListener("click", function(e)
+    {
+      calendar.render();
       updateCalendar();
     });
 });
@@ -145,7 +146,7 @@ function convertTime(time) //our format to API format
   let hours = parseInt(time.substring(0, colonIdx));
   let mins = time.substring(colonIdx + 1, time.length - 3);
   let isAm = time.substring(time.length - 2, time.length);
-  
+
   if (hours === 12 && isAm === "AM")
   {
     hours -= 12;
@@ -189,7 +190,7 @@ function showForm(arg)
         isDeadline = false;
         courseObj = course;
       }
-    } 
+    }
   }
 
   generateCompletionForm(item, isDeadline, courseObj);
