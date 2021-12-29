@@ -28,6 +28,53 @@
   user-select: none;
 }
 
+.sidebar{
+  margin: 0;
+  padding: 0;
+
+  float: left;
+  font-family:Arial, Helvetica, sans-serif;
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  width: 75px;
+  height: 100%;
+
+  z-index: 999;
+
+  background-color: rgb(0, 85, 85);
+  /*border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;*/
+  filter: drop-shadow(10px 10px 5px #5e5e5e);
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  transition: .2s ease;
+}
+
+.sidebar:hover{
+  width: 270px;
+}
+
+.sidebar .side-item{
+  padding: 10px;
+}
+
+.sidebar .side-item:hover{
+  /*background: rgb(0, 128, 128);*/
+  cursor: pointer;
+}
+
+.sidebar .side-item .fas{
+  font-size: 50px;
+  width: 60px;
+  padding-right: 75px;
+}
+
+
+
 /*------End of side bar and its elements---------------*/
 
 /*------Main layout elements---------------------------*/
@@ -38,12 +85,12 @@
   display: flex;
 }
 
-#sidebar {
+/*#sidebar {
   width: 60px;
   background-color: rgb(0, 85, 85);
   height: 100vh;
   overflow: auto;
-}
+}*/
 
 /*----Home page and its elements--------*/
 
@@ -58,13 +105,16 @@
 
 #home_main_bubble {
   height: 85%;
-  background-color: white;
   position: relative;
   overflow: auto;
-  border: 2px black solid;
   text-align: center;
   padding-top: 20%;
   font-size: 2rem;
+  background-color: rgb(255, 255, 190);
+  background-size: 40px 40px;
+  background-image:
+  linear-gradient(to right, rgb(201, 201, 201) 1px, transparent 1px),
+  linear-gradient(to bottom, rgb(201, 201, 201) 1px, transparent 1px);
 }
 
 #home_main_footer {
@@ -104,7 +154,7 @@
 #deadline_list li button {
   cursor: pointer;
 }
-/* 
+/*
 #undo_btn {
   background-image: url("./images/undo.png");
   background-color: white;
