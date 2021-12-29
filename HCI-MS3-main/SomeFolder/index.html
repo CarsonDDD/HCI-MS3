@@ -21,7 +21,7 @@
     <div class="container">
       <!---------------SIDE BAR---------------->
       <nav id="sidebar">
-        <ul>
+        <!--<ul>
           <li id="home_li">
             <img src="./images/home.png" alt="A home icon" id="home_btn" />
           </li>
@@ -39,6 +39,12 @@
               id="statistics_btn"
             />
           </li>
+        </ul>-->
+        <ul id = "sidebarElements">
+          <li class = "side-item" id = "home_btn"><i class="fas fa-home" id = "icon_home"></i>Home</li>
+          <li class = "side-item" id = "calendar_btn"><i class="fas fa-calendar" id = "icon_calendar"></i>Calendar</li>
+          <li class = "side-item" id = "stats_btn"><i class="fas fa-chart-line" id = "icon_stats"></i>Statistics</li>
+          <!--<li class = "side-item" id = "plus_button"><i class="fas fa-plus-circle" id = "icon_plus"></i>Add Course</li>-->
         </ul>
       </nav>
       <!----------------------------------------------->
@@ -111,7 +117,7 @@
 
                 <label class="colour5-label">
                   <input type="checkbox" id="colour5" />
-                  <span class="colour5"></span> 
+                  <span class="colour5"></span>
                 </label>
 
                 <label class="colour6-label">
@@ -138,7 +144,7 @@
                   <input type="checkbox" id="colour10" />
                   <span class="colour10"></span>
                 </label>
-              
+
                 <label class="colour11-label">
                   <input type="checkbox" id="colour11" />
                   <span class="colour11"></span>
@@ -208,7 +214,7 @@
               <div id="tasks_div_nav">
                 <div id="deadlines">Important Dates</div>
                 <div id="sessions">Sessions</div>
-              </div>               
+              </div>
               <div id="form_deadline_panel">
               </div>
               <div id="form_session_panel">
@@ -241,11 +247,11 @@
           <div>
             <canvas id="graph_area"height="300" width="300"></canvas>
           </div>
-          
+
             <div id="projected"></div>
-          
+
         </div>
-        
+
       </div>
 
       <!------------------CALENDAR PAGE------------------>
@@ -260,7 +266,7 @@
         <div id="undo_button_panel">
           <div id="undo_btn"></div>
         </div>
-        
+
         <div id="sched_div">
          <h1>Schedule an event</h1>
          <div id="course_div">
