@@ -1,143 +1,142 @@
-#history
-{
-  width: 500px;
-  height: auto;
+#history {
+  width: 100%;
+  height: fit-content;
   /*left: 100px;*/
-  left: -500px;
-  top:100px;
-  position: relative;
+  /* left: -500px; */
+  /* top: 100px; */
+  /* position: relative; */
   border: 20px solid rgb(22, 102, 49);
+}
+
+#history ul {
+  list-style: none;
+  border: 20px black;
+}
+
+#history ul li {
+  padding: 20px;
+  border: 1px black;
+}
+
+#general_btn {
+  background-color: rgb(22, 102, 49); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 50px;
+  transition-duration: 0.4s;
+  border-radius: 14px;
+  /* left: 30px; */
+  position: relative;
+  margin: 5px;
+}
+
+#general_btn:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+#comp3020_btn {
+  background-color: rgb(22, 102, 49); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 50px;
+  transition-duration: 0.4s;
+  border-radius: 14px;
+  /* left: 30px; */
+  position: relative;
+  margin: 5px;
+}
+
+#comp3020_btn:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+#comp3040_btn {
+  background-color: rgb(22, 102, 49); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 50px;
+  transition-duration: 0.4s;
+  border-radius: 14px;
+  /* left: 30px; */
+  position: relative;
+  margin: 5px;
+}
+
+#comp3040_btn:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+#comp3050_btn {
+  background-color: rgb(22, 102, 49); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 50px;
+  transition-duration: 0.4s;
+  border-radius: 14px;
+  /* left: 30px; */
+  position: relative;
+  margin: 5px;
+}
+
+#comp3050_btn:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+#statistics_page {
+  display: flex;
+  justify-content: space-around;
+}
+
+#history_div {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+}
+
+#button_menu {
+  /* background-color: cyan; */
+  display: flex;
+}
+
+#chart_area {
+  /* position: relative; */
+  /* left: 10%; */
+  /* top: 5%; */
   background-color: #f5fffa;
+  border: 20px solid rgb(22, 102, 49);
+  /* top: 100px; */
 }
 
-#history ul
-{
-    list-style: none;
-    border: 20px black;
-}
-
-#history ul li
-{
-    padding: 20px;
-    border:1px black;
-
-}
-
-#general_btn
-{
-  background-color: rgb(22, 102, 49); /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  transition-duration: 0.4s;
-  border-radius: 14px;
-  left:30px;
-  position : relative;
+#chart_area canvas {
+  padding: 5px;
   margin: 5px;
 }
 
-#general_btn:hover
-{
-  background-color: #4CAF50; /* Green */
-  color: white;
-}
-
-#comp3020_btn
-{
-  background-color: rgb(22, 102, 49); /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  transition-duration: 0.4s;
-  border-radius: 14px;
-  left:30px;
-  position : relative;
-  margin: 5px;
-}
-
-#comp3020_btn:hover
-{
-  background-color: #4CAF50; /* Green */
-  color: white;
-}
-#comp3040_btn
-{
-  background-color: rgb(22, 102, 49); /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  transition-duration: 0.4s;
-  border-radius: 14px;
-  left:30px;
-  position : relative;
-  margin: 5px;
-}
-
-#comp3040_btn:hover
-{
-  background-color: #4CAF50; /* Green */
-  color: white;
-}
-#comp3050_btn
-{
-  background-color: rgb(22, 102, 49); /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  transition-duration: 0.4s;
-  border-radius: 14px;
-  left:30px;
-  position : relative;
-  margin: 5px;
-}
-
-#comp3050_btn:hover
-{
-  background-color: #4CAF50; /* Green */
-  color: white;
-}
-
-#chart_area
-{
-    position: relative;
-    left: 10%;
-    top: 5%;
-    background-color: #f5fffa;
-    border: 20px solid rgb(22, 102, 49);
-    top:100px;
-}
-
-#chart_area canvas
-{
-    padding: 5px;
-    margin: 5px;
-
-}
-
-#graph_area
-{
-    position: relative;
-    top: 35%;
-    height: 200px;
-    width:200px;
+#graph_area {
+  position: relative;
+  top: 35%;
+  height: 200px;
+  width: 200px;
 }

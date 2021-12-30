@@ -256,8 +256,8 @@ function fitInfo()
         completionLeftInfo = window.innerWidth - rect.width;
 
     let high = window.innerHeight;
-    if (window.innerWidth <= 600)
-        high *= 2;
+    // if (window.innerWidth <= 600)
+    //     high *= 2;
 
     if (completionTopInfo + rect.height > high)
         completionTopInfo = high - rect.height;

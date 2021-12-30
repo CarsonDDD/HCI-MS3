@@ -29,12 +29,12 @@
   user-select: none;
 }
 
-.sidebar{
+.sidebar {
   margin: 0;
   padding: 0;
 
   float: left;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   position: fixed;
 
   top: 0;
@@ -50,28 +50,28 @@
   overflow: hidden;
   white-space: nowrap;
 
-  transition: .2s ease;
+  transition: 0.2s ease;
 }
 
-.sidebar:hover{
+.sidebar:hover {
   width: 270px;
   /*border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;*/
 }
 
-.sidebar .side-item{
+.sidebar .side-item {
   /*padding: 10px;*/
   /*font-size: 1vw;*/
   font-size: 25px;
   background-color: chocolate;
 }
 
-.sidebar .side-item:hover{
+.sidebar .side-item:hover {
   /*background: rgb(0, 128, 128);*/
   cursor: pointer;
 }
 
-.sidebar .side-item .fas{
+.sidebar .side-item .fas {
   font-size: 60px;
   width: 80px;
   /*padding-left: 5px;*/
@@ -79,13 +79,11 @@
   background-position: center;
 }
 
-.sidebar .side-item p{
+.sidebar .side-item p {
   /*padding-left: 10px;
   padding-bottom: 10px;*/
   display: inline-block;
 }
-
-
 
 /*------End of side bar and its elements---------------*/
 
@@ -97,9 +95,12 @@
   display: flex;
   background-color: #f5fffa;
   background-size: 40px 40px;
-  background-image:
-  linear-gradient(to right, rgb(240, 240, 240) 5%, transparent 5%),
-  linear-gradient(to bottom, rgb(240, 240, 240) 5%, transparent 5%);
+  background-image: linear-gradient(
+      to right,
+      rgb(240, 240, 240) 5%,
+      transparent 5%
+    ),
+    linear-gradient(to bottom, rgb(240, 240, 240) 5%, transparent 5%);
 }
 
 /*#sidebar {
@@ -195,12 +196,13 @@
 /*-------Calendar page and its elements----*/
 
 #calendar_page {
-  /*width: calc(100vw - 60px);*/
-  width: 100vw;
+  width: calc(100vw - 70px);
+  /* width: 100vw; */
   height: 100%;
   display: none;
   overflow: auto;
   display: flex;
+  margin-left: 70px;
   flex-direction: column;
   background-color: #f5fffa;
 }
@@ -219,7 +221,7 @@
 
 #calendar {
   width: 80%;
-  height: 80%;
+  height: 100%;
   margin: 1em auto;
   z-index: 1;
 }
@@ -265,8 +267,9 @@
   }
 
   #calendar_page {
-    width: 85%;
-    height: 200vh;
+    width: calc(100% - 70px);
+    height: 100vh;
+    margin-left: 70px;
   }
 
   #calendar {
@@ -287,10 +290,10 @@
     height: 15vh;
   }
 
-  #sidebar {
+  /* #sidebar {
     width: 15%;
     height: 200vh;
-  }
+  } */
 
   #home_main {
     width: 100%;
