@@ -2,10 +2,12 @@
 {
   width: 500px;
   height: auto;
-  left: 100px;
+  /*left: 100px;*/
+  left: -500px;
   top:100px;
-  position: absolute;
-  border: 20px solid rgb(22, 102, 49);;
+  position: relative;
+  border: 20px solid rgb(22, 102, 49);
+  background-color: #f5fffa;
 }
 
 #history ul
@@ -18,7 +20,7 @@
 {
     padding: 20px;
     border:1px black;
-    
+
 }
 
 #general_btn
@@ -120,6 +122,9 @@
     position: relative;
     left: 10%;
     top: 5%;
+    background-color: #f5fffa;
+    border: 20px solid rgb(22, 102, 49);
+    top:100px;
 }
 
 #chart_area canvas

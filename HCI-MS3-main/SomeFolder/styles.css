@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #tooltip {
@@ -38,8 +39,7 @@
 
   top: 0;
   left: 0;
-  /*width: 75px;*/
-  width: 4vw;
+  width: 70px;
   height: 100%;
 
   z-index: 999;
@@ -54,16 +54,16 @@
 }
 
 .sidebar:hover{
-  /*width: 270px;*/
-  width: 13vw;
+  width: 270px;
   /*border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;*/
 }
 
 .sidebar .side-item{
   /*padding: 10px;*/
-  padding: 0.5vw;
-  font-size: 1vw;
+  /*font-size: 1vw;*/
+  font-size: 25px;
+  background-color: chocolate;
 }
 
 .sidebar .side-item:hover{
@@ -72,10 +72,17 @@
 }
 
 .sidebar .side-item .fas{
-  font-size: 50px;
-  font-size: 3vw;
-  width: 60px;
-  padding-right: 75px;
+  font-size: 60px;
+  width: 80px;
+  /*padding-left: 5px;*/
+  display: inline-block;
+  background-position: center;
+}
+
+.sidebar .side-item p{
+  /*padding-left: 10px;
+  padding-bottom: 10px;*/
+  display: inline-block;
 }
 
 
@@ -91,8 +98,8 @@
   background-color: #f5fffa;
   background-size: 40px 40px;
   background-image:
-  linear-gradient(to right, rgb(201, 201, 201) 1px, transparent 1px),
-  linear-gradient(to bottom, rgb(201, 201, 201) 1px, transparent 1px);
+  linear-gradient(to right, rgb(240, 240, 240) 5%, transparent 5%),
+  linear-gradient(to bottom, rgb(240, 240, 240) 5%, transparent 5%);
 }
 
 /*#sidebar {
@@ -115,28 +122,28 @@
 }
 
 #home_main_bubble {
-  height: 100%;
+  height: 85%;
   position: relative;
   overflow: auto;
   text-align: center;
   padding-top: 20%;
   font-size: 2rem;
 
-  outline-style: inset;
+  border: inset;
 }
 
 #home_main_footer {
   height: 15%;
-  margin-top: -15%;
+  /*margin-top: -15%;*/
   display: flex;
 }
 
 #plus_button {
-  background-color: rgb(182, 241, 241);
+  background-color: rgb(0, 160, 160);
   height: 75%;
   /* width: calc(85vh * 0.15 * 0.75); */
   width: calc(15vh * 0.75 * 2);
-  border-radius: 50%;
+  border-radius: 13%;
   border: none;
   margin: auto;
   cursor: pointer;
@@ -144,7 +151,7 @@
 }
 
 #plus_button:hover {
-  background-color: rgb(130, 190, 190);
+  background-color: rgb(0, 200, 200);
 }
 
 #deadline_panel {
@@ -188,12 +195,14 @@
 /*-------Calendar page and its elements----*/
 
 #calendar_page {
-  width: calc(100vw - 60px);
+  /*width: calc(100vw - 60px);*/
+  width: 100vw;
   height: 100%;
   display: none;
   overflow: auto;
   display: flex;
   flex-direction: column;
+  background-color: #f5fffa;
 }
 
 #calendar_ctn {
@@ -234,10 +243,11 @@
 /* Statistics page*/
 
 #statistics_page {
-  width: 95%;
+  width: 100vw;
   margin-left: 75px;
   overflow: auto;
   display: none;
+  /*background-color: #f5fffa;*/
 }
 
 /*-------End of main layout elements--------------------*/

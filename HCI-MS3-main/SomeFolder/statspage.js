@@ -123,9 +123,9 @@ function generatePie()
             label: 'Course Hours Distribution',
             data: [80, 50, 70],
             backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)'
+              colours[5],
+              colours[6],
+              colours[0]
             ],
             hoverOffset: 4
           }]
@@ -151,9 +151,9 @@ function generateBar()
             label: 'Completed',
             data: [80, 50, 70],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
+              colours[5],
+              colours[6],
+              colours[0]
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',

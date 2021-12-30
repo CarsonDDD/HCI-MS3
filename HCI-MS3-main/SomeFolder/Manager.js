@@ -262,9 +262,9 @@ function sort(a, b) {
 
 let manager = new Manager();
 
-manager.createCourse("Comp3020", 0, 100, "#0000FF");
-manager.createCourse("Comp3040", 0, 90, "#00FF00");
-manager.createCourse("Comp3050", 0, 80, "#FF0000");
+manager.createCourse("Comp3020", 0, 100, colours[5]);
+manager.createCourse("Comp3040", 0, 90, colours[6]);
+manager.createCourse("Comp3050", 0, 80, colours[0]);
 
 // manager.createDeadline("Comp3020", "21/11/2020", "12:00AM", "Midterm");
 // manager.createDeadline("Comp3020", "27/10/2021", "12:00AM", "Assignment");
