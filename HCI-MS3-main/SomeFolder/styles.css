@@ -32,6 +32,7 @@
 .sidebar {
   margin: 0;
   padding: 0;
+  /*padding-left: 5px;*/
 
   float: left;
   font-family: Arial, Helvetica, sans-serif;
@@ -39,7 +40,7 @@
 
   top: 0;
   left: 0;
-  width: 70px;
+  width: 75px;
   height: 100%;
 
   z-index: 999;
@@ -74,7 +75,7 @@
 .sidebar .side-item .fas {
   font-size: 60px;
   width: 80px;
-  /*padding-left: 5px;*/
+  padding-left: 5px;
   display: inline-block;
   background-position: center;
 }
