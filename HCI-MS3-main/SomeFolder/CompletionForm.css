@@ -57,6 +57,10 @@
   height: 3rem;
 }
 
+#completion_div h1 {
+  width: 20rem;
+}
+
 #deadline_info_div,
 #session_info_div {
   width: 20rem;

@@ -46,6 +46,10 @@
   width: 20rem;
 }
 
+#sched_div h1 {
+  width: 20rem;
+}
+
 #deadline_form,
 #session_form {
   border-top: 0.1rem solid black;
@@ -83,9 +87,15 @@
   display: flex;
 }
 
-#deadline_div,
+#deadline_div {
+  width: 12rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
 #session_div {
-  width: 10rem;
+  width: 8rem;
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -117,8 +127,15 @@
   opacity: 1;
 }
 
+#deadline_div p {
+  width: 9rem;
+}
+
+#session_div p {
+  width: 5rem;
+}
+
 #task_div p {
-  width: 7rem;
   padding-left: 0.5rem;
 }
 

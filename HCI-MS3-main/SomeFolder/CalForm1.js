@@ -223,8 +223,8 @@ function fitCal1()
         leftCal1 = window.innerWidth - rect.width;
 
     let high = window.innerHeight;
-    if (window.innerWidth <= 600)
-        high *= 2;
+    // if (window.innerWidth <= 600)
+    //     high *= 2;
 
     if (topCal1 + rect.height > high)
         topCal1 = high - rect.height;
