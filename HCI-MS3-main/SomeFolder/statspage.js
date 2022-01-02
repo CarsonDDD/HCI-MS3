@@ -261,7 +261,6 @@ if(grade!=0)
 }
 
 }
-let statisticsBtn = document.getElementById("statistics_btn");
 statisticsBtn.addEventListener("click", function(e) {
     initiate();
     generatePie();

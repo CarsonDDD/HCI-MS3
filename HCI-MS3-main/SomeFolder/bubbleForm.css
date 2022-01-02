@@ -18,7 +18,7 @@
   overflow: auto;
   cursor: grab;
   user-select: none;
-  z-index: 3;
+  z-index: 5;
   transition: opacity 0.5s;
 }
 

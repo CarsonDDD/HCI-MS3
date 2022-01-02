@@ -408,7 +408,7 @@ function moveInfo(e)
 }
 
 function fitInfo()
-{
+{ 
     let rect = infoDiv.getBoundingClientRect();
 
     if (leftInfo < 0)

@@ -236,7 +236,7 @@ function completionMoveInfo(e)//moveInfo(e)
     completionLeftInfo += e.pageX - completionPrevXInfo;
     completionTopInfo += e.pageY - completionPrevYInfo;    
 
-    fitInfo();
+    fitCompletion();
 
     completionPrevXInfo = e.pageX;
     completionPrevYInfo = e.pageY;
@@ -244,7 +244,7 @@ function completionMoveInfo(e)//moveInfo(e)
     completionDiv.style.top = completionTopInfo + "px";
 }
 
-function fitInfo()
+function fitCompletion()
 {
     let rect = completionDiv.getBoundingClientRect();
 
@@ -256,8 +256,8 @@ function fitInfo()
         completionLeftInfo = window.innerWidth - rect.width;
 
     let high = window.innerHeight;
-    // if (window.innerWidth <= 600)
-    //     high *= 2;
+    if (window.innerWidth <= 600)
+        high *= 2;
 
     if (completionTopInfo + rect.height > high)
         completionTopInfo = high - rect.height;

@@ -56,8 +56,7 @@ calendar = new FullCalendar.Calendar(calendarEl, {
 });
 
     calendar.render();
-    let calendarBtn = document.getElementById("calendar_btn");
-    calendarBtn.addEventListener("click", function(e)
+    calendarBtn.addEventListener("click", function()
     {
       calendar.render();
       updateCalendar();
