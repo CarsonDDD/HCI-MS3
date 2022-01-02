@@ -4,8 +4,10 @@
   /*left: 100px;*/
   /* left: -500px; */
   /* top: 100px; */
-  /* position: relative; */
-  border: 20px solid rgb(22, 102, 49);
+  position: relative;
+  border: 20px solid rgb(0, 85, 85);
+  flex-grow: 1;
+  background-color: #f5fffa;
 }
 
 #history ul {
@@ -19,7 +21,7 @@
 }
 
 #general_btn {
-  background-color: rgb(22, 102, 49); /* Green */
+  background-color: rgb(0, 85, 85); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -36,12 +38,12 @@
 }
 
 #general_btn:hover {
-  background-color: #4caf50; /* Green */
+  background-color: rgb(10, 126, 126); /* Green */
   color: white;
 }
 
 #comp3020_btn {
-  background-color: rgb(22, 102, 49); /* Green */
+  background-color: rgb(0, 85, 85); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -58,11 +60,11 @@
 }
 
 #comp3020_btn:hover {
-  background-color: #4caf50; /* Green */
+  background-color: rgb(10, 126, 126); /* Green */
   color: white;
 }
 #comp3040_btn {
-  background-color: rgb(22, 102, 49); /* Green */
+  background-color: rgb(0, 85, 85); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -79,11 +81,11 @@
 }
 
 #comp3040_btn:hover {
-  background-color: #4caf50; /* Green */
+  background-color: rgb(10, 126, 126); /* Green */
   color: white;
 }
 #comp3050_btn {
-  background-color: rgb(22, 102, 49); /* Green */
+  background-color: rgb(0, 85, 85); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -100,7 +102,7 @@
 }
 
 #comp3050_btn:hover {
-  background-color: #4caf50; /* Green */
+  background-color: rgb(10, 126, 126); /* Green */
   color: white;
 }
 
@@ -123,9 +125,12 @@
 #chart_area {
   /* position: relative; */
   /* left: 10%; */
-  /* top: 5%; */
+  top: 5%; 
   background-color: #f5fffa;
-  border: 20px solid rgb(22, 102, 49);
+  border: 10px solid rgb(0, 85, 85);
+  height:fit-content;
+  flex-grow: 1;
+  position: relative;
   /* top: 100px; */
 }
 
@@ -139,4 +144,17 @@
   top: 35%;
   height: 200px;
   width: 200px;
+}
+
+#pGrade{
+  top:5%;
+  display: flex;
+  position:relative;
+  width: 300px;
+  height: 200px;
+}
+
+#stats_container{
+  display: flex;
+
 }
