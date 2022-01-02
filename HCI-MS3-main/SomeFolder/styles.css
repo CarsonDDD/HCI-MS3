@@ -9,7 +9,7 @@
   position: absolute;
   background-color: white;
   padding: 0.5em;
-  z-index: 4;
+  z-index: 6;
   border: 0.1rem solid black;
   display: none;
 }
@@ -18,7 +18,7 @@
 
 /*--------Side bar and its elements---------------------*/
 
-#sidebar li {
+/* #sidebar li {
   list-style-type: none;
 }
 
@@ -57,18 +57,18 @@
 .sidebar:hover {
   width: 270px;
   /*border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;*/
-}
+  border-bottom-right-radius: 10px;
+} */
 
-.sidebar .side-item {
-  /*padding: 10px;*/
-  /*font-size: 1vw;*/
+/*.sidebar .side-item {
+  padding: 10px;
+  font-size: 1vw;
   font-size: 25px;
   background-color: chocolate;
 }
 
 .sidebar .side-item:hover {
-  /*background: rgb(0, 128, 128);*/
+  background: rgb(0, 128, 128);
   cursor: pointer;
 }
 
@@ -81,10 +81,10 @@
 }
 
 .sidebar .side-item p {
-  /*padding-left: 10px;
-  padding-bottom: 10px;*/
+  padding-left: 10px;
+  padding-bottom: 10px;
   display: inline-block;
-}
+} */
 
 /*------End of side bar and its elements---------------*/
 
@@ -104,19 +104,48 @@
     linear-gradient(to bottom, rgb(240, 240, 240) 5%, transparent 5%);
 }
 
-/*#sidebar {
+#sidebar {
   width: 60px;
   background-color: rgb(0, 85, 85);
+  filter: drop-shadow(10px 10px 5px #5e5e5e);
   height: 100vh;
-  overflow: auto;
-}*/
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+  transition: width 0.3s;
+}
+
+/* #sidebar:hover {
+  width: 270px;
+} */
+
+#sidebar img {
+  width: 60px;
+  height: 60px;
+  padding: 0.5em;
+  pointer-events: none;
+}
+
+#sidebar p {
+  line-height: 60px;
+  pointer-events: none;
+}
+
+#sidebar ul {
+  width: 60px;
+}
+
+#sidebar li {
+  width: 270px;
+  display: flex;
+}
 
 /*----Home page and its elements--------*/
 
 #home_page {
-  width: 100vw;
-  /*width: calc(100vw - 25px);*/
+  width: calc(100vw - 60px);
   display: flex;
+  margin-left: 60px;
 }
 
 #home_main {
@@ -128,7 +157,6 @@
   position: relative;
   overflow: auto;
   text-align: center;
-  padding-top: 20%;
   font-size: 2rem;
 
   border: inset;
@@ -150,6 +178,7 @@
   margin: auto;
   cursor: pointer;
   overflow: hidden;
+  font-size: 1.25rem;
 }
 
 #plus_button:hover {
@@ -158,16 +187,13 @@
 
 #deadline_panel {
   width: 20em;
-  width: 15%;
-  height: 50vh;
+  height: 85vh;
   padding: 2em 2em;
-  margin-left: -10%;
   overflow: auto;
   background-color: rosybrown;
   filter: drop-shadow(10px 10px 5px #5e5e5e);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  font-size: 1vw;
 }
 
 #deadline_panel h2 {
@@ -197,13 +223,13 @@
 /*-------Calendar page and its elements----*/
 
 #calendar_page {
-  width: calc(100vw - 70px);
+  width: calc(100vw - 60px);
   /* width: 100vw; */
   height: 100%;
   display: none;
   overflow: auto;
   display: flex;
-  margin-left: 70px;
+  margin-left: 60px;
   flex-direction: column;
   background-color: #f5fffa;
 }
@@ -259,18 +285,28 @@
 
 /*---------------------Media Queries-----------------------------------------------------------*/
 
+@media (max-width: 800px) {
+  #home_main {
+    width: 60%;
+  }
+
+  #deadline_panel {
+    width: 40%;
+  }
+}
+
 @media (max-width: 600px) {
   #home_page {
     flex-direction: column;
-    width: 85%;
+    width: calc(100% - 60px);
     height: 200vh;
     overflow: auto;
   }
 
   #calendar_page {
-    width: calc(100% - 70px);
-    height: 100vh;
-    margin-left: 70px;
+    width: calc(100% - 60px);
+    height: 200vh;
+    margin-left: 60px;
   }
 
   #calendar {
@@ -291,10 +327,9 @@
     height: 15vh;
   }
 
-  /* #sidebar {
-    width: 15%;
+  #sidebar {
     height: 200vh;
-  } */
+  }
 
   #home_main {
     width: 100%;

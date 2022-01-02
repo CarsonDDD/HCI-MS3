@@ -22,9 +22,10 @@
     <div class="container">
       <!---------------SIDE BAR---------------->
       <nav class = "sidebar" id="sidebar">
-        <!--<ul>
+        <ul>
           <li id="home_li">
             <img src="./images/home.png" alt="A home icon" id="home_btn" />
+            <p id="home_btn_p">Home</p>
           </li>
           <li id="calendar_li">
             <img
@@ -32,6 +33,7 @@
               alt="A calendar icon"
               id="calendar_btn"
             />
+            <p id="calendar_btn_p">Calendar</p>
           </li>
           <li id="statistics_li">
             <img
@@ -39,14 +41,9 @@
               alt="A statistics icon"
               id="statistics_btn"
             />
+            <p id="statistics_btn_p">Statistics</p>
           </li>
-        </ul>-->
-        <ul id = "sidebarElements">
-          <li class = "side-item" id = "home_btn"><i class="fas fa-home" id = "icon_home"></i>Home</li><br>
-          <li class = "side-item" id = "calendar_btn"><i class="fas fa-calendar" id = "icon_calendar"></i>Calendar</li><br>
-          <li class = "side-item" id = "statistics_btn"><i class="fas fa-chart-line" id = "icon_stats"></i>Statistics</li>
-          <!--<li class = "side-item" id = "plus_button"><i class="fas fa-plus-circle" id = "icon_plus"></i>Add Course</li>-->
-        </ul>
+          </ul>
       </nav>
       <!----------------------------------------------->
 
@@ -58,7 +55,7 @@
           <div id="home_main_footer">
 
             <!--BUBBLE FORM START-->
-            <button class="plus_button" id="plus_button"><font size="4">Add a course</font></button>
+            <button class="plus_button" id="plus_button">Add course</button>
               <form
                 action="/action_page.php"
                 class="form-container"
