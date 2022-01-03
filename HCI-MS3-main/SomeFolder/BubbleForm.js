@@ -188,9 +188,9 @@ function closeBub()
 let colours = new Array(
     "#9AB973",
     "#B4F1B3",
-    "#A6D5FD",
-    "#B9CBD9",
     "#CFE3E2",
+    "#B9CBD9",
+    "#A6D5FD",
     "#BCB0EE",
     "#FCCFF4",
     "#FCC9C5",

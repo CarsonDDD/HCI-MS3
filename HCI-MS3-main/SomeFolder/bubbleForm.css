@@ -184,25 +184,25 @@
   left: 121px;
   width: 40px;
   height: 40px;
-  background-color: #a6d5fd;
+  background-color: #cfe3e2;
   border: 2px solid black;
 }
 .colour3-label .colour3::after {
   height: 0px;
   width: 0px;
-  background-color: #a6d5fd;
+  background-color: #cfe3e2;
   border: 5px solid black;
   opacity: 1;
 }
 /*Check our hiding checkmark*/
 .colour3-label input:checked ~ .colour3 {
-  background-color: #a6d5fd;
+  background-color: #cfe3e2;
   border: 5px solid black;
   opacity: 1;
 }
 .colour3-label input:checked ~ .colour3::after {
   opacity: 1;
-  background-color: #a6d5fd;
+  background-color: #cfe3e2;
   border: 2px solid black;
 }
 
@@ -238,25 +238,25 @@
   left: 217px;
   width: 40px;
   height: 40px;
-  background-color: #cfe3e2;
+  background-color: #a6d5fd;
   border: 2px solid black;
 }
 .colour5-label .colour5::after {
   height: 0px;
   width: 0px;
-  background-color: #cfe3e2;
+  background-color: #a6d5fd;
   border: 5px solid black;
   opacity: 1;
 }
 /*Check our hiding checkmark*/
 .colour5-label input:checked ~ .colour5 {
-  background-color: #cfe3e2;
+  background-color: #a6d5fd;
   border: 5px solid black;
   opacity: 1;
 }
 .colour5-label input:checked ~ .colour5::after {
   opacity: 1;
-  background-color: #cfe3e2;
+  background-color: #a6d5fd;
   border: 2px solid black;
 }
 
