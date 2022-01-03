@@ -22,12 +22,13 @@ btn3020.addEventListener("click", function(e)
         textBox.removeChild(textBox.lastChild);
     }
     textBox.appendChild(list);
-    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>";
+    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>"+"<br>";
     list.appendChild(li);
 
     for(item in comp3020hist)
     {
         li.innerHTML+=comp3020hist[item]+"<br>";
+        li.innerHTML+="Duration: 2hrs"+"<br>"+"<br>"; 
         list.appendChild(li);
     }
 
@@ -46,12 +47,13 @@ btn3040.addEventListener("click", function(e)
         textBox.removeChild(textBox.lastChild);
     }
     textBox.appendChild(list);
-    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>";
+    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>"+"<br>";
     list.appendChild(li);
 
     for(item in comp3040hist)
     {
         li.innerHTML+=comp3040hist[item]+"<br>";
+        li.innerHTML+="Duration: 2hrs"+"<br>"+"<br>"; 
         list.appendChild(li);
     }
     projectedGrade(90);
@@ -68,12 +70,13 @@ btn3050.addEventListener("click", function(e)
         textBox.removeChild(textBox.lastChild);
     }
     textBox.appendChild(list);
-    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>";
+    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>"+"<br>";
     list.appendChild(li);
 
     for(item in comp3050hist)
     {
         li.innerHTML+=comp3050hist[item]+"<br>";
+        li.innerHTML+="Duration: 2hrs"+"<br>"+"<br>"; 
         list.appendChild(li);
     }
 
@@ -98,11 +101,12 @@ const coursehist= ["Comp3020-Study Session: 10/10/21","Comp3020-Study Session: 1
     }
     textBox.appendChild(list);
 
-    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>";
+    li.innerHTML="<font size='8'>"+"Course History"+"</font size>"+"<br>"+"<br>";
     list.appendChild(li);
     for(item in coursehist)
     {
         li.innerHTML+=coursehist[item]+"<br>";
+        li.innerHTML+="Duration: 2hrs"+"<br>"+"<br>"; 
         list.appendChild(li);
     }
 
@@ -134,7 +138,13 @@ function generatePie()
         animation: {
             animateScale: true
         },
-        responsive: false
+        responsive: false,
+        plugins: {
+            title: {
+                display:true,
+                text:"Total hours distribution"
+            }
+          }
     }
 });
 }
@@ -155,25 +165,20 @@ function generateBar()
               colours[6],
               colours[0]
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
             borderWidth: 2
         },
         {
             label: 'Target',
             data: [100, 60, 120],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)'
+                colours[5],
+                colours[6],
+                colours[0]
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
+                'rgb(0,0,0)',
+                'rgb(0,0,0)',
+                'rgb(0,0,0)'
             ],
             borderWidth: 2
         }]
@@ -224,7 +229,7 @@ function projectedGrade(grade)
             label: 'Course Hours Distribution',
             data: [grade,100-grade],
             backgroundColor: [
-              'rgb(255, 99, 132)',
+                'rgb(0,85,85)',
               'lightgrey'
             ],
             hoverOffset: 4
@@ -254,9 +259,9 @@ projectArea.appendChild(pieCtx);
 if(grade!=0)
 {
     gradeHtml.innerHTML="<font size='10'>"+grade+"%"+"</font>";
-    gradeHtml.style.left="45%";
+    gradeHtml.style.left="40%";
     gradeHtml.style.position="relative";
-    gradeHtml.style.color='rgb(255, 99, 132)';
+    gradeHtml.style.color='rgb(0,85,85)';
     projectArea.appendChild(gradeHtml);
 }
 
