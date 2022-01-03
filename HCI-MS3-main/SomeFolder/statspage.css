@@ -1,11 +1,11 @@
 #history {
-  width: 100%;
+  width: 400px;
   height: fit-content;
   /*left: 100px;*/
   /* left: -500px; */
   /* top: 100px; */
   position: relative;
-  border: 20px solid rgb(0, 85, 85);
+  border: 10px solid rgb(0, 85, 85);
   flex-grow: 1;
   background-color: #f5fffa;
 }
@@ -18,6 +18,11 @@
 #history ul li {
   padding: 20px;
   border: 1px black;
+}
+
+#history_div
+{
+  width:400px;
 }
 
 #general_btn {
@@ -125,7 +130,7 @@
 #chart_area {
   /* position: relative; */
   /* left: 10%; */
-  top: 5%; 
+  top: 6.5%; 
   background-color: #f5fffa;
   border: 10px solid rgb(0, 85, 85);
   height:fit-content;
