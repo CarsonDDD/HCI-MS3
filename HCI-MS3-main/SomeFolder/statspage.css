@@ -1,6 +1,6 @@
 #history {
   width: 400px;
-  height: fit-content;
+  height: 800px;
   /*left: 100px;*/
   /* left: -500px; */
   /* top: 100px; */
@@ -8,6 +8,7 @@
   border: 10px solid rgb(0, 85, 85);
   flex-grow: 1;
   background-color: #f5fffa;
+  overflow: auto;
 }
 
 #history ul {
@@ -20,9 +21,9 @@
   border: 1px black;
 }
 
-#history_div
-{
-  width:400px;
+#history_div {
+  width: 400px;
+  /* width: 30%; */
 }
 
 #general_btn {
@@ -130,12 +131,11 @@
 #chart_area {
   /* position: relative; */
   /* left: 10%; */
-  top: 6.5%; 
   background-color: #f5fffa;
   border: 10px solid rgb(0, 85, 85);
-  height:fit-content;
+  height: 900px;
   flex-grow: 1;
-  position: relative;
+  margin-top: 60px;
   /* top: 100px; */
 }
 
@@ -151,15 +151,15 @@
   width: 200px;
 }
 
-#pGrade{
-  top:5%;
+#pGrade {
   display: flex;
-  position:relative;
   width: 300px;
   height: 200px;
+  margin-top: 60px;
 }
 
-#stats_container{
+#stats_container {
   display: flex;
-
+  overflow: auto;
+  height: fit-content;
 }
