@@ -30,9 +30,9 @@ let leftInfo = -1, topInfo = -1;
 
 //variables for selection
 
-let selectedColorInfo = "rosybrown";
-let defaultColorInfo = "rgb(255, 191, 191)";
-let hoverColorInfo = "rgb(158, 118, 118)";
+let selectedColorInfo = "#eee8aa";
+let defaultColorInfo = "#BDB76B";
+let hoverColorInfo = "rgb(220, 210, 100)";
 let selected = deadline_btn;
 
 let selectedPicker = null;
@@ -149,7 +149,7 @@ changeName.addEventListener("click", function(e)
 {
     if (changeName.style.backgroundColor === "rgb(175, 175, 175)") //convert to confirm button
     {
-        changeName.style.backgroundColor = "#04aa6d";
+        changeName.style.backgroundColor = "rgb(0, 85, 85)";
         changeName.style.backgroundImage = "url('./images/check.png')";
         courseName.style.display = "none";
         nameText.style.display = "block";
@@ -206,7 +206,7 @@ changeGrade.addEventListener("click", function(e)
 {
     if (changeGrade.style.backgroundColor === "rgb(175, 175, 175)") //convert to confirm button
     {
-        changeGrade.style.backgroundColor = "#04aa6d";
+        changeGrade.style.backgroundColor = "rgb(0, 85, 85)";
         changeGrade.style.backgroundImage = "url('./images/check.png')";
         grade.style.display = "none";
         gradeText.style.display = "block";
@@ -250,7 +250,7 @@ changeColor.addEventListener("click", function(e)
 {
     if (changeColor.style.backgroundColor === "rgb(175, 175, 175)") //convert to confirm button
     {
-        changeColor.style.backgroundColor = "#04aa6d";
+        changeColor.style.backgroundColor = "rgb(0, 85, 85)";
         changeColor.style.backgroundImage = "url('./images/check.png')";
         color.style.display = "none";
         for (let i = 0; i < pickers.length; i++)

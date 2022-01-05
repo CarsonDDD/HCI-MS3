@@ -9,7 +9,7 @@ let statisticsBtn = document.getElementById("statistics_li"); //a pointer to the
 let currPage = homePage, currBtn = homeBtn; //currPage is the current page, while currBtn is the button to go to the currPage
 
 //color variables
-let hoverColor = "rgb(0, 170, 170)", selectedColor = "rgb(0, 128, 128)", defColor = "rgb(0, 85, 85)";
+let hoverColor = "rgb(10, 126, 126)", selectedColor = "rgb(10, 180, 180)", defColor = "rgb(0, 85, 85)";
 
 //add click, mouseover, and mouseleave events to all the buttons
 

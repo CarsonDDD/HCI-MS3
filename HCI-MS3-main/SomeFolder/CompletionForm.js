@@ -168,7 +168,7 @@ undo_button.addEventListener("mouseover", function()
 {
     if (undo_button.style.opacity == 1)
     {
-        undo_button.style.backgroundColor = "#05613f";     
+        undo_button.style.backgroundColor = "rgb(10, 126, 126)";     
         undo_button.style.cursor = "pointer";
         createTooltip("Undo", undo_button);
     }
@@ -176,7 +176,7 @@ undo_button.addEventListener("mouseover", function()
 
 undo_button.addEventListener("mouseleave", function()
 {
-    undo_button.style.backgroundColor = "#04aa6d";
+    undo_button.style.backgroundColor = "rgb(0, 85, 85)";
     undo_button.style.cursor = "default";
     resetTooltip();
 })
@@ -227,7 +227,7 @@ function updateUndo()
     else
     {
         undo_button.style.opacity = 0.5;
-        undo_button.style.backgroundColor = "#04aa6d";
+        undo_button.style.backgroundColor = "rgb(0, 85, 85)";
     }
 }
 
